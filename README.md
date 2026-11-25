@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-5.6.1-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-5.6.2-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.56%20MB-059669?style=for-the-badge" />
   <img alt="Privacy" src="https://img.shields.io/badge/Telemetry-Zero%20Data%20Collection-0F172A?style=for-the-badge" />
@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v5.6.1 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v5.6.2 Android Interface Showcase" width="820" />
 </p>
 
 **RAQİB (الرقيب)** is an ultra-lightweight (`4.56 MB`), privacy-first Android web browser engineered for mindful, distraction-free, and fast browsing. It combines **instant zero-flash visual blur** with network-level ad, tracker, and explicit-domain shielding, native in-page translation, and 100% on-device privacy.
@@ -25,8 +25,9 @@
 
 ## Official Links
 
-* **5-Language Showcase Website (TR • EN • AR • KU • DE):** https://talibtrb.github.io/raqib-browser/
-* **Download Latest Signed APK (`v5.6.1`):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
+* **5-Language Showcase Website (GitHub Pages):** https://talibtrb.github.io/raqib-browser/
+* **Download Latest Signed APK (`v5.6.2`):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://talibtrb.github.io/raqib-browser/privacy.html
 * **Security & Verification Policy:** [SECURITY.md](SECURITY.md)
 
@@ -70,7 +71,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v5.6.1-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v5.6.2-signed-release.apk
 ```
 
 ---
