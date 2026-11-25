@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAQİB — Halal Visual Browser for Android</title>
+  <meta name="description" content="Ultra-lightweight (~4.5 MB) Android browser with instant zero-flash visual blur, fast ad & tracker shield, native in-page translation, and 100% on-device privacy." />
+  <style>
+    :root {
+      --bg: #080c11;
+      --surface: #111822;
+      --border: rgba(148, 163, 184, 0.18);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --emerald: #10b981;
+      --emerald-light: #6ee7b7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", Arial, sans-serif;
+      background: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.22), var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 20px 72px;
+    }
+    .hero {
+      text-align: center;
+      padding: 36px 16px 42px;
+    }
+    .logo-wrap {
+      display: inline-flex;
+      padding: 10px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 3.1rem);
+      letter-spacing: 0.12em;
+      font-weight: 800;
+    }
+    .tagline {
+      margin: 10px auto 22px;
+      max-width: 640px;
+      font-size: 1.12rem;
+      color: var(--muted);
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); opacity: 0.94; }
+    .btn-primary { background: var(--emerald); color: #031c14; }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px 22px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: #d1fae5;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    footer a { color: var(--emerald-light); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="logo-wrap">
+        <svg width="84" height="84" viewBox="0 0 64 64" aria-label="RAQİB Logo">
+          <defs>
+            <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#363D48"/>
+              <stop offset="50%" stop-color="#1F242B"/>
+              <stop offset="100%" stop-color="#0D1014"/>
+            </linearGradient>
+            <linearGradient id="rG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FFFFFF"/>
+              <stop offset="60%" stop-color="#E5EBF2"/>
+              <stop offset="100%" stop-color="#B8C2CE"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bgG)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+          <path d="M14,2.8 L50,2.8 C56.1,2.8 61.2,7.9 61.2,14 L61.2,23 C45,31 19,31 2.8,23 L2.8,14 C2.8,7.9 7.9,2.8 14,2.8 Z" fill="rgba(255,255,255,0.14)"/>
+          <path d="M32,10 L49,16.5 L49,33 C49,43.5 41.5,51.5 32,55.5 C22.5,51.5 15,43.5 15,33 L15,16.5 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
+          <path d="M23,20 L34,20 C39.3,20 43,23.4 43,28.4 C43,32.4 40.5,35.3 36.8,36.4 L43.4,48 L37.3,48 L31.4,37.1 L28.2,37.1 L28.2,48 L23,48 Z M28.2,24.6 L28.2,32.4 L33.6,32.4 C36.2,32.4 37.7,30.9 37.7,28.5 C37.7,26.1 36.2,24.6 33.6,24.6 Z" fill="url(#rG)"/>
+          <path d="M32,13.5 L34.2,15.7 L32,17.9 L29.8,15.7 Z" fill="#F8FAFC"/>
+        </svg>
+      </div>
+      <h1>RAQİB</h1>
+      <p class="tagline">
+        Bilinçle gezin. Gözünü koru. • Mindful, ultra-fast Android browser with zero-flash visual blur, built-in ad &amp; tracker shield, and 100% on-device privacy.
+      </p>
+      <div class="badges">
+        <span class="pill">v5.5.1 • ~4.5 MB APK</span>
+        <span class="pill">Zero-Flash Strict Blur</span>
+        <span class="pill">Zero Data Collection</span>
+        <span class="pill">5 Languages (TR • EN • AR • KU • DE)</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/TalibTRB/raqib-browser/releases/latest">Download Signed APK (GitHub)</a>
+        <a class="btn btn-secondary" href="./privacy.html">Privacy Policy / Gizlilik Politikası</a>
+        <a class="btn btn-secondary" href="https://github.com/TalibTRB/raqib-browser/blob/main/SECURITY.md">Verify Signature (SHA-256)</a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Strict Zero-Flash Visual Blur</h3>
+        <p>Document-start CSS and Constructable Shadow DOM stylesheets blur web images, thumbnails, and background photos at render time with instant Peek-to-Unblur on hold.</p>
+      </div>
+      <div class="card">
+        <h3>Mandatory Halal Shield &amp; AdBlock</h3>
+        <p>Offline Aho-Corasick network filtering blocks explicit domains, gambling sites, ads, trackers, cryptojackers, and IDN homograph phishing attempts.</p>
+      </div>
+      <div class="card">
+        <h3>Native In-Page Translation</h3>
+        <p>Translate pages directly in place without external proxy redirects or broken logins, with a one-tap Original ↔ Translated toggle bar.</p>
+      </div>
+      <div class="card">
+        <h3>Clean Guest Session</h3>
+        <p>Isolated Chromium profile for a 2nd/family account or unbiased search with zero history, hardware FLAG_SECURE, and always-on Strict Blur.</p>
+      </div>
+      <div class="card">
+        <h3>Scholar &amp; Productivity Suite</h3>
+        <p>Offline Prayer Times, Hijri Calendar, Pro In-Site Search, Screenshot Studio, Quote Card Studio, Reader Mode, Split View, PDF Export, and QR Tools.</p>
+      </div>
+      <div class="card">
+        <h3>100% On-Device Privacy</h3>
+        <p>No accounts, no cloud tracking, no analytics SDKs. Hardware-backed Android Keystore encryption keeps your data strictly on your own phone.</p>
+      </div>
+    </section>
+
+    <footer>
+      <span>RAQİB Browser • <code>com.raqib.browser</code> • Android 8.0–16 (API 26–36)</span>
+      <span>
+        <a href="./privacy.html?lang=tr">Gizlilik (TR)</a> ·
+        <a href="./privacy.html?lang=en">Privacy (EN)</a> ·
+        <a href="./privacy.html?lang=ar">الخصوصية (AR)</a> ·
+        <a href="./privacy.html?lang=ku">Nepenî (KU)</a> ·
+        <a href="./privacy.html?lang=de">Datenschutz (DE)</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>

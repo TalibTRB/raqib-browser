@@ -1,0 +1,26 @@
+Copyright (c) 2026 RAQİB Browser (TalibTRB). All Rights Reserved.
+
+PROPRIETARY SOFTWARE AND BRAND NOTICE
+
+The RAQİB Browser application, its source code, compiled binaries (APK/AAB),
+brand name ("RAQİB"), logo, icons, visual assets, and documentation are the
+exclusive proprietary property of RAQİB Browser (TalibTRB).
+
+You may download and install official, unmodified releases of RAQİB Browser
+for personal, non-commercial use only.
+
+Without prior express written permission from the copyright holder, you may NOT:
+1. Copy, decompile, reverse-engineer, modify, or create derivative works from
+   RAQİB Browser or its binaries.
+2. Rebrand, clone, repackage, or redistribute RAQİB Browser on Google Play or
+   any other app store or website.
+3. Use the "RAQİB" name, emblem, or store graphics to represent another app.
+
+Third-Party Open-Source Acknowledgements:
+RAQİB Browser incorporates third-party open-source libraries under their
+respective licenses:
+- AndroidX / Jetpack Compose / Room / DataStore / Media3 / WebKit / CameraX /
+  Biometric: Apache License 2.0
+- Kotlin Standard Library, Coroutines & Serialization: Apache License 2.0
+- OkHttp & OkHttp DNS-over-HTTPS (Square): Apache License 2.0
+- ZXing Core: Apache License 2.0
