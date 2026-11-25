@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | :--- | :--- |
-| `5.5.x` | Yes (Active Release) |
-| `< 5.5.0` | Please upgrade to the latest signed release |
+| `5.6.x` | Yes (Active Release) |
+| `< 5.6.0` | Please upgrade to the latest signed release |
 
 ## Official Release Signing Verification
 

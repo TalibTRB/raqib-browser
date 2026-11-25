@@ -164,7 +164,7 @@
         </svg>
         <div>
           <div class="brand-title">RAQİB</div>
-          <div class="brand-sub">com.raqib.browser • v5.5.1</div>
+          <div class="brand-sub">com.raqib.browser • v5.6.0</div>
         </div>
       </a>
       <nav class="lang-bar" aria-label="Language Selector">
@@ -189,7 +189,7 @@
 
       <div class="card">
         <h2>2. Yalnızca Cihazınızda Saklanan Veriler</h2>
-        <p>Gezinme geçmişi, yer imleri, site bazlı Blur kuralları, çevrimdışı notlar, hatim/namaz vakti tercihleri ve isteğe bağlı kaydedilen parolalar yalnızca kendi cihazınızda saklanır. Kaydedilen parolalar donanım destekli <strong>Android Keystore (AES-GCM)</strong> ile şifrelenir. Uygulamada buluta otomatik yedekleme (<code>allowBackup=false</code>) kapalıdır. Dilediğiniz an tek dokunuşla tüm tarama verilerini silebilirsiniz.</p>
+        <p>Gezinme geçmişi, yer imleri, site bazlı Blur kuralları, çevrimdışı notlar, hatim/Hicrî takvim tercihleri ve isteğe bağlı kaydedilen parolalar yalnızca kendi cihazınızda saklanır. Kaydedilen parolalar donanım destekli <strong>Android Keystore (AES-GCM)</strong> ile şifrelenir. Uygulamada buluta otomatik yedekleme (<code>allowBackup=false</code>) kapalıdır. Dilediğiniz an tek dokunuşla tüm tarama verilerini silebilirsiniz.</p>
       </div>
 
       <div class="card">
@@ -202,7 +202,7 @@
         <ul>
           <li><strong>İnternet (<code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>):</strong> Ziyaret ettiğiniz web sitelerini açmak, isteğe bağlı indirme, sayfa içi çeviri ve filtre listesi güncellemeleri için kullanılır.</li>
           <li><strong>Kamera (<code>CAMERA</code> — İsteğe Bağlı):</strong> Yalnızca yerleşik QR Kod Tarayıcı’yı açtığınızda veya bir web sitesine açıkça kamera izni verdiğinizde kullanılır.</li>
-          <li><strong>Mikrofon &amp; Konum (<code>RECORD_AUDIO</code>, <code>ACCESS_FINE_LOCATION</code> — İsteğe Bağlı):</strong> Yalnızca açıkça izin verdiğiniz web siteleri tarafından kullanılır. Çevrimdışı Namaz Vakitleri GPS/konum izni gerektirmez.</li>
+          <li><strong>Mikrofon &amp; Konum (<code>RECORD_AUDIO</code>, <code>ACCESS_FINE_LOCATION</code> — İsteğe Bağlı):</strong> Yalnızca açıkça izin verdiğiniz web siteleri tarafından kullanılır; tarayıcının kendisi asla konum toplamaz.</li>
           <li><strong>Biyometrik Doğrulama (<code>USE_BIOMETRIC</code> — İsteğe Bağlı):</strong> Yalnızca cihaz içi kilit ve parola kasası erişimi için Android işletim sistemi üzerinden çalışır; biyometrik veri uygulamaya veya dışarıya aktarılmaz.</li>
           <li><strong>Ön Plan Hizmetleri &amp; Bildirimler (<code>FOREGROUND_SERVICE_MEDIA_PLAYBACK</code>, <code>FOREGROUND_SERVICE_DATA_SYNC</code>, <code>POST_NOTIFICATIONS</code>):</strong> Yalnızca başlattığınız medya oynatma ve dosya indirmelerinin kesintisiz sürmesi için canlı bildirim gösterir.</li>
           <li><strong>Depolama (Android 8–9 için <code>WRITE_EXTERNAL_STORAGE</code> / Android 10+ <code>MediaStore</code>):</strong> İndirdiğiniz dosyaları, PDF’leri, ekran görüntülerini ve alıntı kartlarını cihazınızın İndirilenler / Galeri klasörüne kaydetmek için kullanılır.</li>
@@ -233,7 +233,7 @@
 
       <div class="card">
         <h2>2. Local On-Device Storage Only</h2>
-        <p>Browsing history, bookmarks, per-site Blur rules, offline notes, prayer/Hijri preferences, and optionally saved credentials remain strictly on your device. Saved credentials are encrypted using hardware-backed <strong>Android Keystore (AES-GCM)</strong>. Automatic cloud app backup is disabled (<code>allowBackup=false</code>), and you can wipe all browsing data locally in one tap.</p>
+        <p>Browsing history, bookmarks, per-site Blur rules, offline notes, Hatim/Hijri calendar preferences, and optionally saved credentials remain strictly on your device. Saved credentials are encrypted using hardware-backed <strong>Android Keystore (AES-GCM)</strong>. Automatic cloud app backup is disabled (<code>allowBackup=false</code>), and you can wipe all browsing data locally in one tap.</p>
       </div>
 
       <div class="card">
@@ -246,7 +246,7 @@
         <ul>
           <li><strong>Network (<code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>):</strong> Required to load websites you navigate to, download files you request, update filter lists, or run user-triggered in-page translation.</li>
           <li><strong>Camera (<code>CAMERA</code> — Optional):</strong> Requested only when you open the built-in QR Scanner or explicitly grant camera access to a website.</li>
-          <li><strong>Microphone &amp; Location (<code>RECORD_AUDIO</code>, <code>ACCESS_FINE_LOCATION</code> — Optional):</strong> Used only when you explicitly grant permission to a website. Built-in Offline Prayer Times do not use GPS or location permissions.</li>
+          <li><strong>Microphone &amp; Location (<code>RECORD_AUDIO</code>, <code>ACCESS_FINE_LOCATION</code> — Optional):</strong> Used only when you explicitly grant permission to a website; RAQİB itself never accesses GPS or location.</li>
           <li><strong>Biometrics (<code>USE_BIOMETRIC</code> — Optional):</strong> Handled strictly by the local Android OS for vault/app lock; biometric data never leaves your device.</li>
           <li><strong>Foreground Services &amp; Notifications (<code>FOREGROUND_SERVICE_MEDIA_PLAYBACK</code>, <code>FOREGROUND_SERVICE_DATA_SYNC</code>, <code>POST_NOTIFICATIONS</code>):</strong> Used strictly to show live controls during active user-initiated media playback or file downloads.</li>
           <li><strong>Storage (<code>WRITE_EXTERNAL_STORAGE</code> on Android 8–9 / Scoped <code>MediaStore</code> on Android 10+):</strong> Saves your downloaded files, PDFs, screenshots, and quote cards directly to your device Downloads / Pictures folders.</li>
@@ -277,7 +277,7 @@
 
       <div class="card">
         <h2>2. التخزين المحلي فقط على جهازك</h2>
-        <p>يبقى سجل التصفح، والإشارات المرجعية، وقواعد التمويه للمواقع، والملاحظات، وإعدادات مواقيت الصلاة، وكلمات المرور المحفوظة اختيارياً داخل جهازك فقط. تُشفّر كلمات المرور عبر <strong>Android Keystore (AES-GCM)</strong> مع تعطيل النسخ الاحتياطي السحابي التلقائي (<code>allowBackup=false</code>)، ويمكنك مسح جميع البيانات بضغطة واحدة.</p>
+        <p>يبقى سجل التصفح، والإشارات المرجعية، وقواعد التمويه للمواقع، والملاحظات، وإعدادات الختمة والتقويم الهجري، وكلمات المرور المحفوظة اختيارياً داخل جهازك فقط. تُشفّر كلمات المرور عبر <strong>Android Keystore (AES-GCM)</strong> مع تعطيل النسخ الاحتياطي السحابي التلقائي (<code>allowBackup=false</code>)، ويمكنك مسح جميع البيانات بضغطة واحدة.</p>
       </div>
 
       <div class="card">
@@ -290,7 +290,7 @@
         <ul>
           <li><strong>الشبكة (<code>INTERNET</code>):</strong> لفتح المواقع التي تزورها وتنزيل الملفات وتحديث قوائم الحظر والترجمة داخل الصفحة عند طلبك.</li>
           <li><strong>الكاميرا (<code>CAMERA</code> — اختياري):</strong> يُطلب فقط عند فتح ماسح رموز QR أو منح موقع إذن الكاميرا صراحةً.</li>
-          <li><strong>الميكروفون والموقع (اختياري):</strong> يُستخدم فقط للمواقع التي تمنحها الإذن صراحةً. مواقيت الصلاة تعمل دون إنترنت ولا تستخدم GPS.</li>
+          <li><strong>الميكروفون والموقع (اختياري):</strong> يُستخدم فقط للمواقع التي تمنحها الإذن صراحةً؛ المتصفح نفسه لا يجمع أي بيانات موقع.</li>
           <li><strong>البصمة (<code>USE_BIOMETRIC</code> — اختياري):</strong> تتم محلياً عبر نظام أندرويد فقط ولا تغادر بياناتك الحيوية الجهاز أبداً.</li>
           <li><strong>خدمات الواجهة الأمامية والإشعارات:</strong> لعرض عناصر التحكم أثناء تشغيل الصوتيات أو تنزيل الملفات التي بدأتها بنفسك.</li>
           <li><strong>التخزين:</strong> لحفظ الملفات المنزّلة وملفات PDF ولقطات الشاشة وبطاقات الاقتباس في معرض وتنزيلات جهازك.</li>
@@ -329,7 +329,7 @@
         <ul>
           <li><strong>Înternet:</strong> Ji bo vekirina malperan, dakêşanan û wergera nav-rûpel dema tu bixwazî.</li>
           <li><strong>Kamera (Vebijarkî):</strong> Tenê dema tu QR kodê bixwînî an destûr bidî malperekê.</li>
-          <li><strong>Mîkrofon &amp; Cih (Vebijarkî):</strong> Tenê dema tu bixwe destûr bidî malperekê. Demên nimêjê bê GPS û bê înternet dixebitin.</li>
+          <li><strong>Mîkrofon &amp; Cih (Vebijarkî):</strong> Tenê dema tu bixwe destûr bidî malperekê; gerok bi xwe qet cihê te nagire.</li>
           <li><strong>Biyometrîk &amp; Xizmetên Pêşîn:</strong> Tenê ji bo kilîta herêmî, kontrola deng û dakêşanên te yên çalak.</li>
         </ul>
       </div>
@@ -348,7 +348,7 @@
 
       <div class="card">
         <h2>2. Ausschließlich lokale Speicherung</h2>
-        <p>Verlauf, Lesezeichen, Blur-Seitenregeln, Offline-Notizen, Gebetszeiten-Einstellungen und optional gespeicherte Zugangsdaten bleiben ausschließlich auf Ihrem Gerät. Zugangsdaten werden hardwaregestützt per <strong>Android Keystore (AES-GCM)</strong> verschlüsselt. Automatische Cloud-Backups sind deaktiviert (<code>allowBackup=false</code>).</p>
+        <p>Verlauf, Lesezeichen, Blur-Seitenregeln, Offline-Notizen, Hidschri-/Khatm-Einstellungen und optional gespeicherte Zugangsdaten bleiben ausschließlich auf Ihrem Gerät. Zugangsdaten werden hardwaregestützt per <strong>Android Keystore (AES-GCM)</strong> verschlüsselt. Automatische Cloud-Backups sind deaktiviert (<code>allowBackup=false</code>).</p>
       </div>
 
       <div class="card">
@@ -361,7 +361,7 @@
         <ul>
           <li><strong>Netzwerk (<code>INTERNET</code>):</strong> Zum Laden aufgerufener Websites, für Downloads, Filterlisten-Updates und manuell ausgelöste In-Page-Übersetzungen.</li>
           <li><strong>Kamera (<code>CAMERA</code> — Optional):</strong> Nur für den integrierten QR-Scanner oder ausdrücklich freigegebene Websites.</li>
-          <li><strong>Mikrofon &amp; Standort (Optional):</strong> Nur nach ausdrücklicher Freigabe für einzelne Websites. Offline-Gebetszeiten nutzen kein GPS.</li>
+          <li><strong>Mikrofon &amp; Standort (Optional):</strong> Nur nach ausdrücklicher Freigabe für einzelne Websites; der Browser selbst erfasst niemals Standortdaten.</li>
           <li><strong>Biometrie (<code>USE_BIOMETRIC</code> — Optional):</strong> Erfolgt ausschließlich lokal über Android; biometrische Daten verlassen niemals das Gerät.</li>
           <li><strong>Vordergrunddienste &amp; Speicher:</strong> Ausschließlich für laufende Medienwiedergabe, Downloads und das Speichern Ihrer Dateien/Screenshots im Geräteordner.</li>
         </ul>

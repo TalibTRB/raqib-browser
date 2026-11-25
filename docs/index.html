@@ -1,213 +1,1392 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="tr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAQİB — Halal Visual Browser for Android</title>
-  <meta name="description" content="Ultra-lightweight (~4.5 MB) Android browser with instant zero-flash visual blur, fast ad & tracker shield, native in-page translation, and 100% on-device privacy." />
+  <title>RAQİB — Halal Visual Browser for Android (v5.6.0)</title>
+  <meta name="description" content="Ultra-lightweight (4.54 MB) privacy-first Android browser with t=0ms zero-flash strict visual blur, mandatory Halal Shield, fast Aho-Corasick AdBlock, native in-page translation, and 100% on-device privacy." />
+  <meta name="theme-color" content="#060A0F" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/raqib-icon.png" />
+
+  <!-- OpenGraph / Social Preview (WhatsApp, Telegram, X, Vercel) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RAQİB — Halal Visual Browser for Android" />
+  <meta property="og:description" content="Zero-flash strict visual blur, fast ad & tracker shield, native in-page translation, and 100% on-device privacy in 5 languages (TR • EN • AR • KU • DE)." />
+  <meta property="og:image" content="./assets/og-preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RAQİB — Halal Visual Browser for Android" />
+  <meta name="twitter:description" content="Browse with purpose. Protect your gaze. 4.54 MB signed Android APK, zero telemetry." />
+  <meta name="twitter:image" content="./assets/og-preview.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Sans+Arabic:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --bg: #080c11;
-      --surface: #111822;
-      --border: rgba(148, 163, 184, 0.18);
+      --bg: #05080d;
+      --bg-2: #0a1018;
+      --surface: rgba(16, 24, 35, 0.74);
+      --surface-solid: #0f1722;
+      --surface-hover: rgba(24, 36, 52, 0.88);
+      --border: rgba(148, 163, 184, 0.16);
+      --border-strong: rgba(16, 185, 129, 0.36);
       --text: #f8fafc;
+      --text-soft: #cbd5e1;
       --muted: #94a3b8;
       --emerald: #10b981;
-      --emerald-light: #6ee7b7;
+      --emerald-bright: #34d399;
+      --emerald-light: #a7f3d0;
+      --emerald-glow: rgba(16, 185, 129, 0.22);
+      --amber: #f59e0b;
+      --sky: #38bdf8;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --font-sans: "Plus Jakarta Sans", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Cinzel Decorative", Georgia, serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Arabic", Arial, sans-serif;
-      background: radial-gradient(circle at 50% -10%, rgba(16, 185, 129, 0.22), var(--bg) 55%);
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(16, 185, 129, 0.22), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 30%, rgba(56, 189, 248, 0.08), transparent 55%),
+        radial-gradient(ellipse 60% 45% at 10% 70%, rgba(16, 185, 129, 0.09), transparent 55%);
       color: var(--text);
       line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .container {
-      max-width: 980px;
+
+    a { color: inherit; }
+
+    /* Sticky Glass Navigation */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      background: rgba(5, 8, 13, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 36px 20px 72px;
-    }
-    .hero {
-      text-align: center;
-      padding: 36px 16px 42px;
-    }
-    .logo-wrap {
-      display: inline-flex;
-      padding: 10px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-      margin-bottom: 18px;
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.1rem, 5vw, 3.1rem);
-      letter-spacing: 0.12em;
-      font-weight: 800;
-    }
-    .tagline {
-      margin: 10px auto 22px;
-      max-width: 640px;
-      font-size: 1.12rem;
-      color: var(--muted);
-    }
-    .badges {
+      padding: 12px 20px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 28px;
     }
-    .pill {
-      padding: 6px 14px;
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    }
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .ver-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
       border-radius: 999px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.36);
       color: var(--emerald-light);
-      font-size: 0.85rem;
-      font-weight: 600;
+      letter-spacing: 0.04em;
     }
-    .cta-row {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+    .nav-links a {
+      text-decoration: none;
+      transition: color 0.16s ease;
+    }
+    .nav-links a:hover { color: var(--emerald-bright); }
+
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(15, 23, 34, 0.92);
+      border: 1px solid var(--border);
+    }
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #031a12;
+      box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 64px 0 36px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.11);
+      border: 1px solid rgba(16, 185, 129, 0.34);
+      color: var(--emerald-light);
+      font-size: 0.84rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-bright);
+      box-shadow: 0 0 12px var(--emerald-bright);
+      display: inline-block;
+    }
+    .hero h1 {
+      margin: 0 auto 18px;
+      max-width: 900px;
+      font-size: clamp(2.15rem, 5.2vw, 3.85rem);
+      line-height: 1.12;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(180deg, #ffffff 15%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    html[dir="rtl"] .hero h1 { letter-spacing: 0; line-height: 1.25; }
+    .hero-sub {
+      margin: 0 auto 30px;
+      max-width: 720px;
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      color: var(--text-soft);
+      font-weight: 400;
+    }
+    .cta-group {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
+      margin-bottom: 18px;
     }
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 13px 24px;
-      border-radius: 14px;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 26px;
+      border-radius: 15px;
       text-decoration: none;
       font-weight: 700;
-      font-size: 0.98rem;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+      font-size: 0.96rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      cursor: pointer;
     }
-    .btn:hover { transform: translateY(-1px); opacity: 0.94; }
-    .btn-primary { background: var(--emerald); color: #031c14; }
-    .btn-secondary {
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #021a11;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.34);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(16, 185, 129, 0.48); }
+    .btn-glass {
       background: var(--surface);
       color: var(--text);
       border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
     }
-    .grid {
+    .btn-glass:hover { border-color: var(--border-strong); background: var(--surface-hover); }
+    .hero-meta-note {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 34px;
+    }
+    .hero-visual-wrap {
+      position: relative;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .hero-visual {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 26px;
+      filter: drop-shadow(0 28px 65px rgba(0, 0, 0, 0.72));
+    }
+
+    /* Key Metrics Strip */
+    .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      margin-top: 24px;
+      margin: 34px 0 64px;
     }
-    .card {
+    .metric-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      padding: 22px 18px;
+      text-align: center;
+      backdrop-filter: blur(12px);
     }
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      color: #d1fae5;
+    .metric-val {
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      font-weight: 800;
+      color: var(--emerald-bright);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 6px;
     }
-    .card p {
+    .metric-label {
+      font-size: 0.86rem;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    /* Section Headings */
+    section.block {
+      padding: 46px 0 56px;
+    }
+    .section-head {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 38px;
+    }
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--emerald-bright);
+      margin-bottom: 10px;
+    }
+    html[dir="rtl"] .section-kicker { letter-spacing: 0; }
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.7rem, 3.6vw, 2.55rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+    .section-head p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 1.02rem;
     }
-    footer {
-      margin-top: 48px;
-      padding-top: 20px;
+
+    /* Ultra-Premium Screenshot Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .shot-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      cursor: zoom-in;
+    }
+    .shot-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-strong);
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.55), 0 0 32px rgba(16, 185, 129, 0.14);
+    }
+    .shot-img-wrap {
+      background: #060a0f;
+      padding: 12px 12px 0;
+      overflow: hidden;
+      aspect-ratio: 640 / 980;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .shot-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 18px 18px 0 0;
+      display: block;
+    }
+    .shot-body {
+      padding: 18px 20px 22px;
       border-top: 1px solid var(--border);
+      background: rgba(10, 16, 24, 0.94);
+      flex: 1;
+    }
+    .shot-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.13);
+      color: var(--emerald-light);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      margin-bottom: 8px;
+    }
+    .shot-body h3 {
+      margin: 0 0 6px;
+      font-size: 1.06rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .shot-body p {
+      margin: 0;
+      font-size: 0.89rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Feature Bento Pillars */
+    .pillar-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 34px 0 16px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: var(--emerald-light);
+    }
+    .pillar-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.35), transparent);
+    }
+    html[dir="rtl"] .pillar-title::after {
+      background: linear-gradient(270deg, rgba(16, 185, 129, 0.35), transparent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .feature-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+    .f-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16, 185, 129, 0.13);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--emerald-bright);
+      margin-bottom: 14px;
+    }
+    .feature-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .feature-card p {
+      margin: 0;
+      font-size: 0.91rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Privacy & Download Panel */
+    .split-panel {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+    .glass-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      backdrop-filter: blur(14px);
+    }
+    .glass-panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.32rem;
+      font-weight: 800;
+    }
+    .glass-panel p.lead {
+      margin: 0 0 18px;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+    .hash-box {
+      background: rgba(5, 8, 13, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 14px;
+      margin-bottom: 12px;
+    }
+    .hash-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .hash-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--emerald-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .copy-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-soft);
+      font-family: inherit;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .copy-btn:hover { border-color: var(--emerald); color: var(--emerald-light); }
+    .hash-val {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      word-break: break-all;
+      line-height: 1.5;
+      direction: ltr;
+      text-align: left;
+    }
+    .steps-list {
+      margin: 12px 0 18px;
+      padding-inline-start: 20px;
+      color: var(--text-soft);
+      font-size: 0.93rem;
+    }
+    .steps-list li { margin-bottom: 8px; }
+    .steps-list code {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--emerald-light);
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      direction: ltr;
+      display: inline-block;
+    }
+    .check-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.93rem;
+      color: var(--text-soft);
+    }
+    .check-dot {
+      color: var(--emerald-bright);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 56px;
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+    .footer-inner {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 12px;
+      align-items: center;
+      gap: 14px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-links a {
+      color: var(--emerald-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer-links a:hover { text-decoration: underline; }
+
+    /* Lightbox Modal */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(3, 6, 10, 0.92);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-box {
+      position: relative;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    .lightbox-box img {
+      max-height: 78vh;
+      max-width: 100%;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
+    }
+    .lightbox-cap {
+      margin-top: 14px;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .lightbox-sub {
+      margin-top: 4px;
       color: var(--muted);
       font-size: 0.88rem;
     }
-    footer a { color: var(--emerald-light); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    .lb-close, .lb-nav {
+      position: fixed;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 34, 0.9);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s ease;
+    }
+    .lb-close:hover, .lb-nav:hover { background: var(--emerald); color: #031a12; }
+    .lb-close { top: 20px; right: 20px; }
+    .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .split-panel { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding-top: 38px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .topbar-inner { justify-content: center; }
+      .lb-nav { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <!-- Sticky Glass Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand-link" href="#top">
+        <img class="brand-icon" src="./assets/raqib-icon.png" alt="RAQİB Emblem" />
+        <span class="brand-wordmark">RAQİB</span>
+        <span class="ver-chip">v5.6.0</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#gallery" data-i18n="navGallery">Arayüz</a>
+        <a href="#features" data-i18n="navFeatures">Özellikler</a>
+        <a href="#privacy" data-i18n="navPrivacy">Gizlilik</a>
+        <a href="#download" data-i18n="navDownload">İndir</a>
+      </nav>
+      <div class="lang-switcher" role="group" aria-label="Language Selector">
+        <button class="lang-btn" data-lang="tr" onclick="setLang('tr')">TR</button>
+        <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">العربية</button>
+        <button class="lang-btn" data-lang="ku" onclick="setLang('ku')">KU</button>
+        <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero -->
     <section class="hero">
-      <div class="logo-wrap">
-        <svg width="84" height="84" viewBox="0 0 64 64" aria-label="RAQİB Logo">
-          <defs>
-            <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#363D48"/>
-              <stop offset="50%" stop-color="#1F242B"/>
-              <stop offset="100%" stop-color="#0D1014"/>
-            </linearGradient>
-            <linearGradient id="rG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#FFFFFF"/>
-              <stop offset="60%" stop-color="#E5EBF2"/>
-              <stop offset="100%" stop-color="#B8C2CE"/>
-            </linearGradient>
-          </defs>
-          <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bgG)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-          <path d="M14,2.8 L50,2.8 C56.1,2.8 61.2,7.9 61.2,14 L61.2,23 C45,31 19,31 2.8,23 L2.8,14 C2.8,7.9 7.9,2.8 14,2.8 Z" fill="rgba(255,255,255,0.14)"/>
-          <path d="M32,10 L49,16.5 L49,33 C49,43.5 41.5,51.5 32,55.5 C22.5,51.5 15,43.5 15,33 L15,16.5 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.55)" stroke-width="1.2"/>
-          <path d="M23,20 L34,20 C39.3,20 43,23.4 43,28.4 C43,32.4 40.5,35.3 36.8,36.4 L43.4,48 L37.3,48 L31.4,37.1 L28.2,37.1 L28.2,48 L23,48 Z M28.2,24.6 L28.2,32.4 L33.6,32.4 C36.2,32.4 37.7,30.9 37.7,28.5 C37.7,26.1 36.2,24.6 33.6,24.6 Z" fill="url(#rG)"/>
-          <path d="M32,13.5 L34.2,15.7 L32,17.9 L29.8,15.7 Z" fill="#F8FAFC"/>
-        </svg>
+      <div class="hero-eyebrow">
+        <span class="pulse-dot"></span>
+        <span data-i18n="heroBadge">v5.6.0 • 4.54 MB İmzalı APK • Android 8.0–16 • Sıfır Veri Toplama</span>
       </div>
-      <h1>RAQİB</h1>
-      <p class="tagline">
-        Bilinçle gezin. Gözünü koru. • Mindful, ultra-fast Android browser with zero-flash visual blur, built-in ad &amp; tracker shield, and 100% on-device privacy.
+      <h1 data-i18n="heroTitle">Bilinçle gezin. Gözünü koru.</h1>
+      <p class="hero-sub" data-i18n="heroSub">
+        RAQİB (الرقيب), interneti hızlı, huzurlu ve dikkat dağılmadan kullanmak için geliştirilmiş ultra hafif bir Android tarayıcısıdır. t=0ms anlık Katı Blur, zorunlu Helal Kalkan, Aho-Corasick reklam engelleyici ve yerel sayfa içi çeviri tek bir 4.54 MB uygulamada.
       </p>
-      <div class="badges">
-        <span class="pill">v5.5.1 • ~4.5 MB APK</span>
-        <span class="pill">Zero-Flash Strict Blur</span>
-        <span class="pill">Zero Data Collection</span>
-        <span class="pill">5 Languages (TR • EN • AR • KU • DE)</span>
+      <div class="cta-group">
+        <a class="btn btn-primary" href="https://github.com/TalibTRB/raqib-browser/releases/download/v5.6.0/RAQIB-v5.6.0-signed-release.apk">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="ctaDownload">İmzalı APK İndir (v5.6.0)</span>
+        </a>
+        <a class="btn btn-glass" href="https://github.com/TalibTRB/raqib-browser/releases/latest" target="_blank" rel="noopener">
+          <span data-i18n="ctaReleases">GitHub Releases &amp; SHA-256</span>
+        </a>
+        <a id="privacyTopLink" class="btn btn-glass" href="./privacy.html?lang=tr">
+          <span data-i18n="ctaPrivacy">Gizlilik Politikası</span>
+        </a>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/TalibTRB/raqib-browser/releases/latest">Download Signed APK (GitHub)</a>
-        <a class="btn btn-secondary" href="./privacy.html">Privacy Policy / Gizlilik Politikası</a>
-        <a class="btn btn-secondary" href="https://github.com/TalibTRB/raqib-browser/blob/main/SECURITY.md">Verify Signature (SHA-256)</a>
+      <div class="hero-meta-note" data-i18n="heroMeta">
+        Kalıcı 4096-bit RSA imzalı • Hesap gerekmez • Reklam ve analiz SDK'sı yok • 5 Yerleşik Dil
+      </div>
+      <div class="hero-visual-wrap">
+        <img class="hero-visual" src="./assets/hero-showcase.png" alt="RAQİB v5.6.0 Multi-Device Interface Preview" />
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card">
-        <h3>Strict Zero-Flash Visual Blur</h3>
-        <p>Document-start CSS and Constructable Shadow DOM stylesheets blur web images, thumbnails, and background photos at render time with instant Peek-to-Unblur on hold.</p>
+    <!-- Engineering Metrics Strip -->
+    <section class="metrics-grid" aria-label="Highlights">
+      <div class="metric-card">
+        <div class="metric-val">t = 0 ms</div>
+        <div class="metric-label" data-i18n="m1">Sıfır Flaş Katı Görsel Blur</div>
       </div>
-      <div class="card">
-        <h3>Mandatory Halal Shield &amp; AdBlock</h3>
-        <p>Offline Aho-Corasick network filtering blocks explicit domains, gambling sites, ads, trackers, cryptojackers, and IDN homograph phishing attempts.</p>
+      <div class="metric-card">
+        <div class="metric-val">4.54 MB</div>
+        <div class="metric-label" data-i18n="m2">Tek-DEX R8 Optimize APK</div>
       </div>
-      <div class="card">
-        <h3>Native In-Page Translation</h3>
-        <p>Translate pages directly in place without external proxy redirects or broken logins, with a one-tap Original ↔ Translated toggle bar.</p>
+      <div class="metric-card">
+        <div class="metric-val">0 Byte</div>
+        <div class="metric-label" data-i18n="m3">Sunucuya Gönderilen Veri</div>
       </div>
-      <div class="card">
-        <h3>Clean Guest Session</h3>
-        <p>Isolated Chromium profile for a 2nd/family account or unbiased search with zero history, hardware FLAG_SECURE, and always-on Strict Blur.</p>
+      <div class="metric-card">
+        <div class="metric-val">5 Dil</div>
+        <div class="metric-label" data-i18n="m4">TR • EN • AR (RTL) • KU • DE</div>
       </div>
-      <div class="card">
-        <h3>Scholar &amp; Productivity Suite</h3>
-        <p>Offline Prayer Times, Hijri Calendar, Pro In-Site Search, Screenshot Studio, Quote Card Studio, Reader Mode, Split View, PDF Export, and QR Tools.</p>
+    </section>
+
+    <!-- Live Android 16 Interface Showcase Gallery -->
+    <section id="gallery" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="galKicker">GERÇEK ANDROID 16 ARAYÜZÜ</span>
+        <h2 data-i18n="galTitle">Her pikseli sade, hızlı ve cam zarafetinde</h2>
+        <p data-i18n="galSub">RAQİB v5.6.0'ın gerçek Android 16 ekran görüntülerini incelemek için herhangi bir cihaza dokunun.</p>
       </div>
-      <div class="card">
-        <h3>100% On-Device Privacy</h3>
-        <p>No accounts, no cloud tracking, no analytics SDKs. Hardware-backed Android Keystore encryption keeps your data strictly on your own phone.</p>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+    <!-- Full Feature Deep-Dive (4 Pillars, 12 Cards) -->
+    <section id="features" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="featKicker">TÜM ÖZELLİKLER</span>
+        <h2 data-i18n="featTitle">Tek bir ultra hafif tarayıcıda eksiksiz koruma ve verimlilik</h2>
+        <p data-i18n="featSub">Göz koruması, reklam/izleyici kalkanı, sayfa içi çeviri, ilim ve çalışma araçları hiçbir performans ödünü olmadan bir arada.</p>
+      </div>
+      <div id="featuresContainer"></div>
+    </section>
+
+    <!-- Privacy, Verification & Direct Download / Obtainium -->
+    <section id="privacy" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="secKicker">KRİPTOGRAFİK DOĞRULAMA &amp; DAĞITIM</span>
+        <h2 data-i18n="secTitle">%100 Cihaz İçi Gizlilik ve Doğrulanabilir İmzalı Sürümler</h2>
+        <p data-i18n="secSub">Her resmi APK, kalıcı 4096-bit RSA anahtarıyla imzalanır ve SHA-256 parmak iziyle açıkça doğrulanabilir.</p>
+      </div>
+
+      <div id="download" class="split-panel">
+        <div class="glass-panel">
+          <h3 data-i18n="dlTitle">Resmi İmzalı APK (v5.6.0) &amp; İmza Doğrulama</h3>
+          <p class="lead" data-i18n="dlLead">
+            Doğrudan GitHub Releases üzerinden indirin ve aşağıdaki SHA-256 özetleriyle dosyanın değiştirilmediğini saniyeler içinde doğrulayın.
+          </p>
+
+          <div class="hash-box">
+            <div class="hash-head">
+              <span class="hash-label">APK SHA-256 (RAQIB-v5.6.0-signed-release.apk • 4.54 MB)</span>
+              <button class="copy-btn" onclick="copyText(this, '5cbfa2d5cc24146fe008c4cce19cb1143d83ab4f00bbb1e9575ac1be8f96f87d')" data-i18n="copyBtn">Kopyala</button>
+            </div>
+            <div class="hash-val">5cbfa2d5cc24146fe008c4cce19cb1143d83ab4f00bbb1e9575ac1be8f96f87d</div>
+          </div>
+
+          <div class="hash-box">
+            <div class="hash-head">
+              <span class="hash-label" data-i18n="certLabel">KALICI İMZA SERTİFİKASI SHA-256 (RSA 4096-BIT • v2+v3)</span>
+              <button class="copy-btn" onclick="copyText(this, 'F7:0D:88:EA:F2:AB:21:9C:2F:F8:72:6E:2C:D5:B6:EF:2F:9E:A7:93:0E:AF:5F:A8:D1:85:C3:13:95:BA:4C:A5')" data-i18n="copyBtn">Kopyala</button>
+            </div>
+            <div class="hash-val">F7:0D:88:EA:F2:AB:21:9C:2F:F8:72:6E:2C:D5:B6:EF:2F:9E:A7:93:0E:AF:5F:A8:D1:85:C3:13:95:BA:4C:A5</div>
+          </div>
+
+          <div class="cta-group" style="justify-content: flex-start; margin-top: 18px; margin-bottom: 0;">
+            <a class="btn btn-primary" href="https://github.com/TalibTRB/raqib-browser/releases/download/v5.6.0/RAQIB-v5.6.0-signed-release.apk">
+              <span data-i18n="ctaDownload">İmzalı APK İndir (v5.6.0)</span>
+            </a>
+            <a class="btn btn-glass" href="https://github.com/TalibTRB/raqib-browser/blob/main/SECURITY.md" target="_blank" rel="noopener">
+              <span data-i18n="secDocBtn">Güvenlik Politikası</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="glass-panel">
+          <h3 data-i18n="obtTitle">Android'de Otomatik Güncelleme (Obtainium)</h3>
+          <p class="lead" data-i18n="obtLead">
+            Play Store olmadan bile yeni RAQİB sürümlerini doğrudan resmi GitHub Releases kaynağından otomatik takip edebilirsiniz:
+          </p>
+          <ol class="steps-list">
+            <li data-i18n="obtS1">Android'de açık kaynaklı <strong>Obtainium</strong> uygulamasını açın → <strong>Add App</strong>.</li>
+            <li data-i18n="obtS2">Kaynak adresi olarak şunu girin: <code>https://github.com/TalibTRB/raqib-browser</code></li>
+            <li data-i18n="obtS3">Obtainium yeni imzalı sürümleri otomatik yakalar ve kalıcı RSA imzasını doğrular.</li>
+          </ol>
+
+          <h3 style="font-size: 1.06rem; margin-top: 20px;" data-i18n="privTitle">Sıfır Veri Toplama Taahhüdü</h3>
+          <ul class="check-list">
+            <li><span class="check-dot">✓</span><span data-i18n="priv1">Hesap yok, analiz SDK'sı yok, geliştirici telemetri sunucusu yok.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="priv2">Kaydedilen parolalar donanımsal Android Keystore (AES-GCM) ile şifrelenir.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="priv3">Buluta otomatik yedekleme (allowBackup=false) kapalıdır; veriler cihazınızda kalır.</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <footer>
-      <span>RAQİB Browser • <code>com.raqib.browser</code> • Android 8.0–16 (API 26–36)</span>
-      <span>
-        <a href="./privacy.html?lang=tr">Gizlilik (TR)</a> ·
-        <a href="./privacy.html?lang=en">Privacy (EN)</a> ·
-        <a href="./privacy.html?lang=ar">الخصوصية (AR)</a> ·
-        <a href="./privacy.html?lang=ku">Nepenî (KU)</a> ·
-        <a href="./privacy.html?lang=de">Datenschutz (DE)</a>
-      </span>
+      <div class="footer-inner">
+        <span>© 2026 <strong>RAQİB Browser</strong> (<code>com.raqib.browser</code>) • All Rights Reserved</span>
+        <div class="footer-links">
+          <a href="./privacy.html?lang=tr">Gizlilik (TR)</a>
+          <a href="./privacy.html?lang=en">Privacy (EN)</a>
+          <a href="./privacy.html?lang=ar">الخصوصية (AR)</a>
+          <a href="./privacy.html?lang=ku">Nepenî (KU)</a>
+          <a href="./privacy.html?lang=de">Datenschutz (DE)</a>
+          <a href="https://github.com/TalibTRB/raqib-browser/releases/latest" target="_blank" rel="noopener">GitHub Releases</a>
+        </div>
+      </div>
     </footer>
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" onclick="if(event.target===this) closeLightbox()">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" onclick="stepLightbox(-1)" aria-label="Previous">‹</button>
+    <div class="lightbox-box">
+      <img id="lbImg" src="" alt="" />
+      <div id="lbTitle" class="lightbox-cap"></div>
+      <div id="lbDesc" class="lightbox-sub"></div>
+    </div>
+    <button class="lb-nav lb-next" onclick="stepLightbox(1)" aria-label="Next">›</button>
   </div>
+
+  <script>
+    const ICONS = {
+      blur: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" opacity=".45"/></svg>',
+      shield: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>',
+      bolt: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+      translate: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>',
+      guest: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+      moon: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      search: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+      quote: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10h8M8 14h5"/></svg>',
+      book: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+      hijri: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+      audio: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
+      sliders: '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>'
+    };
+
+    const SHOT_FILES = [
+      './assets/showcase-home-light.png',
+      './assets/showcase-blur-live.png',
+      './assets/showcase-blur-panel.png',
+      './assets/showcase-tools-menu.png',
+      './assets/showcase-quote-studio.png',
+      './assets/showcase-dark-mode.png'
+    ];
+
+    const I18N = {
+      tr: {
+        dir: 'ltr',
+        docTitle: 'RAQİB — Android İçin Helal Görsel Tarayıcı (v5.6.0)',
+        navGallery: 'Arayüz', navFeatures: 'Özellikler', navPrivacy: 'Gizlilik', navDownload: 'İndir',
+        heroBadge: 'v5.6.0 • 4.54 MB İmzalı APK • Android 8.0–16 • Sıfır Veri Toplama',
+        heroTitle: 'Bilinçle gezin. Gözünü koru.',
+        heroSub: 'RAQİB (الرقيب), interneti hızlı, huzurlu ve dikkat dağılmadan kullanmak için tasarlanmış ultra hafif Android tarayıcısıdır. t=0ms anlık Katı Blur, zorunlu Helal Kalkan, Aho-Corasick reklam engelleyici ve yerel sayfa içi çeviri tek bir 4.54 MB uygulamada.',
+        ctaDownload: 'İmzalı APK İndir (v5.6.0)',
+        ctaReleases: 'GitHub Releases & SHA-256',
+        ctaPrivacy: 'Gizlilik Politikası',
+        heroMeta: 'Kalıcı 4096-bit RSA imzalı • Hesap gerekmez • Reklam ve analiz SDK\'sı yok • 5 Yerleşik Dil',
+        m1: 'Sıfır Flaş Katı Görsel Blur', m2: 'Tek-DEX R8 Optimize APK', m3: 'Sunucuya Gönderilen Veri', m4: 'TR • EN • AR (RTL) • KU • DE',
+        galKicker: 'GERÇEK ANDROID 16 ARAYÜZÜ',
+        galTitle: 'Her pikseli sade, hızlı ve cam zarafetinde',
+        galSub: 'RAQİB v5.6.0\'ın gerçek Android 16 ekran görüntülerini tam boy incelemek için herhangi bir cihaza dokunun.',
+        shots: [
+          ['Ana Ekran', 'Huzurlu Cam Ana Ekran', 'RAQİB arması, Hicrî takvim, hızlı koruma hapları (Blur, Kalkan, Odak, Hatim, Zekât) ve sabit alt çubuk.'],
+          ['t = 0 ms Katı Blur', 'Canlı Web Görsel Koruması', 'Fotoğraflar, küçük resimler ve Shadow DOM medyaları daha ekrana çizilmeden anlık bulanıklaştırılır.'],
+          ['Blur Kontrolü', 'Esnek Görsel Blur Paneli', '0–40 px bulanıklık şiddeti, basılı tutarak anlık netleştirme (Peek-to-Unblur) ve site bazlı beyaz/kara liste.'],
+          ['40+ Araç', 'Özelleştirilebilir Araç Menüsü', 'Ekran Stüdyosu, Alıntı Kartı, Sayfa İçi Çeviri, Bölünmüş Ekran, Ses EQ, Okuma Modu, PDF ve QR tek dokunuşta.'],
+          ['Stüdyo', 'Otomatik Sığdıran Alıntı Kartı', 'Metin ne kadar uzun olursa olsun taşmadan sığan 5 temalı, 3 oranlı (4:5, 1:1, 9:16) hat/serif alıntı kartları.'],
+          ['Koyu Mod', 'Birleşik Koyu & Açık Tema', 'Sistem temasına uyumlu antrasit/obsidyen koyu mod, keskin beyaz yazılar ve göz yormayan kontrast.']
+        ],
+        featKicker: 'TÜM ÖZELLİKLER',
+        featTitle: 'Tek bir ultra hafif tarayıcıda eksiksiz koruma ve verimlilik',
+        featSub: 'Göz koruması, reklam/izleyici kalkanı, sayfa içi çeviri, ilim ve çalışma araçları hiçbir hız ödünü olmadan bir arada.',
+        pillars: [
+          {
+            title: '1. Görsel & Ahlaki Koruma',
+            items: [
+              ['blur', 't = 0 ms Sıfır Flaş Katı Blur', 'Sayfalar yüklenirken <img>, <picture>, <canvas>, video kapakları, CSS arka planları ve Open/Closed Shadow DOM görsellerini sıfır gecikmeyle bulanıklaştırır. Basılı tutarak anlık netleştirin (Peek-to-Unblur).'],
+              ['shield', 'Zorunlu Helal Kalkan & Güvenli Gezinme', 'Müstehcen, kumar ve zararlı alan adlarını ağ seviyesinde kalıcı engeller. SafeSearch zorlama, IDN Homograph sahte alan adı uyarısı, kripto madenciliği kalkanı ve tehlikeli dosya uzantısı denetimi her zaman devrededir.'],
+              ['bolt', 'Aho-Corasick Reklam & İzleyici Kalkanı', '< 8 ms\'de yüklenen ikili (binary) trie motoru reklamları, üçüncü taraf takipçileri, çerez onay pencerelerini ve uygulama yönlendirme şeritlerini engeller; URL izleme parametrelerini temizler.']
+            ]
+          },
+          {
+            title: '2. Hız, Sayfa İçi Çeviri & Temiz Oturum',
+            items: [
+              ['translate', 'Native Sayfa İçi Çeviri Motoru', 'Harici proxy (.translate.goog) yönlendirmesi yapmadan doğrudan sayfanın içinde çeviri yapar; oturumlar bozulmaz. Yüzer hap ile Orijinal ↔ Çeviri arasında tek dokunuşla geçin.'],
+              ['guest', 'Misafir / Temiz Oturum', 'Aile, iş veya 2. hesap girişleri ya da tarafsız arama için izole Chromium MULTI_PROFILE oturumu. Sıfır geçmiş, sıfır önbellek, donanımsal FLAG_SECURE ve her zaman aktif Katı Blur + Helal Kalkan.'],
+              ['moon', 'Birleşik Koyu & Açık Mod Senkronu', 'Cihaz temasını otomatik izler; tarayıcı arayüzü, alt sayfalar ve web sitelerini birbiriyle tam uyumlu Koyu (beyaz yazı) veya Açık (siyah yazı) kutupta dengeler.']
+            ]
+          },
+          {
+            title: '3. İlim, Okuma & Verimlilik Araçları',
+            items: [
+              ['search', 'Pro Site İçi Arama & Hızlı Kısayollar', 'Türkçe/Arapça hareke ve şapka esnekliğiyle sayfadaki tüm eşleşmeleri bulup zıplayın. Omnibox hızlı arama şeridi (Google, YouTube, Turath, Tafsir, Hadith, Almaany), !t / !tf / !h / !a / !yt kısayolları ve çevrimdışı hesap/birim/saat dönüştürücü.'],
+              ['quote', 'Ekran Görüntüsü & Alıntı Kartı Stüdyosu', 'Düz şerit fosforlu kalem, sansür kutusu, kırpma, ok ve metin notlu Ekran Stüdyosu; ayrıca her uzunluktaki metni estetik biçimde otomatik sığdıran 5 temalı Alıntı Kartı Stüdyosu.'],
+              ['book', 'Okuma Modu, Bölünmüş Ekran, PDF & QR', 'Sade Okuma Modu, Sadece Metin Modu, 50/50 Bölünmüş Ekran, Element Silgisi, Çevrimdışı Notlar, Dahili PDF Görüntüleyici & PDF Kaydetme, Sekme Çalışma Alanları, QR Tarayıcı ve Oluşturucu.']
+            ]
+          },
+          {
+            title: '4. Hicrî Araçlar, Ses Stüdyosu & Ergonomi',
+            items: [
+              ['hijri', 'Hicrî Takvim, Hatim, Zekât & İstiğfar', 'Tamamen çevrimdışı Hicrî Ajanda, Kur\'ân Hatim Takipçisi, Zekât & Hicrî-Miladî Dönüştürücü ve ayarlardan süresi/aralığı düzenlenebilen zarif Arapça "Estağfirullah" hatırlatıcısı.'],
+              ['audio', 'Kesintisiz Web Ses & Media3 Stüdyosu', 'Ekran kapalıyken veya başka uygulamadayken ders/sohbet seslerinin kesintisiz çalması, Oynatma Hızı, Konuşma Netliği (Voice Boost) ve 5 Bantlı WebAudio Ses Ekolayzırı.'],
+              ['sliders', 'Özelleştirilebilir Çubuk & 7 Adımlı Rehber', 'Alt çubuk ve 40+ araç menüsü sırasını dilediğiniz gibi düzenleyin. Her tuşa özel uzun basma kısayolları ve 7 adımlı etkileşimli ilk açılış rehberi ile sıfır öğrenme eğrisi.']
+            ]
+          }
+        ],
+        secKicker: 'KRİPTOGRAFİK DOĞRULAMA & DAĞITIM',
+        secTitle: '%100 Cihaz İçi Gizlilik ve Doğrulanabilir İmzalı Sürümler',
+        secSub: 'Her resmi APK, kalıcı 4096-bit RSA anahtarıyla imzalanır ve SHA-256 parmak iziyle açıkça doğrulanabilir.',
+        dlTitle: 'Resmi İmzalı APK (v5.6.0) & İmza Doğrulama',
+        dlLead: 'Doğrudan GitHub Releases üzerinden indirin ve aşağıdaki SHA-256 özetleriyle dosyanın değiştirilmediğini saniyeler içinde doğrulayın.',
+        certLabel: 'KALICI İMZA SERTİFİKASI SHA-256 (RSA 4096-BIT • v2+v3)',
+        copyBtn: 'Kopyala', copiedBtn: 'Kopyalandı ✓',
+        secDocBtn: 'Güvenlik Politikası',
+        obtTitle: 'Android\'de Otomatik Güncelleme (Obtainium)',
+        obtLead: 'Play Store olmadan bile yeni RAQİB sürümlerini doğrudan resmi GitHub Releases kaynağından otomatik takip edebilirsiniz:',
+        obtS1: 'Android\'de açık kaynaklı <strong>Obtainium</strong> uygulamasını açın → <strong>Add App</strong>.',
+        obtS2: 'Kaynak adresi olarak şunu girin: <code>https://github.com/TalibTRB/raqib-browser</code>',
+        obtS3: 'Obtainium yeni imzalı sürümleri otomatik yakalar ve kalıcı RSA imzasını doğrular.',
+        privTitle: 'Sıfır Veri Toplama Taahhüdü',
+        priv1: 'Hesap yok, analiz SDK\'sı yok, geliştirici telemetri sunucusu yok.',
+        priv2: 'Kaydedilen parolalar donanımsal Android Keystore (AES-GCM) ile şifrelenir.',
+        priv3: 'Buluta otomatik yedekleme (allowBackup=false) kapalıdır; verileriniz yalnızca telefonunuzda kalır.'
+      },
+
+      en: {
+        dir: 'ltr',
+        docTitle: 'RAQİB — Halal Visual Browser for Android (v5.6.0)',
+        navGallery: 'Interface', navFeatures: 'Features', navPrivacy: 'Privacy', navDownload: 'Download',
+        heroBadge: 'v5.6.0 • 4.54 MB Signed APK • Android 8.0–16 • Zero Data Collection',
+        heroTitle: 'Browse with purpose. Protect your gaze.',
+        heroSub: 'RAQİB (الرقيب) is an ultra-lightweight, privacy-first Android web browser engineered for calm, focused, and fast browsing. Instant t=0ms Strict Visual Blur, mandatory Halal Shield, Aho-Corasick AdBlock, and native in-page translation in a single 4.54 MB APK.',
+        ctaDownload: 'Download Signed APK (v5.6.0)',
+        ctaReleases: 'GitHub Releases & SHA-256',
+        ctaPrivacy: 'Privacy Policy',
+        heroMeta: 'Permanent 4096-bit RSA signed • No account required • Zero analytics or ad SDKs • 5 Built-in Languages',
+        m1: 'Zero-Flash Strict Visual Blur', m2: 'Single-DEX R8 Full-Mode APK', m3: 'Telemetry Sent to Servers', m4: 'TR • EN • AR (RTL) • KU • DE',
+        galKicker: 'REAL ANDROID 16 INTERFACE',
+        galTitle: 'Crafted for speed, serenity, and glass clarity',
+        galSub: 'Tap any device below to zoom into real high-DPI screenshots captured directly from RAQİB v5.6.0 on Android 16.',
+        shots: [
+          ['Home Screen', 'Serene Glassmorphism Home', 'Cinzel RAQİB emblem, Hijri calendar pill, instant protection chips (Blur, Shield, Focus, Hatim, Zakat), and fixed bottom bar.'],
+          ['t = 0 ms Strict Blur', 'Live Web Visual Protection', 'Photos, thumbnails, avatars, CSS backgrounds, and Shadow DOM media blur before first paint with zero flash.'],
+          ['Blur Control', 'Precision Visual Blur Panel', 'Fine-tune 0–40 px intensity, hold-to-peek unblur, visual styles, and instant per-site whitelist/blacklist rules.'],
+          ['40+ Tools', 'Customizable Power Menu', 'Screenshot Studio, Quote Cards, In-Page Translate, Split View, Audio EQ, Reader Mode, PDF, and QR tools in one sheet.'],
+          ['Studio', 'Auto-Fit Quote Card Studio', 'Turn any quote into a crisp calligraphic card (5 themes, 4:5 / 1:1 / 9:16) with smart auto-sizing that never overflows.'],
+          ['Dark Mode', 'Unified Dark & Light Sync', 'Automatically harmonizes with system dark mode, pairing obsidian surfaces with crisp negative-ink typography.']
+        ],
+        featKicker: 'COMPLETE CAPABILITIES',
+        featTitle: 'Every protection and study tool in one ultra-light browser',
+        featSub: 'Visual modesty, network-layer ad & tracker defense, in-page translation, and productivity tools engineered for pure speed.',
+        pillars: [
+          {
+            title: '1. Visual & Moral Protection',
+            items: [
+              ['blur', 't = 0 ms Zero-Flash Strict Blur', 'Document-start CSS and Constructable Shadow DOM stylesheets blur <img>, <picture>, <canvas>, video thumbnails, avatars, and CSS background photos at render time. Hold any image for instant Peek-to-Unblur.'],
+              ['shield', 'Mandatory Halal Shield & Safe Browsing', 'Permanent network-layer blocking for explicit, gambling, and malicious domains. Includes SafeSearch enforcement, IDN Homograph phishing alerts, anti-cryptojacking, and dangerous download checks.'],
+              ['bolt', 'Aho-Corasick Ad, Tracker & Annoyance Shield', 'Compiled binary trie (< 8 ms load) blocks ad networks, third-party trackers, cookie-consent pop-ups, and app-nag bars while automatically stripping URL tracking parameters.']
+            ]
+          },
+          {
+            title: '2. Speed, Translation & Clean Sessions',
+            items: [
+              ['translate', 'Native In-Page DOM Translation Engine', 'Translates foreign pages directly in place via native Kotlin bridge — immune to page CSP and never breaks logins via external proxies. Flip between Original ↔ Translated in one tap.'],
+              ['guest', 'Clean Guest Session', 'Isolated Chromium MULTI_PROFILE for a 2nd, family, or work login—or unbiased lookups—with zero history, zero cache, hardware FLAG_SECURE, and always-on Strict Blur + Halal Shield.'],
+              ['moon', 'Unified Dark & Light Polarity Sync', 'Follows system dark mode automatically and harmonizes browser chrome, sheets, and websites cleanly between Obsidian Dark (white ink) and Light (black ink) without disturbing blur filters.']
+            ]
+          },
+          {
+            title: '3. Scholar, Reading & Productivity Suite',
+            items: [
+              ['search', 'Pro In-Site Search & Quick-Search Bangs', 'Diacritics-tolerant in-page search with instant jump list, Omnibox quick-search chips (Google, YouTube, Turath, Tafsir, Hadith, Almaany), !t / !tf / !h / !a / !yt bangs, and offline calculator/unit/timezone solver.'],
+              ['quote', 'Screenshot Studio & Auto-Fit Quote Cards', 'Annotate captures with straight strip highlighter, censor boxes, crop, arrows, and notes—or design shareable Quote Cards that automatically fit text of any length cleanly inside the frame.'],
+              ['book', 'Reader Mode, Split View, PDF & QR Tools', 'Clutter-free Reader Mode, Text-Only Mode, Dual 50/50 Split View, Element Zapper, Offline Notes, Internal PDF Viewer & Save as PDF, Tab Workspaces, plus built-in QR Scanner & Generator.']
+            ]
+          },
+          {
+            title: '4. Hijri Tools, Audio Studio & Ergonomics',
+            items: [
+              ['hijri', 'Hijri Calendar, Hatim, Zakat & Istighfar', '100% offline Hijri Agenda, Qur\'an Hatim Tracker, Zakat & Hijri-Gregorian Date Converter, plus an optional non-intrusive Arabic "Astaghfirullah" reminder with custom interval & duration.'],
+              ['audio', 'Uninterrupted Web Audio & Media3 Studio', 'Seamless background HTML5 audio & lecture playback when switching apps or locking the screen, paired with playback speed controls, Voice Boost, and a 5-Band WebAudio Equalizer.'],
+              ['sliders', 'Customizable Toolbar & 7-Step Guided Tour', 'Reorder bottom toolbar shortcuts and 40+ menu tools anytime. Every button unlocks power long-press shortcuts, introduced clearly in an interactive 7-step first-launch tour.']
+            ]
+          }
+        ],
+        secKicker: 'CRYPTOGRAPHIC VERIFICATION & DISTRIBUTION',
+        secTitle: '100% On-Device Privacy & Verifiable Signed Releases',
+        secSub: 'Every official APK is signed with our permanent 4096-bit RSA release key and openly verifiable via SHA-256.',
+        dlTitle: 'Official Signed APK (v5.6.0) & Verification',
+        dlLead: 'Download directly from GitHub Releases and verify integrity in seconds against the cryptographic fingerprints below.',
+        certLabel: 'PERMANENT SIGNING CERTIFICATE SHA-256 (RSA 4096-BIT • v2+v3)',
+        copyBtn: 'Copy', copiedBtn: 'Copied ✓',
+        secDocBtn: 'Security Policy',
+        obtTitle: 'Automatic Android Updates via Obtainium',
+        obtLead: 'Receive official signed RAQİB updates directly from GitHub Releases without needing an app store:',
+        obtS1: 'Open the open-source <strong>Obtainium</strong> app on Android → <strong>Add App</strong>.',
+        obtS2: 'Paste repository URL: <code>https://github.com/TalibTRB/raqib-browser</code>',
+        obtS3: 'Obtainium tracks new signed releases automatically and verifies RSA key continuity.',
+        privTitle: 'Zero-Data-Collection Guarantee',
+        priv1: 'No accounts, zero analytics SDKs, zero advertising SDKs, zero developer servers.',
+        priv2: 'Saved credentials are encrypted locally via hardware Android Keystore (AES-GCM).',
+        priv3: 'Cloud auto-backup is disabled (allowBackup=false); your browsing stays strictly on your phone.'
+      },
+
+      ar: {
+        dir: 'rtl',
+        docTitle: 'رقيب (RAQİB) — متصفح أندرويد حلال بتمويه بصري فوري (v5.6.0)',
+        navGallery: 'الواجهة', navFeatures: 'المميزات', navPrivacy: 'الخصوصية', navDownload: 'التحميل',
+        heroBadge: 'v5.6.0 • حجم 4.54 MB موقّع • أندرويد 8.0–16 • صفر جمع بيانات',
+        heroTitle: 'تصفّح بوعي. احفظ بصرك.',
+        heroSub: 'رقيب (RAQİB) متصفح أندرويد فائق الخفة والسرعة صُمّم للتصفح الآمن والهادف دون تشتيت. يجمع بين التمويه البصري الصارم في اللحظة الصفرية، ودرع الحلال الإلزامي، ومانع الإعلانات، والترجمة الفورية داخل الصفحة في ملف 4.54 MB فقط.',
+        ctaDownload: 'تحميل APK الموقّع (v5.6.0)',
+        ctaReleases: 'إصدارات GitHub و SHA-256',
+        ctaPrivacy: 'سياسة الخصوصية',
+        heroMeta: 'موقّع بمفتاح RSA دائم 4096-bit • بدون حساب • بدون إعلانات أو تحليلات • 5 لغات مدمجة',
+        m1: 'تمويه بصري صارم بلا وميض', m2: 'حزمة APK فائقة الخفة R8', m3: 'بيانات تُرسل لأي خادم', m4: 'العربية (RTL) • TR • EN • KU • DE',
+        galKicker: 'واجهة أندرويد 16 الحقيقية',
+        galTitle: 'تصميم زجاجي هادئ وسريع في كل تفصيل',
+        galSub: 'انقر على أي شاشة لتكبير لقطات حقيقية عالية الدقة مأخوذة مباشرة من إصدار رقيب v5.6.0 على أندرويد 16.',
+        shots: [
+          ['الصفحة الرئيسية', 'واجهة زجاجية نقية', 'شعار رقيب، التقويم الهجري، أزرار الحماية السريعة (التمويه، الدرع، التركيز، الختمة، الزكاة) وشريط سفلي ثابت.'],
+          ['تمويه فوري t=0ms', 'حماية بصرية مباشرة للويب', 'يموّه الصور والصور المصغّرة وخلفيات CSS ووسائط Shadow DOM قبل ظهورها على الشاشة بلا أي وميض.'],
+          ['التحكم بالتمويه', 'لوحة تحكم دقيقة بالتمويه', 'تعديل قوة التمويه (0–40 px)، التوضيح بالضغط المطوّل، وقواعد مخصصة لكل موقع بنقرة واحدة.'],
+          ['أكثر من 40 أداة', 'قائمة أدوات قابلة للتخصيص', 'استوديو اللقطات، بطاقات الاقتباس، الترجمة داخل الصفحة، الشاشة المقسمة، معادل الصوت، وضع القارئ، PDF و QR.'],
+          ['الاستوديو', 'بطاقات اقتباس ذاتية الملاءمة', 'حوّل أي فائدة إلى بطاقة أنيقة بـ 5 قوالب و 3 مقاسات (4:5، 1:1، 9:16) مع ملاءمة تلقائية للنص دون قص.'],
+          ['الوضع الداكن', 'مزامنة موحّدة للداكن والفاتح', 'يتناغم تلقائياً مع وضع النظام الداكن بخلفية داكنة أنيقة وخطوط بيضاء عالية الوضوح لراحة العين.']
+        ],
+        featKicker: 'جميع المميزات',
+        featTitle: 'حماية شاملة وأدوات علم وإنتاجية في متصفح واحد خفيف',
+        featSub: 'حفظ البصر، حجب الإعلانات والمتتبعات، الترجمة الفورية وأدوات البحث العلمي دون أي تضحية بالسرعة.',
+        pillars: [
+          {
+            title: '1. الحماية البصرية والأخلاقية',
+            items: [
+              ['blur', 'تمويه بصري صارم بلا وميض (t = 0 ms)', 'يموّه الصور والصور المصغّرة والأفاتار وخلفيات CSS وعناصر Shadow DOM لحظة تحميل الصفحة دون تعديل شجرة DOM. اضغط مطولاً على أي صورة لتوضيحها لحظياً.'],
+              ['shield', 'درع الحلال الإلزامي والتصفح الآمن', 'حجب دائم على مستوى الشبكة للمواقع الإباحية ومواقع القمار والروابط الضارة، مع فرض البحث الآمن والتنبيه من النطاقات المزيفة (IDN) وحظر التعدين وفحص التنزيلات الخطرة.'],
+              ['bolt', 'مانع إعلانات ومتتبعات Aho-Corasick', 'محرك تصفية ثنائي فائق السرعة (< 8 ms) يحجب شبكات الإعلانات والمتتبعات ولافتات ملفات الارتباط والنوافذ المزعجة، وينظف الروابط من معاملات التتبع تلقائياً.']
+            ]
+          },
+          {
+            title: '2. السرعة، الترجمة وجلسة الضيف النظيفة',
+            items: [
+              ['translate', 'محرك ترجمة أصلي داخل الصفحة', 'يترجم صفحات الويب الأجنبية في مكانها مباشرة دون التحويل إلى بروكسي خارجي ودون كسر تسجيل الدخول، مع زر عائم فوري للتبديل بين الأصلي والمترجم.'],
+              ['guest', 'جلسة الضيف النظيفة', 'ملف Chromium معزول بالكامل لتسجيل حساب ثانٍ للعمل أو العائلة أو لبحث محايد دون حفظ السجل أو الكاش، مع حماية FLAG_SECURE وبقاء التمويه الصارم ودرع الحلال فعّالين دائماً.'],
+              ['moon', 'توحيد الوضع الداكن والفاتح', 'يتزامن تلقائياً مع وضع الجهاز الداكن ويوحّد واجهة المتصفح والمواقع بألوان متباينة واضحة (نص أبيض على داكن / أسود على فاتح) دون تعارض مع التمويه.']
+            ]
+          },
+          {
+            title: '3. أدوات طالب العلم والقراءة والإنتاجية',
+            items: [
+              ['search', 'البحث الاحترافي والاختصارات السريعة', 'بحث متقدم داخل الصفحة يتجاوز التشكيل مع القفز السريع بين النتائج، وشريط بحث فوري (Google, YouTube, Turath, Tafsir, Hadith, Almaany) واختصارات !t / !tf / !h / !a / !yt وآلة حاسبة ومحول وحدات دون إنترنت.'],
+              ['quote', 'استوديو اللقطات وبطاقات الاقتباس', 'استوديو متكامل للقطات الشاشة (تظليل مستقيم، طمس، قص، أسهم، تعليقات) واستوديو بطاقات الاقتباس الذي يضبط حجم الخط تلقائياً ليتسع لأي نص بأناقة.'],
+              ['book', 'وضع القارئ، الشاشة المقسمة، PDF و QR', 'وضع قارئ خالٍ من المشتتات، وضع النص فقط، الشاشة المقسمة 50/50، ممحاة العناصر، دفتر ملاحظات محلي، عارض وحافظ PDF، مساحات عمل للتبويبات، وماسح ومنشئ QR.']
+            ]
+          },
+          {
+            title: '4. الأدوات الهجرية، استوديو الصوت والمرونة',
+            items: [
+              ['hijri', 'التقويم الهجري، الختمة، الزكاة والاستغفار', 'أجندة هجرية دون إنترنت، متتبع ختمة القرآن، حاسبة الزكاة ومحول التاريخ الهجري/الميلادي، مع تذكير لطيف قابل للتخصيص بعبارة «أستغفر الله» بخط عربي أنيق.'],
+              ['audio', 'تشغيل صوتيات الويب واستوديو Media3', 'تشغيل مستمر لصوتيات الدروس والمحاضرات في الخلفية وعند قفل الشاشة، مع التحكم بالسرعة وتقوية الصوت البشري ومعادل صوتي بـ 5 نطاقات.'],
+              ['sliders', 'شريط قابل للتخصيص وجولة ترحيب 7 خطوات', 'أعد ترتيب الشريط السفلي وأكثر من 40 أداة كما تشاء، واستفد من اختصارات الضغط المطوّل لكل زر مع جولة إرشادية تفاعلية من 7 خطوات عند أول تشغيل.']
+            ]
+          }
+        ],
+        secKicker: 'التحقق التشفيري والتوزيع الرسمي',
+        secTitle: 'خصوصية محلية 100% وإصدارات موقّعة قابلة للتحقق',
+        secSub: 'كل ملف APK رسمي موقّع بمفتاح RSA دائم (4096-bit) ويمكن التحقق من سلامته فوراً عبر بصمة SHA-256.',
+        dlTitle: 'تحميل APK الرسمي الموقّع (v5.6.0) والتحقق',
+        dlLead: 'حمّل مباشرة من GitHub Releases وتأكد من مطابقة البصمات التشفيرية التالية لضمان أصالة الملف:',
+        certLabel: 'بصمة شهادة التوقيع الدائمة SHA-256 (RSA 4096-BIT • v2+v3)',
+        copyBtn: 'نسخ', copiedBtn: 'تم النسخ ✓',
+        secDocBtn: 'سياسة الأمان',
+        obtTitle: 'التحديث التلقائي على أندرويد عبر Obtainium',
+        obtLead: 'يمكنك متابعة وتثبيت التحديثات الرسمية الموقّعة مباشرة من GitHub دون الحاجة لمتجر تطبيقات:',
+        obtS1: 'افتح تطبيق <strong>Obtainium</strong> مفتوح المصدر على أندرويد ← <strong>Add App</strong>.',
+        obtS2: 'أدخل رابط المستودع: <code>https://github.com/TalibTRB/raqib-browser</code>',
+        obtS3: 'يتحقق Obtainium تلقائياً من الإصدارات الجديدة ومن تطابق توقيع RSA الدائم.',
+        privTitle: 'تعهد صفر جمع بيانات',
+        priv1: 'بدون حسابات، بدون حزم تحليلات أو إعلانات، وبدون أي خوادم تتبع للمطور.',
+        priv2: 'تُشفّر كلمات المرور المحفوظة محلياً عبر Android Keystore (AES-GCM).',
+        priv3: 'النسخ الاحتياطي السحابي معطّل (allowBackup=false)؛ جميع بياناتك تبقى في هاتفك فقط.'
+      },
+
+      ku: {
+        dir: 'ltr',
+        docTitle: 'RAQÎB — Geroka Helal û Dîtbarî ji bo Android (v5.6.0)',
+        navGallery: 'Rûkar', navFeatures: 'Taybetmendî', navPrivacy: 'Nepenî', navDownload: 'Daxistin',
+        heroBadge: 'v5.6.0 • 4.54 MB APK ya Îmzekirî • Android 8.0–16 • Sifir Dane',
+        heroTitle: 'Bi hişmendî bigere. Çavê xwe biparêze.',
+        heroSub: 'RAQÎB (الرقيب) gerokeke Androidê ya pir sivik û bilez e ji bo gera paqij û bê belavbûna hiş. Şêlûkirina Hişk di t=0ms de, Mertalê Helal ê mecbûrî, astengkerê reklaman û wergera nav-rûpel di 4.54 MB de.',
+        ctaDownload: 'APK ya Îmzekirî Daxe (v5.6.0)',
+        ctaReleases: 'GitHub Releases & SHA-256',
+        ctaPrivacy: 'Siyaseta Nepeniyê',
+        heroMeta: 'Bi mifteya RSA 4096-bit îmzekirî • Hesab ne hewce ye • Bê reklam û şopîner • 5 Ziman',
+        m1: 'Şêlûkirina Hişk a Yekser', m2: 'APK ya Sivik a R8', m3: 'Daneyên şandî serveran', m4: 'TR • EN • AR (RTL) • KU • DE',
+        galKicker: 'RÛKARA RASTÎN A ANDROID 16',
+        galTitle: 'Sade, bilez û bi bedewiya şûşeyê',
+        galSub: 'Ji bo dîtina dîmenên rastîn ên RAQÎB v5.6.0 li ser Android 16 li ser her ekranê bitikîne.',
+        shots: [
+          ['Rûpela Sereke', 'Rûpela Sereke ya Paqij', 'Armaya RAQÎB, salnameya Hicrî, bişkokên parastina bilez (Blur, Mertal, Fokus, Xetm, Zekat) û şerîta jêrîn.'],
+          ['t = 0 ms Blur', 'Parastina Dîtbarî ya Zindî', 'Hemû wêne, vîdyo û medyaya Shadow DOM berî xuyabûnê yekser şêlû dibin.'],
+          ['Kontrola Blur', 'Panela Şêlûkirinê ya Hûrgulî', 'Hêza 0–40 px, bi pêlkirina dirêj zelalkirina demkî (Peek-to-Unblur) û rêzikên malperê.'],
+          ['40+ Amûr', 'Menuya Amûran a Xwerû', 'Stûdyoya Dîmenê, Karta Jêgirtinê, Wergera Nav-Rûpel, Ekrana Parçekirî, EQ ya Deng, PDF û QR.'],
+          ['Stûdyo', 'Karta Jêgirtinê ya Xwe-Hevseng', 'Nivîs çiqas dirêj be jî bêyî derketina ji çarçoveyê 5 tema û 3 pîvan (4:5, 1:1, 9:16).'],
+          ['Moda Tarî', 'Hevahengiya Moda Tarî û Ronî', 'Xweber li gorî moda pergalê tê eyarkirin bi rûyê tarî û nivîsên spî yên zelal.']
+        ],
+        featKicker: 'HEMÛ TAYBETMENDÎ',
+        featTitle: 'Parastin û berhemdariya temam di gerokeke sivik de',
+        featSub: 'Parastina çav, mertalê reklam û şopîneran, wergera yekser û amûrên xwendinê bi leza herî bilind.',
+        pillars: [
+          {
+            title: '1. Parastina Dîtbarî û Exlaqî',
+            items: [
+              ['blur', 't = 0 ms Şêlûkirina Hişk (Zero-Flash)', 'Wêne, avatar, paşxaneyên CSS û medyaya Shadow DOM berî xuyabûnê şêlû dike. Ji bo dîtina wêneyekê tiliya xwe li ser bigire (Peek-to-Unblur).'],
+              ['shield', 'Mertalê Helal ê Mecbûrî & Gera Ewle', 'Malperên nebaş, qumar û navnîşanên xeternak di asta torê de asteng dike; SafeSearch, hişyariya IDN û kontrola dakêşanan her dem çalak in.'],
+              ['bolt', 'Astengkerê Reklam û Şopîneran Aho-Corasick', 'Motora bilez (< 8 ms) reklam, şopînerên sêyemîn, pencereyên çerezan radike û girêdanan ji parametreyên şopandinê paqij dike.']
+            ]
+          },
+          {
+            title: '2. Lez, Werger û Rûniştina Mêvan',
+            items: [
+              ['translate', 'Wergera Yekser di Nav Rûpelê de', 'Malperên biyanî di cihê wan de bêyî veguheztina proxy werdigerîne û bi yek tikandinê di navbera Orîjînal ↔ Werger de diguherîne.'],
+              ['guest', 'Rûniştina Mêvan / Paqij', 'Profîla Chromium a veqetandî ji bo hesabê 2emîn an lêgerîna bêalî bê dîrok û bê kaş; FLAG_SECURE, Blur û Mertalê Helal her tim çalak in.'],
+              ['moon', 'Hevahengiya Moda Tarî û Ronî', 'Arayûza gerokê û malperan bi hev re dixe Moda Tarî (nivîsa spî) an Ronî (nivîsa reş) bêyî xerakirina şêlûkirinê.']
+            ]
+          },
+          {
+            title: '3. Amûrên Xwendin, Îlm û Berhemdariyê',
+            items: [
+              ['search', 'Lêgerîna Pîşeyî & Kurteriyên Bang', 'Lêgerîna nav-rûpel a bi bazdana bilez, şerîta Omnibox (Google, YouTube, Turath, Tafsir, Hadith, Almaany), kurteriyên !t / !tf / !h / !a / !yt û hesabkera bê-înternet.'],
+              ['quote', 'Stûdyoya Dîmenê & Karta Jêgirtinê', 'Nîşankera rast, sansûr, birîn, tîr û not li ser dîmenan; herwiha Stûdyoya Karta Jêgirtinê ya ku her nivîsê xweşik li kartê cih dike.'],
+              ['book', 'Moda Xwendinê, Ekrana Parçekirî, PDF & QR', 'Moda Xwendinê, Moda Tenê Nivîs, Ekrana 50/50, Jêbirina Hêmanan, Notên Bê-Înternet, Xwendevan & Tomarkirina PDF, Qadên Taban û QR.']
+            ]
+          },
+          {
+            title: '4. Amûrên Hicrî, Stûdyoya Deng û Ergonomî',
+            items: [
+              ['hijri', 'Salnameya Hicrî, Xetm, Zekat & Îstîxfar', 'Salnameya Hicrî ya bê-înternet, Şopînera Xetmê, Hesabkera Zekatê û bîranîna xweşik a "Estexfîrullah" ku ji mîhengan tê eyarkirin.'],
+              ['audio', 'Lêxistina Deng li Paşxaneyê & Media3 EQ', 'Berdewamiya dengê ders û sohbetan li paşxaneyê û dema ekran girtî ye, leza lêxistinê, xurtkirina dengê axaftinê û Ekolayzera 5-Band.'],
+              ['sliders', 'Şerîta Xwerû & Rêbera 7 Gavî', 'Rêza bişkokên jêrîn û 40+ amûran li gorî xwe saz bike; kurteriyên pêlkirina dirêj û rêbera destpêkê ya 7 gavî.']
+            ]
+          }
+        ],
+        secKicker: 'PEJIRANDINA KRÎPTOGRAFÎK Û BELAVKIRIN',
+        secTitle: 'Nepeniya %100 li ser Amûrê û Guhertoyên Îmzekirî',
+        secSub: 'Her APK ya fermî bi mifteya RSA 4096-bit tê îmzekirin û bi SHA-256 tê kontrolkirin.',
+        dlTitle: 'APK ya Fermî ya Îmzekirî (v5.6.0) & Kontrol',
+        dlLead: 'Rasterast ji GitHub Releases daxe û bi şopên SHA-256 ên jêrîn ewlehiya pelê piştrast bike:',
+        certLabel: 'SERTÎFÎKAYA ÎMZEYA DAÎMÎ SHA-256 (RSA 4096-BIT • v2+v3)',
+        copyBtn: 'Kopî bike', copiedBtn: 'Hat kopîkirin ✓',
+        secDocBtn: 'Siyaseta Ewlehiyê',
+        obtTitle: 'Nûkirina Xweber li ser Android (Obtainium)',
+        obtLead: 'Bêyî Play Store dikarî guhertoyên nû yên RAQÎB rasterast ji GitHub Releases bişopînî:',
+        obtS1: 'Sepana <strong>Obtainium</strong> veke → <strong>Add App</strong>.',
+        obtS2: 'Navnîşanê binivîse: <code>https://github.com/TalibTRB/raqib-browser</code>',
+        obtS3: 'Obtainium guhertoyên nû xweber dibîne û îmzeya RSA kontrol dike.',
+        privTitle: 'Soza Sifir Berhevkirina Daneyan',
+        priv1: 'Bê hesab, bê SDK ya analîtîk an reklamê, bê servera şopandinê.',
+        priv2: 'Şîfreyên tomarkirî bi Android Keystore (AES-GCM) tên şîfrekirin.',
+        priv3: 'Yedekkirina ewrê girtî ye (allowBackup=false); hemû dane tenê li ser telefona te ne.'
+      },
+
+      de: {
+        dir: 'ltr',
+        docTitle: 'RAQİB — Halal-Visuell-Browser für Android (v5.6.0)',
+        navGallery: 'Oberfläche', navFeatures: 'Funktionen', navPrivacy: 'Datenschutz', navDownload: 'Download',
+        heroBadge: 'v5.6.0 • 4,54 MB Signierte APK • Android 8.0–16 • Null Datensammlung',
+        heroTitle: 'Bewusst surfen. Deinen Blick schützen.',
+        heroSub: 'RAQİB (الرقيب) ist ein extrem leichter, datenschutzorientierter Android-Browser für ruhiges, schnelles und ablenkungsfreies Surfen. Sofortiger t=0ms Strenger Bild-Blur, obligatorischer Halal-Schild, Aho-Corasick-Werbeblocker und native In-Page-Übersetzung in nur 4,54 MB.',
+        ctaDownload: 'Signierte APK laden (v5.6.0)',
+        ctaReleases: 'GitHub Releases & SHA-256',
+        ctaPrivacy: 'Datenschutzerklärung',
+        heroMeta: 'Dauerhaft 4096-Bit-RSA signiert • Kein Konto nötig • Keine Tracking-SDKs • 5 Sprachen',
+        m1: 'Zero-Flash Strenger Bild-Blur', m2: 'Single-DEX R8-optimierte APK', m3: 'Daten an Server gesendet', m4: 'TR • EN • AR (RTL) • KU • DE',
+        galKicker: 'ECHTE ANDROID-16-OBERFLÄCHE',
+        galTitle: 'Klar, blitzschnell und in moderner Glas-Ästhetik',
+        galSub: 'Tippen Sie auf ein Gerät, um echte, hochauflösende Android-16-Screenshots von RAQİB v5.6.0 im Detail zu betrachten.',
+        shots: [
+          ['Startseite', 'Ruhige Glassmorphism-Startseite', 'Cinzel-RAQİB-Logo, Hidschri-Kalender, Schnellschutz-Chips (Blur, Schild, Fokus, Khatm, Zakat) und feste Leiste.'],
+          ['t = 0 ms Blur', 'Sofortiger Live-Bildschutz', 'Fotos, Vorschaubilder, CSS-Hintergründe und Shadow-DOM-Medien werden vor dem ersten Frame verzögerungsfrei geblurt.'],
+          ['Blur-Steuerung', 'Präzises Blur-Kontrollpanel', '0–40 px Unschärfe, Halten zum kurzen Aufklaren (Peek-to-Unblur) und eigene Seiten-Whitelist/-Blacklist.'],
+          ['40+ Werkzeuge', 'Anpassbares Power-Menü', 'Screenshot-Studio, Zitatkarten, In-Page-Übersetzung, Split View, Audio-EQ, Lesemodus, PDF & QR auf einen Tipp.'],
+          ['Studio', 'Auto-Fit Zitatkarten-Studio', 'Jeder Text passt sich automatisch perfekt in 5 elegante Themen und 3 Formate (4:5, 1:1, 9:16) ein – ohne Überlauf.'],
+          ['Dunkelmodus', 'Einheitlicher Dunkel- & Hellmodus', 'Synchronisiert sich mit dem Systemmodus für tiefes Obsidian-Dunkel und gestochen scharfe weiße Schrift.']
+        ],
+        featKicker: 'ALLE FUNKTIONEN',
+        featTitle: 'Kompletter Schutz & Produktivität in einem ultraleichten Browser',
+        featSub: 'Visueller Schutz, Netzwerk-Werbeblocker, In-Page-Übersetzung und Lernwerkzeuge ohne Kompromisse bei der Geschwindigkeit.',
+        pillars: [
+          {
+            title: '1. Visueller & Moralischer Schutz',
+            items: [
+              ['blur', 't = 0 ms Zero-Flash Strenger Blur', 'Document-Start-CSS und Constructable Shadow-DOM-Stylesheets machen <img>, <picture>, <canvas>, Video-Thumbnails und CSS-Hintergründe ohne Flackern unkenntlich. Gedrückt halten für sofortiges Peek-to-Unblur.'],
+              ['shield', 'Obligatorischer Halal-Schild & Sicheres Surfen', 'Dauerhafte Netzwerkblockierung anstößiger, Glücksspiel- und Phishing-Domains. Mit SafeSearch, IDN-Homograph-Warnung, Anti-Cryptojacking und Prüfung gefährlicher Downloads.'],
+              ['bolt', 'Aho-Corasick Werbe- & Tracker-Blocker', 'Vorkompilierter Binär-Filter (< 8 ms Ladezeit) blockiert Werbenetzwerke, Tracker, Cookie-Banner und App-Hinweise und bereinigt URL-Tracking-Parameter automatisch.']
+            ]
+          },
+          {
+            title: '2. Tempo, Übersetzung & Saubere Sitzung',
+            items: [
+              ['translate', 'Native In-Page-DOM-Übersetzung', 'Übersetzt fremdsprachige Webseiten direkt im Dokument ohne externe Proxy-Weiterleitung oder gebrochene Logins – mit sofortigem Original ↔ Übersetzung-Schalter.'],
+              ['guest', 'Gast- / Saubere Sitzung', 'Isoliertes Chromium-MULTI_PROFILE für ein Zweit-, Familien- oder Arbeitskonto sowie neutrale Suchen – null Verlauf, null Cache, Hardware-FLAG_SECURE, Strenger Blur & Halal-Schild stets aktiv.'],
+              ['moon', 'Einheitlicher Dunkel- & Hellmodus', 'Folgt automatisch dem Systemmodus und harmonisiert Browser-Oberfläche, Menüs und Webseiten sauber zwischen Dunkel (weiße Schrift) und Hell (schwarze Schrift).']
+            ]
+          },
+          {
+            title: '3. Lern-, Lese- & Produktivitäts-Suite',
+            items: [
+              ['search', 'Profi-Seitensuche & Schnell-Bangs', 'Diakritik-tolerante Suche auf der Seite mit Sprungliste, Omnibox-Schnellsuche (Google, YouTube, Turath, Tafsir, Hadith, Almaany), !t / !tf / !h / !a / !yt Bangs sowie Offline-Rechner & Einheitenumrechner.'],
+              ['quote', 'Screenshot- & Auto-Fit Zitatkarten-Studio', 'Markieren Sie Screenshots mit geradem Textmarker, Zensurboxen, Zuschneiden und Pfeilen – oder gestalten Sie teilbare Zitatkarten mit perfekter automatischer Textanpassung.'],
+              ['book', 'Lesemodus, Split View, PDF & QR', 'Ablenkungsfreier Lesemodus, Nur-Text-Modus, 50/50 Geteilter Bildschirm, Element-Zapper, Offline-Notizen, interner PDF-Viewer & PDF-Export, Tab-Arbeitsbereiche und QR-Scanner/-Generator.']
+            ]
+          },
+          {
+            title: '4. Hidschri-Tools, Audio-Studio & Ergonomie',
+            items: [
+              ['hijri', 'Hidschri-Kalender, Khatm, Zakat & Istighfar', '100 % Offline-Hidschri-Agenda, Koran-Khatm-Tracker, Zakat- & Hidschri-Umrechner sowie eine optionale, dezent einblendbare arabische „Astaghfirullah“-Erinnerung mit einstellbarem Intervall.'],
+              ['audio', 'Unterbrechungsfreies Web-Audio & Media3-Studio', 'Reibungslose Hintergrundwiedergabe von Vorträgen & Web-Audio bei gesperrtem Bildschirm, inklusive Wiedergabegeschwindigkeit, Sprachverstärkung (Voice Boost) und 5-Band-WebAudio-EQ.'],
+              ['sliders', 'Anpassbare Leiste & 7-Schritte-Tour', 'Ordnen Sie Symbolleiste und 40+ Menüwerkzeuge frei an. Jede Taste bietet Langdruck-Kurzbefehle, verständlich erklärt in einer interaktiven 7-Schritte-Starttour.']
+            ]
+          }
+        ],
+        secKicker: 'KRYPTOGRAFISCHE PRÜFUNG & VERTEILUNG',
+        secTitle: '100 % Lokaler Datenschutz & Prüfbare Signierte Releases',
+        secSub: 'Jede offizielle APK wird mit unserem dauerhaften 4096-Bit-RSA-Schlüssel signiert und ist per SHA-256 frei überprüfbar.',
+        dlTitle: 'Offizielle Signierte APK (v5.6.0) & Signaturprüfung',
+        dlLead: 'Laden Sie die APK direkt über GitHub Releases herunter und prüfen Sie die Integrität in Sekunden anhand dieser Prüfsummen:',
+        certLabel: 'DAUERHAFTES SIGNATURZERTIFIKAT SHA-256 (RSA 4096-BIT • v2+v3)',
+        copyBtn: 'Kopieren', copiedBtn: 'Kopiert ✓',
+        secDocBtn: 'Sicherheitsrichtlinie',
+        obtTitle: 'Automatische Android-Updates mit Obtainium',
+        obtLead: 'Erhalten Sie neue signierte RAQİB-Updates direkt über GitHub Releases – ganz ohne App Store:',
+        obtS1: 'Öffnen Sie die Open-Source-App <strong>Obtainium</strong> auf Android → <strong>Add App</strong>.',
+        obtS2: 'Repository-URL eingeben: <code>https://github.com/TalibTRB/raqib-browser</code>',
+        obtS3: 'Obtainium erkennt neue signierte Releases automatisch und prüft die RSA-Signatur.',
+        privTitle: 'Null-Datensammlungs-Versprechen',
+        priv1: 'Keine Konten, keine Analyse-SDKs, keine Werbe-SDKs, keine Entwicklerserver.',
+        priv2: 'Gespeicherte Zugangsdaten werden lokal per Android Keystore (AES-GCM) verschlüsselt.',
+        priv3: 'Cloud-Backup ist deaktiviert (allowBackup=false); Ihre Daten verlassen niemals Ihr Gerät.'
+      }
+    };
+
+    let currentLang = 'tr';
+    let lbIndex = 0;
+
+    function renderDynamic(code) {
+      const t = I18N[code] || I18N.tr;
+      const g = document.getElementById('galleryGrid');
+      g.innerHTML = t.shots.map((s, idx) => `
+        <article class="shot-card" onclick="openLightbox(${idx})">
+          <div class="shot-img-wrap">
+            <img src="${SHOT_FILES[idx]}" alt="${s[1]}" loading="${idx < 3 ? 'eager' : 'lazy'}" />
+          </div>
+          <div class="shot-body">
+            <span class="shot-tag">${s[0]}</span>
+            <h3>${s[1]}</h3>
+            <p>${s[2]}</p>
+          </div>
+        </article>
+      `).join('');
+
+      const fc = document.getElementById('featuresContainer');
+      fc.innerHTML = t.pillars.map(p => `
+        <div class="pillar-title">${p.title}</div>
+        <div class="features-grid">
+          ${p.items.map(it => `
+            <article class="feature-card">
+              <div class="f-icon">${ICONS[it[0]] || ICONS.shield}</div>
+              <h3>${it[1]}</h3>
+              <p>${it[2]}</p>
+            </article>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function setLang(code) {
+      if (!I18N[code]) code = 'tr';
+      currentLang = code;
+      const t = I18N[code];
+      document.documentElement.lang = code;
+      document.documentElement.dir = t.dir;
+      document.title = t.docTitle;
+
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === code);
+      });
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      const pl = document.getElementById('privacyTopLink');
+      if (pl) pl.href = './privacy.html?lang=' + code;
+
+      renderDynamic(code);
+      try { localStorage.setItem('raqib_site_lang', code); } catch (_) {}
+      try {
+        const u = new URL(window.location.href);
+        u.searchParams.set('lang', code);
+        window.history.replaceState({}, '', u.toString());
+      } catch (_) {}
+    }
+
+    function copyText(btn, value) {
+      const t = I18N[currentLang] || I18N.tr;
+      const done = () => {
+        btn.textContent = t.copiedBtn;
+        setTimeout(() => { btn.textContent = t.copyBtn; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(done).catch(done);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        done();
+      }
+    }
+
+    function openLightbox(idx) {
+      lbIndex = idx;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function stepLightbox(delta) {
+      lbIndex = (lbIndex + delta + SHOT_FILES.length) % SHOT_FILES.length;
+      updateLightbox();
+    }
+    function updateLightbox() {
+      const t = I18N[currentLang] || I18N.tr;
+      const s = t.shots[lbIndex];
+      document.getElementById('lbImg').src = SHOT_FILES[lbIndex];
+      document.getElementById('lbImg').alt = s[1];
+      document.getElementById('lbTitle').textContent = s[0] + ' — ' + s[1];
+      document.getElementById('lbDesc').textContent = s[2];
+    }
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+    });
+
+    (function init() {
+      const params = new URLSearchParams(window.location.search);
+      const qLang = (params.get('lang') || '').toLowerCase();
+      let saved = '';
+      try { saved = localStorage.getItem('raqib_site_lang') || ''; } catch (_) {}
+      const nav = (navigator.language || 'tr').slice(0, 2).toLowerCase();
+      const pick = I18N[qLang] ? qLang : (I18N[saved] ? saved : (I18N[nav] ? nav : 'tr'));
+      setLang(pick);
+    })();
+  </script>
 </body>
 </html>
