@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>RAQİB — İndirme &amp; Ülke İstatistikleri</title>
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <style>
+    :root {
+      --bg: #070A0F;
+      --card: rgba(20, 26, 36, 0.78);
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --emerald: #10B981;
+      --emerald-soft: rgba(16, 185, 129, 0.14);
+      --amber: #F59E0B;
+      --amber-soft: rgba(245, 158, 11, 0.14);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, rgba(16,185,129,0.12), transparent 45%), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 28px 18px 60px;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; }
+    header {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 14px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .brand h1 { font-size: 1.25rem; letter-spacing: 0.04em; }
+    .brand p { font-size: 0.82rem; color: var(--muted); }
+    .actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      background: var(--card); border: 1px solid var(--border); color: var(--text);
+      padding: 9px 15px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: 0.18s ease;
+    }
+    .btn:hover { border-color: var(--emerald); }
+    .btn-primary { background: var(--emerald); border-color: var(--emerald); color: #04130D; }
+    .notice {
+      background: var(--amber-soft); border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; font-size: 0.88rem; line-height: 1.55;
+      display: none;
+    }
+    .notice code { background: rgba(0,0,0,0.35); padding: 2px 6px; border-radius: 6px; font-size: 0.82rem; }
+    .grid-kpi {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px; margin-bottom: 22px;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 18px 20px; backdrop-filter: blur(16px);
+    }
+    .kpi-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .kpi-val { font-size: 2rem; font-weight: 800; margin-top: 6px; color: var(--text); }
+    .kpi-sub { font-size: 0.8rem; color: var(--emerald); margin-top: 4px; }
+    .two-col { display: grid; grid-template-columns: 1.25fr 1fr; gap: 16px; margin-bottom: 18px; }
+    @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } }
+    h2 { font-size: 1rem; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+    .badge {
+      font-size: 0.74rem; padding: 3px 9px; border-radius: 999px;
+      background: var(--emerald-soft); color: var(--emerald); font-weight: 600;
+    }
+    .country-row { margin-bottom: 12px; }
+    .country-head { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 5px; }
+    .bar-track { height: 8px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, #059669, #34D399); border-radius: 999px; }
+    .daily-chart { display: flex; align-items: flex-end; gap: 7px; height: 165px; padding-top: 12px; }
+    .day-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+    .day-bar { width: 100%; min-height: 4px; background: linear-gradient(180deg, #34D399, #059669); border-radius: 6px 6px 2px 2px; }
+    .day-lbl { font-size: 0.68rem; color: var(--muted); }
+    .day-num { font-size: 0.7rem; color: var(--text); font-weight: 600; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+    .empty { color: var(--muted); font-size: 0.88rem; padding: 16px 0; }
+    #authBox {
+      max-width: 400px; margin: 70px auto; display: none;
+    }
+    #authBox input {
+      width: 100%; padding: 11px 13px; border-radius: 10px; border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35); color: var(--text); margin: 12px 0; font-size: 0.95rem;
+    }
+    .err { color: #FCA5A5; font-size: 0.84rem; margin-top: 6px; min-height: 18px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="authBox" class="card">
+      <h2>RAQİB İstatistik Paneli</h2>
+      <p style="font-size:0.85rem;color:var(--muted);">Bu panel <code>STATS_ADMIN_KEY</code> ile korunuyor.</p>
+      <input id="keyInput" type="password" placeholder="Yönetici şifresi" />
+      <button class="btn btn-primary" style="width:100%;" onclick="submitKey()">Giriş Yap</button>
+      <div id="authErr" class="err"></div>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <header>
+        <div class="brand">
+          <img src="./assets/raqib-icon.png" alt="RAQİB" />
+          <div>
+            <h1>RAQİB İndirme &amp; Ülke Paneli</h1>
+            <p id="updatedAt">Sıfır IP / Sıfır Telemetri • Yalnızca anonim ülke kodu sayacı</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn" onclick="loadStats()">Yenile</button>
+          <a class="btn btn-primary" href="./">Tanıtım Sayfası</a>
+        </div>
+      </header>
+
+      <div id="setupNotice" class="notice">
+        <strong>Ülke bazlı kalıcı depolama henüz bağlanmadı (GitHub toplam sayıları canlı gösteriliyor):</strong><br/>
+        Vercel panelinde projenin <strong>Storage → Create Upstash Redis</strong> (ücretsiz) adımına tıklayıp projeye bağlaman yeterli;
+        <code>UPSTASH_REDIS_REST_URL</code> ve <code>UPSTASH_REDIS_REST_TOKEN</code> otomatik eklenir ve tüm ülke/günlük indirmeler anında kalıcı kaydedilmeye başlar.
+        İstersen şifre koruması için <code>STATS_ADMIN_KEY</code> çevre değişkeni de ekleyebilirsin.
+      </div>
+
+      <section class="grid-kpi">
+        <div class="card">
+          <div class="kpi-label">GitHub Toplam İndirme</div>
+          <div id="kpiGhTotal" class="kpi-val">—</div>
+          <div class="kpi-sub">Tüm resmi sürümler</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Site Üzerinden (Ülke Takipli)</div>
+          <div id="kpiTrackedTotal" class="kpi-val">—</div>
+          <div id="kpiBackend" class="kpi-sub">—</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">En Çok İndiren Ülke</div>
+          <div id="kpiTopCountry" class="kpi-val">—</div>
+          <div id="kpiCountryCount" class="kpi-sub">—</div>
+        </div>
+        <div class="card">
+          <div class="kpi-label">Platform Dağılımı</div>
+          <div id="kpiTargets" class="kpi-val" style="font-size:1.15rem;line-height:1.5;">—</div>
+          <div class="kpi-sub">APK • Edge/Brave • Firefox</div>
+        </div>
+      </section>
+
+      <section class="two-col">
+        <div class="card">
+          <h2>Ülkelere Göre İndirmeler <span id="countryTotalBadge" class="badge">0 ülke</span></h2>
+          <div id="countryList"></div>
+        </div>
+        <div class="card">
+          <h2>Son 14 Gün <span class="badge">Günlük</span></h2>
+          <div id="dailyChart" class="daily-chart"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Resmi GitHub Releases Dosya İndirmeleri <span class="badge">Canlı API</span></h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sürüm</th>
+              <th>Dosya</th>
+              <th>Boyut</th>
+              <th>İndirme</th>
+            </tr>
+          </thead>
+          <tbody id="ghTableBody"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const regionNames = (typeof Intl !== 'undefined' && Intl.DisplayNames)
+      ? new Intl.DisplayNames(['tr'], { type: 'region' })
+      : null;
+
+    function countryFlag(cc) {
+      if (!cc || cc === 'XX' || cc.length !== 2) return '🌍';
+      return String.fromCodePoint(...cc.toUpperCase().split('').map(c => 127397 + c.charCodeAt(0)));
+    }
+    function countryName(cc) {
+      if (!cc || cc === 'XX') return 'Bilinmiyor';
+      try { return (regionNames && regionNames.of(cc)) || cc; } catch (_) { return cc; }
+    }
+    function fmtBytes(n) {
+      if (!n) return '—';
+      if (n >= 1048576) return (n / 1048576).toFixed(2) + ' MB';
+      return Math.round(n / 1024) + ' KB';
+    }
+
+    function submitKey() {
+      const val = document.getElementById('keyInput').value.trim();
+      if (!val) return;
+      sessionStorage.setItem('raqib_stats_key', val);
+      loadStats();
+    }
+    document.getElementById('keyInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitKey();
+    });
+
+    async function loadStats() {
+      const savedKey = sessionStorage.getItem('raqib_stats_key') || '';
+      const headers = savedKey ? { 'x-stats-key': savedKey } : {};
+      let res;
+      try {
+        res = await fetch('/api/stats', { headers });
+      } catch (err) {
+        document.getElementById('dashboard').style.display = 'block';
+        document.getElementById('setupNotice').style.display = 'block';
+        document.getElementById('setupNotice').innerHTML =
+          '<strong>Bilgi:</strong> <code>/api/stats</code> canlı sunucu fonksiyonu yalnızca Vercel adresi (<code>raqib-browser.vercel.app/stats</code>) üzerinde çalışır.';
+        return;
+      }
+
+      if (res.status === 401) {
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('authBox').style.display = 'block';
+        document.getElementById('authErr').textContent = savedKey ? 'Şifre hatalı.' : '';
+        return;
+      }
+
+      const data = await res.json();
+      document.getElementById('authBox').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('setupNotice').style.display = data.storageConfigured ? 'none' : 'block';
+      document.getElementById('updatedAt').textContent =
+        'Son güncelleme: ' + new Date(data.generatedAt).toLocaleString('tr-TR') + ' • Sıfır IP / Sıfır Telemetri';
+
+      document.getElementById('kpiGhTotal').textContent = (data.github.totalDownloads || 0).toLocaleString('tr-TR');
+      document.getElementById('kpiTrackedTotal').textContent = (data.tracked.total || 0).toLocaleString('tr-TR');
+      document.getElementById('kpiBackend').textContent = data.storageConfigured
+        ? ('Depolama aktif: ' + data.storageBackend)
+        : 'Depolama bekleniyor (Redis)';
+
+      const countries = Object.entries(data.tracked.countries || {})
+        .sort((a, b) => b[1] - a[1]);
+      document.getElementById('countryTotalBadge').textContent = countries.length + ' ülke';
+      if (countries.length > 0) {
+        const [topCode, topCount] = countries[0];
+        document.getElementById('kpiTopCountry').textContent = countryFlag(topCode) + ' ' + topCode;
+        document.getElementById('kpiCountryCount').textContent = countryName(topCode) + ' (' + topCount + ')';
+      } else {
+        document.getElementById('kpiTopCountry').textContent = '—';
+        document.getElementById('kpiCountryCount').textContent = 'Henüz veri yok';
+      }
+
+      const t = data.tracked.targets || {};
+      document.getElementById('kpiTargets').textContent =
+        `APK: ${t.apk || 0}  •  Edge/Brave: ${t['ext-edge'] || 0}  •  Firefox: ${t['ext-firefox'] || 0}`;
+
+      const cList = document.getElementById('countryList');
+      if (countries.length === 0) {
+        cList.innerHTML = '<div class="empty">Henüz ülke bazlı indirme kaydı yok.</div>';
+      } else {
+        const maxC = countries[0][1] || 1;
+        const sumC = countries.reduce((s, [, v]) => s + v, 0) || 1;
+        cList.innerHTML = countries.slice(0, 15).map(([code, count]) => {
+          const pct = Math.round((count / sumC) * 100);
+          const width = Math.max(4, Math.round((count / maxC) * 100));
+          return `
+            <div class="country-row">
+              <div class="country-head">
+                <span>${countryFlag(code)} ${countryName(code)} (${code})</span>
+                <strong>${count} <span style="color:var(--muted);font-weight:400;">(${pct}%)</span></strong>
+              </div>
+              <div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div>
+            </div>`;
+        }).join('');
+      }
+
+      // Last 14 days bar chart
+      const daily = data.tracked.daily || {};
+      const days = [];
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000);
+        const key = d.toISOString().slice(0, 10);
+        days.push({ key, label: key.slice(5), count: Number(daily[key]) || 0 });
+      }
+      const maxD = Math.max(1, ...days.map(x => x.count));
+      document.getElementById('dailyChart').innerHTML = days.map(d => {
+        const h = d.count === 0 ? 4 : Math.max(12, Math.round((d.count / maxD) * 125));
+        return `
+          <div class="day-col" title="${d.key}: ${d.count}">
+            <span class="day-num">${d.count || ''}</span>
+            <div class="day-bar" style="height:${h}px;opacity:${d.count ? 1 : 0.25};"></div>
+            <span class="day-lbl">${d.label}</span>
+          </div>`;
+      }).join('');
+
+      // GitHub Releases table
+      const tbody = document.getElementById('ghTableBody');
+      const rows = [];
+      (data.github.releases || []).forEach(rel => {
+        (rel.assets || []).forEach(a => {
+          rows.push(`<tr>
+            <td><strong>${rel.tag}</strong></td>
+            <td>${a.name}</td>
+            <td>${fmtBytes(a.size)}</td>
+            <td><strong>${a.downloads.toLocaleString('tr-TR')}</strong></td>
+          </tr>`);
+        });
+      });
+      tbody.innerHTML = rows.length ? rows.join('') : '<tr><td colspan="4" class="empty">Sürüm bulunamadı.</td></tr>';
+    }
+
+    loadStats();
+  </script>
+</body>
+</html>

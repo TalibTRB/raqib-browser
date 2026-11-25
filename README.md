@@ -6,20 +6,21 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-5.6.2-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.56%20MB-059669?style=for-the-badge" />
+  <img alt="Extensions" src="https://img.shields.io/badge/Extensions-Edge%20%7C%20Brave%20%7C%20Firefox-0F766E?style=for-the-badge" />
   <img alt="Privacy" src="https://img.shields.io/badge/Telemetry-Zero%20Data%20Collection-0F172A?style=for-the-badge" />
   <img alt="Languages" src="https://img.shields.io/badge/Languages-TR%20%7C%20EN%20%7C%20AR%20%7C%20KU%20%7C%20DE-334155?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v5.6.2 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.0.0 Android Interface Showcase" width="820" />
 </p>
 
-**RAQİB (الرقيب)** is an ultra-lightweight (`4.56 MB`), privacy-first Android web browser engineered for mindful, distraction-free, and fast browsing. It combines **instant zero-flash visual blur** with network-level ad, tracker, and explicit-domain shielding, native in-page translation, and 100% on-device privacy.
+**RAQİB (الرقيب)** is an ultra-lightweight (`4.56 MB`), privacy-first Android web browser — plus official **Manifest V3 Browser Extensions for Microsoft Edge, Brave, and Firefox** — engineered for mindful, distraction-free, and fast browsing.
 
-> **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (GitHub Pages & Vercel ready), official signed release APKs, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
+> **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (GitHub Pages & Vercel ready), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
 
 ---
 
@@ -27,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **5-Language Showcase Website (GitHub Pages):** https://talibtrb.github.io/raqib-browser/
-* **Download Latest Signed APK (`v5.6.2`):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.0.0` — Android APK + Edge/Brave/Firefox Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://talibtrb.github.io/raqib-browser/privacy.html
 * **Security & Verification Policy:** [SECURITY.md](SECURITY.md)
 
@@ -71,8 +72,17 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v5.6.2-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.0.0-signed-release.apk
 ```
+
+---
+
+## Desktop Browser Extensions (Edge • Brave • Firefox)
+
+Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur (`Alt+Hover` or press & hold), **152** Mandatory Halal Shield + SafeSearch rules, **249** Ad & Tracker network rules, YouTube Focus Shield, and all 5 languages (`TR • EN • AR • KU • DE`):
+
+* **Microsoft Edge & Brave (`RAQIB-Extension-v1.0.0-Edge-Brave.zip`):** Unzip → open `edge://extensions` or `brave://extensions` → enable **Developer Mode** → **Load unpacked** (or upload the `.zip` directly to Microsoft Edge Add-ons).
+* **Mozilla Firefox (`RAQIB-Extension-v1.0.0-Firefox.zip`):** Open `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** (or upload the `.zip` directly to [Firefox Add-ons / AMO](https://addons.mozilla.org/developers/) for permanent signed install on Desktop & Android Firefox).
 
 ---
 
