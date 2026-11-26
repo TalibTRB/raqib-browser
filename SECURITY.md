@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | :--- | :--- |
-| `1.1.x` | Yes (Active Release — `v1.1.4`, `versionCode 31`) |
-| `1.0.x` | Security maintenance — please upgrade to `v1.1.4` |
+| `1.1.x` | Yes (Active Release — `v1.1.5`, `versionCode 32`) |
+| `1.0.x` | Security maintenance — please upgrade to `v1.1.5` |
 | `< 1.0.0` | Pre-launch development builds (unsupported) |
 
 ## Official Release Signing Verification
