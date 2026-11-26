@@ -11,7 +11,7 @@
  */
 
 const REPO = 'TalibTRB/raqib-browser';
-const FALLBACK_VERSION = 'v1.1.6';
+const FALLBACK_VERSION = 'v1.2.0';
 const FALLBACK_EXT_VERSION = 'v1.0.0';
 
 const ASSET_MATCHERS = {
