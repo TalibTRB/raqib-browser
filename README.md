@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.2-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.61%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.1 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.2 Android Interface Showcase" width="820" />
 </p>
 
 **RAQİB (الرقيب)** is an ultra-lightweight (`4.61 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.1.1` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.1.2` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.1.1-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.1.2-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,11 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.1.2` (`versionCode 29` — 2026-11-26)
+* **Google Sign-In + 2FA → X.com Handoff Fix:** Preserves regional Google auth/2FA relay hops (`accounts.google.*`, `/accounts/SetSID`, `/CheckCookie`, `/gsi/transform`) inside the active OAuth popup so `window.opener.postMessage` completes back to X.com seamlessly without white-screen stalls; keeps OAuth popups alive across 2FA app switches with a lean `t = 0 ms` Blur + Password Vault doc-start script.
+* **Guaranteed Public Device Storage for PDFs (Android 10–16 / HyperOS):** Removes read-only `MediaStore.SIZE` on insert, saves directly to public `Download/` with normalized `application/pdf` MIME, `.pdf` extension guarantee, `MediaScanner` indexing, and WebView cookie forwarding for authenticated downloads.
+* **Pro Internal PDF Viewer Drag & Fast Scrubber:** Adds 2-finger pinch-to-zoom (`1.0x–3.5x`), double-tap zoom, full 2D zoomed page panning/dragging with seamless next/previous page overflow, and a right-edge draggable Fast Page Scrubber with live floating page bubble.
 
 ### `v1.1.1` (`versionCode 28` — 2026-11-26)
 * **In-App APK Update & Installation Fix:** Added `REQUEST_INSTALL_PACKAGES` permission, strict `application/vnd.android.package-archive` MIME normalization, OEM-proof `FileProvider` staging (Xiaomi HyperOS/MIUI, Samsung OneUI, Android 10–16), and automatic "Allow from this source" guidance when permission is not yet granted.
