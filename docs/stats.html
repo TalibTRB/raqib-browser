@@ -68,7 +68,19 @@
       background: var(--emerald-soft); color: var(--emerald); font-weight: 600;
     }
     .country-row { margin-bottom: 12px; }
-    .country-head { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 5px; }
+    .country-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 5px; }
+    .country-label { display: inline-flex; align-items: center; gap: 8px; }
+    .flag-img {
+      width: 22px; height: 15px; border-radius: 3px; object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.18); flex-shrink: 0; vertical-align: middle;
+    }
+    .flag-img-lg { width: 28px; height: 19px; border-radius: 4px; }
+    .flag-fallback {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 24px; height: 16px; padding: 0 4px; border-radius: 3px;
+      background: rgba(16,185,129,0.2); color: var(--emerald);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.04em;
+    }
     .bar-track { height: 8px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
     .bar-fill { height: 100%; background: linear-gradient(90deg, #059669, #34D399); border-radius: 999px; }
     .daily-chart { display: flex; align-items: flex-end; gap: 7px; height: 165px; padding-top: 12px; }
@@ -178,9 +190,13 @@
       ? new Intl.DisplayNames(['tr'], { type: 'region' })
       : null;
 
-    function countryFlag(cc) {
-      if (!cc || cc === 'XX' || cc.length !== 2) return '🌍';
-      return String.fromCodePoint(...cc.toUpperCase().split('').map(c => 127397 + c.charCodeAt(0)));
+    function countryFlagHtml(cc, large) {
+      const code = String(cc || '').trim().toUpperCase();
+      if (!/^[A-Z]{2}$/.test(code) || code === 'XX') {
+        return '<span class="flag-fallback">GLB</span>';
+      }
+      const cls = large ? 'flag-img flag-img-lg' : 'flag-img';
+      return `<img class="${cls}" src="https://flagcdn.com/${code.toLowerCase()}.svg" alt="${code}" loading="lazy" onerror="this.outerHTML='<span class=\\'flag-fallback\\'>${code}</span>'" />`;
     }
     function countryName(cc) {
       if (!cc || cc === 'XX') return 'Bilinmiyor';
@@ -241,7 +257,8 @@
       document.getElementById('countryTotalBadge').textContent = countries.length + ' ülke';
       if (countries.length > 0) {
         const [topCode, topCount] = countries[0];
-        document.getElementById('kpiTopCountry').textContent = countryFlag(topCode) + ' ' + topCode;
+        document.getElementById('kpiTopCountry').innerHTML =
+          `<span class="country-label">${countryFlagHtml(topCode, true)}<span>${topCode}</span></span>`;
         document.getElementById('kpiCountryCount').textContent = countryName(topCode) + ' (' + topCount + ')';
       } else {
         document.getElementById('kpiTopCountry').textContent = '—';
@@ -264,7 +281,7 @@
           return `
             <div class="country-row">
               <div class="country-head">
-                <span>${countryFlag(code)} ${countryName(code)} (${code})</span>
+                <span class="country-label">${countryFlagHtml(code, false)}<span>${countryName(code)} (${code})</span></span>
                 <strong>${count} <span style="color:var(--muted);font-weight:400;">(${pct}%)</span></strong>
               </div>
               <div class="bar-track"><div class="bar-fill" style="width:${width}%"></div></div>

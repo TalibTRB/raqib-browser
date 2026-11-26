@@ -11,7 +11,8 @@
  */
 
 const REPO = 'TalibTRB/raqib-browser';
-const FALLBACK_VERSION = 'v1.0.0';
+const FALLBACK_VERSION = 'v1.1.0';
+const FALLBACK_EXT_VERSION = 'v1.0.0';
 
 const ASSET_MATCHERS = {
   apk: {
@@ -20,11 +21,11 @@ const ASSET_MATCHERS = {
   },
   'ext-edge': {
     contains: 'Edge-Brave.zip',
-    fallbackUrl: `https://github.com/${REPO}/releases/download/${FALLBACK_VERSION}/RAQIB-Extension-${FALLBACK_VERSION}-Edge-Brave.zip`
+    fallbackUrl: `https://github.com/${REPO}/releases/download/${FALLBACK_VERSION}/RAQIB-Extension-${FALLBACK_EXT_VERSION}-Edge-Brave.zip`
   },
   'ext-firefox': {
     contains: 'Firefox.zip',
-    fallbackUrl: `https://github.com/${REPO}/releases/download/${FALLBACK_VERSION}/RAQIB-Extension-${FALLBACK_VERSION}-Firefox.zip`
+    fallbackUrl: `https://github.com/${REPO}/releases/download/${FALLBACK_VERSION}/RAQIB-Extension-${FALLBACK_EXT_VERSION}-Firefox.zip`
   }
 };
 

@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.56%20MB-059669?style=for-the-badge" />
   <img alt="Extensions" src="https://img.shields.io/badge/Extensions-Edge%20%7C%20Brave%20%7C%20Firefox-0F766E?style=for-the-badge" />
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.0.0 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.0 Android Interface Showcase" width="820" />
 </p>
 
 **RAQİB (الرقيب)** is an ultra-lightweight (`4.56 MB`), privacy-first Android web browser — plus official **Manifest V3 Browser Extensions for Microsoft Edge, Brave, and Firefox** — engineered for mindful, distraction-free, and fast browsing.
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **5-Language Showcase Website (GitHub Pages):** https://talibtrb.github.io/raqib-browser/
-* **Download Latest Release (`v1.0.0` — Android APK + Edge/Brave/Firefox Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.1.0` — Android APK + Edge/Brave/Firefox Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://talibtrb.github.io/raqib-browser/privacy.html
 * **Security & Verification Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.0.0-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.1.0-signed-release.apk
 ```
 
 ---
