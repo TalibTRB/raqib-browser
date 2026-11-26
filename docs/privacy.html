@@ -379,15 +379,68 @@
     </footer>
   </div>
 
+  <script src="./assets/raqib-inline-editor.js?v=1"></script>
   <script>
+    var currentPrivacyLang = 'tr';
+    var privacyEditor = null;
+    var PRIVACY_DEFAULTS = {};
+    var PRIVACY_VALUES = {};
+
+    (function tagPrivacyFields() {
+      var brandSub = document.querySelector('.brand-sub');
+      if (brandSub) {
+        brandSub.setAttribute('data-priv-key', 'global.brandSub');
+        PRIVACY_DEFAULTS['global.brandSub'] = brandSub.innerHTML;
+        PRIVACY_VALUES['global.brandSub'] = brandSub.innerHTML;
+      }
+      ['tr', 'en', 'ar', 'ku', 'de'].forEach(function(lang) {
+        var sec = document.getElementById('sec-' + lang);
+        if (!sec) return;
+        var bind = function(el, key) {
+          if (!el) return;
+          el.setAttribute('data-priv-key', key);
+          PRIVACY_DEFAULTS[key] = el.innerHTML;
+          PRIVACY_VALUES[key] = el.innerHTML;
+        };
+        bind(sec.querySelector('.hero-badge'), lang + '.badge');
+        bind(sec.querySelector('h1'), lang + '.h1');
+        bind(sec.querySelector('.meta'), lang + '.meta');
+        sec.querySelectorAll('.card').forEach(function(card, ci) {
+          bind(card.querySelector('h2'), lang + '.c' + ci + '.h2');
+          card.querySelectorAll('p').forEach(function(p, pi) {
+            bind(p, lang + '.c' + ci + '.p' + pi);
+          });
+          card.querySelectorAll('li').forEach(function(li, liIdx) {
+            bind(li, lang + '.c' + ci + '.li' + liIdx);
+          });
+        });
+      });
+    })();
+
+    function applyPrivacyOverrides(merged) {
+      document.querySelectorAll('[data-priv-key]').forEach(function(el) {
+        var key = el.getAttribute('data-priv-key');
+        var val = (merged && merged[key] !== undefined) ? merged[key] : PRIVACY_DEFAULTS[key];
+        PRIVACY_VALUES[key] = val;
+        if (val !== undefined) el.innerHTML = val;
+      });
+    }
+
     function setLang(code) {
+      if (['tr','en','ar','ku','de'].indexOf(code) === -1) code = 'tr';
+      currentPrivacyLang = code;
       document.querySelectorAll('.lang-section').forEach(function(el) { el.classList.remove('active'); });
       document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.classList.toggle('active', btn.dataset.lang === code); });
       var target = document.getElementById('sec-' + code) || document.getElementById('sec-tr');
       target.classList.add('active');
       document.documentElement.lang = code;
       document.documentElement.dir = (code === 'ar') ? 'rtl' : 'ltr';
-      try { history.replaceState(null, '', '?lang=' + code); } catch (_) {}
+      if (privacyEditor) privacyEditor.onLanguageChanged();
+      try {
+        var u = new URL(window.location.href);
+        u.searchParams.set('lang', code);
+        history.replaceState(null, '', u.toString());
+      } catch (_) {}
     }
     (function() {
       var params = new URLSearchParams(window.location.search);
@@ -397,8 +450,46 @@
       } else {
         var nav = (navigator.language || 'tr').toLowerCase().slice(0, 2);
         if (['tr','en','ar','ku','de'].indexOf(nav) !== -1) setLang(nav);
+        else setLang('tr');
       }
     })();
+
+    if (window.RaqibInlineEditor) {
+      privacyEditor = window.RaqibInlineEditor.boot({
+        page: 'privacy',
+        getCurrentLang: function() { return currentPrivacyLang; },
+        applyOverrides: applyPrivacyOverrides,
+        getTargets: function() {
+          var list = [];
+          var brandSub = document.querySelector('[data-priv-key="global.brandSub"]');
+          if (brandSub) {
+            list.push({
+              el: brandSub,
+              key: 'global.brandSub',
+              label: 'brandSub',
+              isRtl: false,
+              getValue: function() { return PRIVACY_VALUES['global.brandSub']; },
+              getDefault: function() { return PRIVACY_DEFAULTS['global.brandSub']; }
+            });
+          }
+          var sec = document.getElementById('sec-' + currentPrivacyLang);
+          if (sec) {
+            sec.querySelectorAll('[data-priv-key]').forEach(function(el) {
+              var key = el.getAttribute('data-priv-key');
+              list.push({
+                el: el,
+                key: key,
+                label: key,
+                isRtl: currentPrivacyLang === 'ar',
+                getValue: function() { return PRIVACY_VALUES[key]; },
+                getDefault: function() { return PRIVACY_DEFAULTS[key]; }
+              });
+            });
+          }
+          return list;
+        }
+      });
+    }
   </script>
 </body>
 </html>

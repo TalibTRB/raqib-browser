@@ -123,6 +123,8 @@
         </div>
         <div class="actions">
           <button class="btn" onclick="loadStats()">Yenile</button>
+          <a class="btn" href="./?admin=1">✏️ Vitrin Düzenle</a>
+          <a class="btn" href="./privacy?admin=1">✏️ Gizlilik Düzenle</a>
           <a class="btn btn-primary" href="./">Tanıtım Sayfası</a>
         </div>
       </header>
@@ -240,6 +242,14 @@
       }
 
       const data = await res.json();
+      if (savedKey) {
+        fetch('/api/content', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', key: savedKey })
+        }).catch(() => {});
+      }
       document.getElementById('authBox').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       document.getElementById('setupNotice').style.display = data.storageConfigured ? 'none' : 'block';
