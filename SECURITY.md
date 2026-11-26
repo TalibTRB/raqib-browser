@@ -4,8 +4,8 @@
 
 | Version | Supported |
 | :--- | :--- |
-| `1.1.x` | Yes (Active Release — `v1.1.0`, `versionCode 27`) |
-| `1.0.x` | Security maintenance — please upgrade to `v1.1.0` |
+| `1.1.x` | Yes (Active Release — `v1.1.1`, `versionCode 28`) |
+| `1.0.x` | Security maintenance — please upgrade to `v1.1.1` |
 | `< 1.0.0` | Pre-launch development builds (unsupported) |
 
 ## Official Release Signing Verification
@@ -22,7 +22,7 @@ Never install APK files whose certificate fingerprint does not match the values 
 ## Security, Privacy & Transparent Network Architecture
 
 * **0 Byte Developer Telemetry:** Zero analytics SDKs, zero ad SDKs, zero accounts, and zero developer telemetry servers.
-* **User-Initiated External Network Requests Only:** Outside of websites you explicitly visit, network requests occur only when you trigger optional features: In-Page / Selected-Text Translation (sends visible text snippets over HTTPS without cookies or user IDs), optional DNS-over-HTTPS (DoH), optional filter list updates, or manual *Check for Updates* (GitHub Releases API).
+* **User-Initiated External Network Requests Only:** Zero unsolicited background prefetch or cold-start DNS warmups (`v1.1.1+`). Outside of websites you explicitly visit, network requests occur only when you trigger optional features: In-Page / Selected-Text Translation (sends visible text snippets over HTTPS without cookies or user IDs), optional DNS-over-HTTPS (DoH), optional filter list updates, or manual *Check for Updates* (GitHub Releases API).
 * **Zero-Flash Strict Blur Everywhere:** Document-start CSS & Constructable Shadow DOM blur (`t = 0 ms`) is enforced across normal tabs, Clean Guest Sessions, and OAuth child popups (`v1.1.0+`).
 * **On-Device Encrypted Vault:** Saved credentials are encrypted on-device with hardware-backed **Android Keystore (AES-256-GCM)**.
 * **No Cloud Leakage:** Automatic cloud backup is disabled (`android:allowBackup="false"`).

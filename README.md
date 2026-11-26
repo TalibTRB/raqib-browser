@@ -6,19 +6,19 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.1-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
-  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.60%20MB-059669?style=for-the-badge" />
+  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.61%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
   <img alt="Privacy" src="https://img.shields.io/badge/Developer%20Telemetry-0%20Bytes-0F172A?style=for-the-badge" />
   <img alt="Languages" src="https://img.shields.io/badge/Languages-TR%20%7C%20EN%20%7C%20AR%20%7C%20KU%20%7C%20DE-334155?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.0 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.1 Android Interface Showcase" width="820" />
 </p>
 
-**RAQİB (الرقيب)** is an ultra-lightweight (`4.60 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
+**RAQİB (الرقيب)** is an ultra-lightweight (`4.61 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
 
 > **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (Vercel & GitHub Pages), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
 
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.1.0` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.1.1` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.1.0-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.1.1-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,17 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.1.1` (`versionCode 28` — 2026-11-26)
+* **In-App APK Update & Installation Fix:** Added `REQUEST_INSTALL_PACKAGES` permission, strict `application/vnd.android.package-archive` MIME normalization, OEM-proof `FileProvider` staging (Xiaomi HyperOS/MIUI, Samsung OneUI, Android 10–16), and automatic "Allow from this source" guidance when permission is not yet granted.
+* **Clickable Download Notifications:** Tapping an active download notification opens RAQİB's Downloads panel; tapping a completed download notification smart-routes directly to the Internal PDF Viewer (`.pdf`), Android Package Installer (`.apk`), Media3 Player (audio/video), or system viewer.
+* **Deep Performance, RAM & Battery Overhaul:**
+  * Isolated root Compose state subscriptions in `MainActivity` to eliminate wasted full-tree recompositions during scroll/page progress.
+  * Trimmed live background WebView sessions (`5 → 3`, preserving playing-media tabs) and prewarmed spare pool (`2 → 1`, default idle priority) saving ~150–300 MB RAM.
+  * Eliminated unsolicited cold-start HTTP/3 prefetch & 13-host DNS storm (strict zero-background-traffic startup).
+  * Single-pass Universal Web Dark Mode with lean container scan caps (`520 → 140` / `40 → 24`) eliminating double forced reflows.
+  * Scoped YouTube `t = 0 ms` ad-pruner strictly to YouTube hosts, scoped scholarly search bridge to `?q=`, and idle-deferred Cookie/App-Nag cleaners.
+  * Fast-skipped pure leaf non-media nodes inside Blur's `MutationObserver` while keeping 100% `t = 0 ms` Zero-Flash Strict Blur intact.
 
 ### `v1.1.0` (`versionCode 27` — 2026-11-26)
 * **In-Page Selected Text Translation:** Instant floating translation sheet without ever leaving the webpage (`TR / EN / AR / KU / DE`, Copy, Listen TTS, Quote Card, Save Note).
