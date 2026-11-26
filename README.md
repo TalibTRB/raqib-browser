@@ -8,9 +8,9 @@
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-1.1.0-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
-  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.56%20MB-059669?style=for-the-badge" />
-  <img alt="Extensions" src="https://img.shields.io/badge/Extensions-Edge%20%7C%20Brave%20%7C%20Firefox-0F766E?style=for-the-badge" />
-  <img alt="Privacy" src="https://img.shields.io/badge/Telemetry-Zero%20Data%20Collection-0F172A?style=for-the-badge" />
+  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.60%20MB-059669?style=for-the-badge" />
+  <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
+  <img alt="Privacy" src="https://img.shields.io/badge/Developer%20Telemetry-0%20Bytes-0F172A?style=for-the-badge" />
   <img alt="Languages" src="https://img.shields.io/badge/Languages-TR%20%7C%20EN%20%7C%20AR%20%7C%20KU%20%7C%20DE-334155?style=for-the-badge" />
 </p>
 
@@ -18,19 +18,19 @@
   <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.0 Android Interface Showcase" width="820" />
 </p>
 
-**RAQİB (الرقيب)** is an ultra-lightweight (`4.56 MB`), privacy-first Android web browser — plus official **Manifest V3 Browser Extensions for Microsoft Edge, Brave, and Firefox** — engineered for mindful, distraction-free, and fast browsing.
+**RAQİB (الرقيب)** is an ultra-lightweight (`4.60 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
 
-> **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (GitHub Pages & Vercel ready), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
+> **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (Vercel & GitHub Pages), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
 
 ---
 
 ## Official Links
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
-* **5-Language Showcase Website (GitHub Pages):** https://talibtrb.github.io/raqib-browser/
-* **Download Latest Release (`v1.1.0` — Android APK + Edge/Brave/Firefox Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
-* **5-Language Privacy Policy (HTTPS):** https://talibtrb.github.io/raqib-browser/privacy.html
-* **Security & Verification Policy:** [SECURITY.md](SECURITY.md)
+* **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
+* **Download Latest Release (`v1.1.0` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
+* **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
 ---
 
@@ -77,12 +77,29 @@ apksigner verify --verbose --print-certs RAQIB-v1.1.0-signed-release.apk
 
 ---
 
-## Desktop Browser Extensions (Edge • Brave • Firefox)
+## Desktop Browser Extensions (Microsoft Edge Store • Brave • Firefox)
 
 Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur (`Alt+Hover` or press & hold), **152** Mandatory Halal Shield + SafeSearch rules, **249** Ad & Tracker network rules, YouTube Focus Shield, and all 5 languages (`TR • EN • AR • KU • DE`):
 
-* **Microsoft Edge & Brave (`RAQIB-Extension-v1.0.0-Edge-Brave.zip`):** Unzip → open `edge://extensions` or `brave://extensions` → enable **Developer Mode** → **Load unpacked** (or upload the `.zip` directly to Microsoft Edge Add-ons).
-* **Mozilla Firefox (`RAQIB-Extension-v1.0.0-Firefox.zip`):** Open `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** (or upload the `.zip` directly to [Firefox Add-ons / AMO](https://addons.mozilla.org/developers/) for permanent signed install on Desktop & Android Firefox).
+* **Microsoft Edge (Official 1-Click Store Install — LIVE!):** [Install from Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce)
+* **Brave / Chromium Manual (`RAQIB-Extension-v1.0.0-Edge-Brave.zip`):** Unzip → open `brave://extensions` → enable **Developer Mode** → **Load unpacked**.
+* **Mozilla Firefox (`RAQIB-Extension-v1.0.0-Firefox.zip`):** Submitted to Firefox Add-ons (AMO review in progress) — or load locally via `about:debugging#/runtime/this-firefox`.
+
+---
+
+## Changelog
+
+### `v1.1.0` (`versionCode 27` — 2026-11-26)
+* **In-Page Selected Text Translation:** Instant floating translation sheet without ever leaving the webpage (`TR / EN / AR / KU / DE`, Copy, Listen TTS, Quote Card, Save Note).
+* **Readability-Grade Reader Mode + Automatic Arabic RTL:** Full extraction for `<div>`/`<br>` scholarly & news layouts with proper RTL punctuation alignment.
+* **Unlimited Sentence-Chunked TTS + Selected Text Audio:** Read Full Page, Summary, or Selected Text aloud with Pause/Resume & live part progress.
+* **Password Vault V3 + Manual Add/Edit:** Captures Google Sign-Up Gmail radios, X.com multi-step React SPA flows, and OAuth popups; adds editable save prompt and manual vault entry creation.
+* **Non-Destructive Downloads List:** Removing completed entries from RAQİB's Downloads list never deletes files from phone storage.
+* **Full-Tab External Link Promotion + `t = 0 ms` Strict Blur in OAuth Popups:** `archive.org`, `.pdf`, `t.co`, and external links always open in full tabs; OAuth dialogs also enforce zero-flash Strict Blur + AdBlock + Credential Bridge.
+* **Pro Internal PDF Viewer:** Horizontal-locked Straight-Strip Highlighter (4 colors, 3 thicknesses, Undo, persistent saving, Highlighted PDF export), automatic last-page resume, and Jump-to-Page dialog.
+
+### `v1.0.0` (`versionCode 26` — 2026-11-25)
+* Initial permanent RSA-4096 signed Android release (`4.56 MB` Single-DEX R8), crackle-free background audio engine, and MV3 Desktop Extensions for Edge/Brave & Firefox.
 
 ---
 

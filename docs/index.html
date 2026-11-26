@@ -646,12 +646,146 @@
     .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
     .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
 
+    /* Desktop Extension Spotlight, Changelog & FAQ */
+    .btn-edge {
+      background: linear-gradient(135deg, #0078d4 0%, #0ea5e9 100%);
+      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      box-shadow: 0 10px 28px rgba(0, 120, 212, 0.28);
+    }
+    .btn-edge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(14, 165, 233, 0.36);
+    }
+    .store-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.36);
+      color: #7dd3fc;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .desktop-spotlight {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 24px;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      backdrop-filter: blur(18px);
+    }
+    .desktop-preview-img {
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.5);
+      display: block;
+    }
+    .changelog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .changelog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      backdrop-filter: blur(16px);
+    }
+    .changelog-card.latest {
+      border-color: var(--border-strong);
+      box-shadow: 0 12px 34px rgba(16, 185, 129, 0.08);
+    }
+    .changelog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .changelog-ver {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .changelog-date {
+      font-size: 0.78rem;
+      color: var(--emerald-bright);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .changelog-list {
+      margin: 0;
+      padding-inline-start: 18px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      display: grid;
+      gap: 8px;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      backdrop-filter: blur(14px);
+    }
+    .faq-item[open] {
+      border-color: var(--border-strong);
+    }
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      color: var(--emerald-bright);
+      font-size: 1.2rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item p {
+      margin: 10px 0 0;
+      color: var(--text-soft);
+      font-size: 0.89rem;
+      line-height: 1.62;
+    }
+
     @media (max-width: 980px) {
       .nav-links { display: none; }
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .split-panel { grid-template-columns: 1fr; }
+      .desktop-spotlight { grid-template-columns: 1fr; }
+      .changelog-grid { grid-template-columns: 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .hero { padding-top: 38px; }
@@ -674,7 +808,9 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#gallery" data-i18n="navGallery">Arayüz</a>
         <a href="#features" data-i18n="navFeatures">Özellikler</a>
+        <a href="#desktop" data-i18n="navDesktop">Masaüstü</a>
         <a href="#privacy" data-i18n="navPrivacy">Gizlilik</a>
+        <a href="#faq" data-i18n="navFaq">SSS</a>
         <a href="#download" data-i18n="navDownload">İndir</a>
       </nav>
       <div class="lang-switcher" role="group" aria-label="Language Selector">
@@ -703,6 +839,10 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span data-i18n="ctaDownload">İmzalı APK İndir (v1.1.0)</span>
         </a>
+        <a class="btn btn-edge" href="https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span data-i18n="ctaEdgeStore">Microsoft Edge'e Ekle (Canlı)</span>
+        </a>
         <a class="btn btn-glass" href="https://github.com/TalibTRB/raqib-browser/releases/latest" target="_blank" rel="noopener">
           <span data-i18n="ctaReleases">GitHub Releases &amp; SHA-256</span>
         </a>
@@ -730,7 +870,7 @@
       </div>
       <div class="metric-card">
         <div class="metric-val">0 Byte</div>
-        <div class="metric-label" data-i18n="m3">Sunucuya Gönderilen Veri</div>
+        <div class="metric-label" data-i18n="m3">Geliştirici Telemetrisi</div>
       </div>
       <div class="metric-card">
         <div class="metric-val">5 Dil</div>
@@ -756,6 +896,46 @@
         <p data-i18n="featSub">Göz koruması, reklam/izleyici kalkanı, sayfa içi çeviri, ilim ve çalışma araçları hiçbir performans ödünü olmadan bir arada.</p>
       </div>
       <div id="featuresContainer"></div>
+    </section>
+
+    <!-- Desktop Extension Spotlight (Live on Microsoft Edge Add-ons!) -->
+    <section id="desktop" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="deskKicker">MASAÜSTÜ TARAYICI EKLENTİSİ • MV3</span>
+        <h2 data-i18n="deskTitle">Aynı Görsel Koruma Şimdi Bilgisayarınızda</h2>
+        <p data-i18n="deskSub">Mevcut masaüstü tarayıcınızdan vazgeçmeden t=0ms Katı Görsel Blur, Alt+Hover netleştirme, YouTube Focus Shield ve 401 çevrimdışı kuralı tek tıkla kurun.</p>
+      </div>
+      <div class="desktop-spotlight">
+        <div>
+          <span class="store-live-pill">
+            <span class="pulse-dot"></span>
+            <span data-i18n="deskStoreBadge">Microsoft Edge Add-ons Mağazasında Canlı</span>
+          </span>
+          <h3 style="margin: 0 0 10px; font-size: 1.32rem;" data-i18n="deskCardTitle">RAQİB — Halal Visual Shield (Edge • Brave • Firefox)</h3>
+          <p class="lead" style="margin-bottom: 14px;" data-i18n="deskCardLead">
+            Manifest V3 ile geliştirilmiş ultra hafif eklenti: 152 Helal Kalkan + SafeSearch kuralı, 249 reklam/izleyici kuralı, YouTube Shorts/öneri gizleyici ve 5 yerleşik dil.
+          </p>
+          <ul class="check-list" style="margin-bottom: 18px;">
+            <li><span class="check-dot">✓</span><span data-i18n="deskPt1">Resmî Microsoft Edge Mağazasından tek tıkla kurulum ve otomatik güncelleme.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="deskPt2">Alt+Hover veya basılı tutarak anlık netleştirme (Peek-to-Unblur) &amp; Alt+B hızlı aç/kapa.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="deskPt3">Sıfır telemetri, sıfır uzaktan kod, %100 cihaz içi DNR kuralları.</span></li>
+          </ul>
+          <div class="cta-group" style="justify-content: flex-start; margin: 0;">
+            <a class="btn btn-edge" href="https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce" target="_blank" rel="noopener">
+              <span data-i18n="ctaEdgeStore">Microsoft Edge'e Ekle (Canlı)</span>
+            </a>
+            <a class="btn btn-glass" data-dl-target="ext-edge" href="https://github.com/TalibTRB/raqib-browser/releases/download/v1.1.0/RAQIB-Extension-v1.0.0-Edge-Brave.zip">
+              <span>Brave / Edge (.zip)</span>
+            </a>
+            <a class="btn btn-glass" data-dl-target="ext-firefox" href="https://github.com/TalibTRB/raqib-browser/releases/download/v1.1.0/RAQIB-Extension-v1.0.0-Firefox.zip">
+              <span>Firefox (.zip)</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <img class="desktop-preview-img" src="./assets/showcase-edge-extension.png" alt="RAQİB — Halal Visual Shield Microsoft Edge Add-on Preview" loading="lazy" />
+        </div>
+      </div>
     </section>
 
     <!-- Privacy, Verification & Direct Download / Obtainium -->
@@ -798,10 +978,13 @@
             </a>
           </div>
           <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
-            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #34D399; font-weight: 700; margin-bottom: 8px;">
-              Desktop Browser Extensions (MV3 • 5 Languages • Zero Telemetry)
+            <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #34D399; font-weight: 700; margin-bottom: 8px;" data-i18n="dlExtHeader">
+              Masaüstü Tarayıcı Eklentileri (MV3 • 5 Dil • 0 Byte Telemetri)
             </div>
             <div class="cta-group" style="justify-content: flex-start; margin: 0;">
+              <a class="btn btn-edge" href="https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce" target="_blank" rel="noopener">
+                <span data-i18n="ctaEdgeStoreShort">Microsoft Edge Store (Canlı)</span>
+              </a>
               <a class="btn btn-glass" data-dl-target="ext-edge" href="https://github.com/TalibTRB/raqib-browser/releases/download/v1.1.0/RAQIB-Extension-v1.0.0-Edge-Brave.zip">
                 <span>Edge &amp; Brave (.zip • 48 KB)</span>
               </a>
@@ -823,14 +1006,35 @@
             <li data-i18n="obtS3">Obtainium yeni imzalı sürümleri otomatik yakalar ve kalıcı RSA imzasını doğrular.</li>
           </ol>
 
-          <h3 style="font-size: 1.06rem; margin-top: 20px;" data-i18n="privTitle">Sıfır Veri Toplama Taahhüdü</h3>
+          <h3 style="font-size: 1.06rem; margin-top: 20px;" data-i18n="privTitle">Şeffaf Gizlilik &amp; 0 Byte Telemetri Mimarisi</h3>
           <ul class="check-list">
-            <li><span class="check-dot">✓</span><span data-i18n="priv1">Hesap yok, analiz SDK'sı yok, geliştirici telemetri sunucusu yok.</span></li>
-            <li><span class="check-dot">✓</span><span data-i18n="priv2">Kaydedilen parolalar donanımsal Android Keystore (AES-GCM) ile şifrelenir.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="priv1">0 Byte geliştirici telemetrisi: Hesap yok, analiz SDK'sı yok, reklam SDK'sı veya geliştirici sunucusu yok.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="priv2">Kaydedilen parolalar donanımsal Android Keystore (AES-256-GCM) ile şifrelenir.</span></li>
             <li><span class="check-dot">✓</span><span data-i18n="priv3">Buluta otomatik yedekleme (allowBackup=false) kapalıdır; veriler cihazınızda kalır.</span></li>
+            <li><span class="check-dot">✓</span><span data-i18n="priv4">İsteğe bağlı sayfa/metin çevirisi, DoH ve güncelleme kontrolü yalnızca siz başlattığınızda hesap ve çerez eklemeden ilgili harici servise bağlanır.</span></li>
           </ul>
         </div>
       </div>
+    </section>
+
+    <!-- Release Changelog -->
+    <section id="changelog" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="chgKicker">SÜRÜM GEÇMİŞİ</span>
+        <h2 data-i18n="chgTitle">Şeffaf Değişiklik Günlüğü</h2>
+        <p data-i18n="chgSub">Her yeni sürüm, gerçek kullanım geri bildirimleriyle test edilip aynı kalıcı RSA-4096 anahtarıyla imzalanır.</p>
+      </div>
+      <div id="changelogGrid" class="changelog-grid"></div>
+    </section>
+
+    <!-- Interactive FAQ -->
+    <section id="faq" class="block">
+      <div class="section-head">
+        <span class="section-kicker" data-i18n="faqKicker">SIKÇA SORULAN SORULAR</span>
+        <h2 data-i18n="faqTitle">Merak Edilenler &amp; Doğrulama</h2>
+        <p data-i18n="faqSub">Gizlilik, imza doğrulama, Katı Blur kullanımı ve masaüstü kurulum hakkında net yanıtlar.</p>
+      </div>
+      <div id="faqGrid" class="faq-grid"></div>
     </section>
 
     <footer>
@@ -842,6 +1046,7 @@
           <a href="./privacy.html?lang=ar">الخصوصية (AR)</a>
           <a href="./privacy.html?lang=ku">Nepenî (KU)</a>
           <a href="./privacy.html?lang=de">Datenschutz (DE)</a>
+          <a href="https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce" target="_blank" rel="noopener">Microsoft Edge Add-ons</a>
           <a href="https://github.com/TalibTRB/raqib-browser/releases/latest" target="_blank" rel="noopener">GitHub Releases</a>
         </div>
       </div>
@@ -889,15 +1094,17 @@
       tr: {
         dir: 'ltr',
         docTitle: 'RAQİB — Android İçin Helal Görsel Tarayıcı (v1.1.0)',
-        navGallery: 'Arayüz', navFeatures: 'Özellikler', navPrivacy: 'Gizlilik', navDownload: 'İndir',
-        heroBadge: 'v1.1.0 • 4.60 MB İmzalı APK • Android 8.0–16 • Sıfır Veri Toplama',
+        navGallery: 'Arayüz', navFeatures: 'Özellikler', navDesktop: 'Masaüstü', navPrivacy: 'Gizlilik', navFaq: 'SSS', navDownload: 'İndir',
+        heroBadge: 'v1.1.0 • 4.60 MB İmzalı APK • Android 8.0–16 • 0 Byte Telemetri',
         heroTitle: 'Bilinçle gezin. Gözünü koru.',
-        heroSub: 'RAQİB (الرقيب), interneti hızlı, huzurlu ve dikkat dağılmadan kullanmak için tasarlanmış ultra hafif Android tarayıcısıdır. t=0ms anlık Katı Blur, zorunlu Helal Kalkan, Aho-Corasick reklam engelleyici ve yerel sayfa içi çeviri tek bir 4.60 MB uygulamada.',
+        heroSub: 'RAQİB (الرقيب), mahremiyeti ön planda tutan, dikkat dağıtıcı unsurları azaltan ve t=0ms Katı Görsel Blur sunan ultra hafif (4.60 MB) Android tarayıcısı ve masaüstü eklentisidir.',
         ctaDownload: 'İmzalı APK İndir (v1.1.0)',
+        ctaEdgeStore: 'Microsoft Edge\'e Ekle (Canlı)',
+        ctaEdgeStoreShort: 'Microsoft Edge Store (Canlı)',
         ctaReleases: 'GitHub Releases & SHA-256',
         ctaPrivacy: 'Gizlilik Politikası',
-        heroMeta: 'Kalıcı 4096-bit RSA imzalı • Hesap gerekmez • Reklam ve analiz SDK\'sı yok • 5 Yerleşik Dil',
-        m1: 'Sıfır Flaş Katı Görsel Blur', m2: 'Tek-DEX R8 Optimize APK', m3: 'Sunucuya Gönderilen Veri', m4: 'TR • EN • AR (RTL) • KU • DE',
+        heroMeta: 'Kalıcı 4096-bit RSA imzalı • Hesap gerekmez • 0 Byte geliştirici telemetrisi • 5 Yerleşik Dil',
+        m1: 'Sıfır Flaş Katı Görsel Blur', m2: 'Tek-DEX R8 Optimize APK', m3: 'Geliştirici Telemetrisi', m4: 'TR • EN • AR (RTL) • KU • DE',
         galKicker: 'GERÇEK ANDROID 16 ARAYÜZÜ',
         galTitle: 'Her pikseli sade, hızlı ve cam zarafetinde',
         galSub: 'RAQİB v1.1.0\'ın gerçek Android 16 ekran görüntülerini tam boy incelemek için herhangi bir cihaza dokunun.',
@@ -959,24 +1166,76 @@
         obtS1: 'Android\'de açık kaynaklı <strong>Obtainium</strong> uygulamasını açın → <strong>Add App</strong>.',
         obtS2: 'Kaynak adresi olarak şunu girin: <code>https://github.com/TalibTRB/raqib-browser</code>',
         obtS3: 'Obtainium yeni imzalı sürümleri otomatik yakalar ve kalıcı RSA imzasını doğrular.',
-        privTitle: 'Sıfır Veri Toplama Taahhüdü',
-        priv1: 'Hesap yok, analiz SDK\'sı yok, geliştirici telemetri sunucusu yok.',
-        priv2: 'Kaydedilen parolalar donanımsal Android Keystore (AES-GCM) ile şifrelenir.',
-        priv3: 'Buluta otomatik yedekleme (allowBackup=false) kapalıdır; verileriniz yalnızca telefonunuzda kalır.'
+        privTitle: 'Şeffaf Gizlilik & 0 Byte Telemetri Mimarisi',
+        priv1: '0 Byte geliştirici telemetrisi: Hesap yok, analiz SDK\'sı yok, reklam SDK\'sı veya geliştirici sunucusu yok.',
+        priv2: 'Kaydedilen parolalar donanımsal Android Keystore (AES-256-GCM) ile şifrelenir.',
+        priv3: 'Buluta otomatik yedekleme (allowBackup=false) kapalıdır; verileriniz yalnızca telefonunuzda kalır.',
+        priv4: 'İsteğe bağlı sayfa/metin çevirisi, DoH veya güncelleme kontrolü yalnızca siz başlattığınızda hesap ve çerez eklemeden ilgili harici servise bağlanır.',
+        deskKicker: 'MASAÜSTÜ TARAYICI EKLENTİSİ • MV3',
+        deskTitle: 'Aynı Görsel Koruma Şimdi Bilgisayarınızda',
+        deskSub: 'Mevcut tarayıcınızdan vazgeçmeden t=0ms Katı Görsel Blur, Alt+Hover netleştirme, YouTube Focus Shield ve 401 çevrimdışı kuralı tek tıkla kurun.',
+        deskStoreBadge: 'Microsoft Edge Add-ons Mağazasında Canlı',
+        deskCardTitle: 'RAQİB — Halal Visual Shield (Edge • Brave • Firefox)',
+        deskCardLead: 'Manifest V3 ile geliştirilmiş ultra hafif eklenti: 152 Helal Kalkan + SafeSearch kuralı, 249 reklam/izleyici kuralı, YouTube Shorts/öneri gizleyici ve 5 dil.',
+        deskPt1: 'Resmî Microsoft Edge Mağazasından tek tıkla kurulum ve otomatik güncelleme.',
+        deskPt2: 'Alt+Hover veya basılı tutarak anlık netleştirme (Peek-to-Unblur) & Alt+B hızlı aç/kapa.',
+        deskPt3: '0 Byte telemetri, sıfır uzaktan kod, %100 cihaz içi DNR kuralları.',
+        dlExtHeader: 'Masaüstü Tarayıcı Eklentileri (MV3 • 5 Dil • 0 Byte Telemetri)',
+        chgKicker: 'SÜRÜM GEÇMİŞİ',
+        chgTitle: 'Şeffaf Değişiklik Günlüğü',
+        chgSub: 'Her yeni sürüm, gerçek saha geri bildirimleriyle test edilip aynı kalıcı RSA-4096 anahtarıyla imzalanır.',
+        changelog: [
+          {
+            ver: 'v1.1.0 (Android • versionCode 27)',
+            date: '26 Kasım 2026 • Güncel',
+            latest: true,
+            items: [
+              'Sayfa İçi Anlık Seçili Metin Çevirisi: Siteden ayrılmadan 5 dilde çeviri, Kopyala, Dinle ve Alıntı Kartı.',
+              'Readability Sınıfı Okuma Modu + Otomatik Arapça RTL: &lt;div&gt;/&lt;br&gt; tabanlı ilim ve haber sitelerini eksiksiz çıkarır.',
+              'Sınırsız Cümle Kuyruklu TTS: Tüm Sayfa / Özet / Seçili Metin okuma + Duraklat/Devam Et.',
+              'Şifre Kasası V3 + Manuel Ekle/Düzenle: Google kayıt, X.com SPA ve OAuth popup yakalama.',
+              'Cihazdan Asla Silmeyen İndirme Listesi + X.com/archive.org/PDF tam sekme terfisi + OAuth popup\'ta t=0ms Katı Blur.',
+              'Dahili PDF Okuyucu Pro: Düz Şeritsel Vurgulama (4 renk, vurgulu PDF dışa aktarma), sayfa hatırlama ve Sayfaya Git.'
+            ]
+          },
+          {
+            ver: 'v1.0.0 (Android + Edge / Brave / Firefox)',
+            date: '25 Kasım 2026 • İlk Kararlı Sürüm',
+            latest: false,
+            items: [
+              'Kalıcı 4096-bit RSA (v2+v3) imzalı ilk genel Android sürümü ve 4.56 MB Single-DEX R8 optimizasyonu.',
+              'Çıtırtısız arka plan ses motoru, ekran kapalı sıfır-boya modu ve YouTube konum kurtarma.',
+              'Microsoft Edge Add-ons Mağazasında yayına giren MV3 RAQİB — Halal Visual Shield masaüstü eklentisi.'
+            ]
+          }
+        ],
+        faqKicker: 'SIKÇA SORULAN SORULAR',
+        faqTitle: 'Merak Edilenler & Doğrulama',
+        faqSub: 'Gizlilik, imza doğrulama, Katı Blur ve masaüstü kurulum hakkında açık yanıtlar.',
+        faqs: [
+          ['"0 Byte Telemetri" tam olarak ne demektir? Çeviri nasıl çalışır?', 'RAQİB geliştirici sunucularına gezinme geçmişi, kullanıcı kimliği veya analiz verisi göndermez. Yalnızca siz açıkça Çevir butonuna bastığınızda görünür/seçili metin HTTPS üzerinden çerezsiz ve kimliksiz olarak çeviri uç noktasına iletilir.'],
+          ['Katı Blur zararsız bir görseli bulanıklaştırırsa nasıl görürüm?', 'Herhangi bir görselin üzerine parmağınızı basılı tutarak anlık netleştirebilirsiniz (Peek-to-Unblur); parmağınızı kaldırdığınızda anında yeniden bulanıklaşır. Güvenilir siteleri Blur panelinden tek dokunuşla istisnaya ekleyebilirsiniz.'],
+          ['v1.0.0\'dan v1.1.0\'a güncellerken verilerim silinir mi?', 'Hayır. Tüm resmi sürümler aynı kalıcı 4096-bit RSA anahtarıyla (SHA-256: F7:0D:88...) imzalandığı için mevcut sürümü silmeden doğrudan üzerine kurabilirsiniz; yer imleriniz, şifreleriniz ve ayarlarınız korunur.'],
+          ['APK neden sadece 4.60 MB? Güvenilirliğini nasıl doğrularım?', 'RAQİB şişkin üçüncü taraf reklam/analiz SDK\'ları yerine Android\'in yerleşik Chromium WebView motorunu ve R8 tek-DEX derlemesini kullanır. İndirdiğiniz APK\'nın SHA-256 özetini ve imzasını yukarıdaki parmak izleriyle doğrulayabilirsiniz.'],
+          ['Bilgisayarıma (Microsoft Edge / Brave / Firefox) nasıl kurarım?', 'Microsoft Edge kullanıyorsanız yukarıdaki "Microsoft Edge\'e Ekle" butonuna tıklayıp resmi mağazadan 1 saniyede kurabilirsiniz. Brave ve Firefox için ilgili .zip paketleri GitHub Releases üzerinde hazırdır.'],
+          ['İndirmeler listesinden bir kaydı silersem dosya telefonumdan silinir mi?', 'Hayır. v1.1.0 itibarıyla tamamlanmış bir indirmeyi RAQİB listelerinden kaldırdığınızda yalnızca geçmiş satırı silinir; dosyanız cihazınızın İndirilenler klasöründe güvende kalır.']
+        ]
       },
 
       en: {
         dir: 'ltr',
         docTitle: 'RAQİB — Halal Visual Browser for Android (v1.1.0)',
-        navGallery: 'Interface', navFeatures: 'Features', navPrivacy: 'Privacy', navDownload: 'Download',
-        heroBadge: 'v1.1.0 • 4.60 MB Signed APK • Android 8.0–16 • Zero Data Collection',
+        navGallery: 'Interface', navFeatures: 'Features', navDesktop: 'Desktop', navPrivacy: 'Privacy', navFaq: 'FAQ', navDownload: 'Download',
+        heroBadge: 'v1.1.0 • 4.60 MB Signed APK • Android 8.0–16 • 0 Byte Telemetry',
         heroTitle: 'Browse with purpose. Protect your gaze.',
-        heroSub: 'RAQİB (الرقيب) is an ultra-lightweight, privacy-first Android web browser engineered for calm, focused, and fast browsing. Instant t=0ms Strict Visual Blur, mandatory Halal Shield, Aho-Corasick AdBlock, and native in-page translation in a single 4.60 MB APK.',
+        heroSub: 'RAQİB (الرقيب) is a privacy-first, distraction-free visual protection browser (4.60 MB Android APK) and desktop extension ecosystem with instant t=0ms Strict Visual Blur, Halal Shield, and AdBlock.',
         ctaDownload: 'Download Signed APK (v1.1.0)',
+        ctaEdgeStore: 'Add to Microsoft Edge (Live)',
+        ctaEdgeStoreShort: 'Microsoft Edge Store (Live)',
         ctaReleases: 'GitHub Releases & SHA-256',
         ctaPrivacy: 'Privacy Policy',
-        heroMeta: 'Permanent 4096-bit RSA signed • No account required • Zero analytics or ad SDKs • 5 Built-in Languages',
-        m1: 'Zero-Flash Strict Visual Blur', m2: 'Single-DEX R8 Full-Mode APK', m3: 'Telemetry Sent to Servers', m4: 'TR • EN • AR (RTL) • KU • DE',
+        heroMeta: 'Permanent 4096-bit RSA signed • No account required • 0 Byte developer telemetry • 5 Built-in Languages',
+        m1: 'Zero-Flash Strict Visual Blur', m2: 'Single-DEX R8 Full-Mode APK', m3: 'Developer Telemetry Sent', m4: 'TR • EN • AR (RTL) • KU • DE',
         galKicker: 'REAL ANDROID 16 INTERFACE',
         galTitle: 'Crafted for speed, serenity, and glass clarity',
         galSub: 'Tap any device below to zoom into real high-DPI screenshots captured directly from RAQİB v1.1.0 on Android 16.',
@@ -1038,24 +1297,76 @@
         obtS1: 'Open the open-source <strong>Obtainium</strong> app on Android → <strong>Add App</strong>.',
         obtS2: 'Paste repository URL: <code>https://github.com/TalibTRB/raqib-browser</code>',
         obtS3: 'Obtainium tracks new signed releases automatically and verifies RSA key continuity.',
-        privTitle: 'Zero-Data-Collection Guarantee',
-        priv1: 'No accounts, zero analytics SDKs, zero advertising SDKs, zero developer servers.',
-        priv2: 'Saved credentials are encrypted locally via hardware Android Keystore (AES-GCM).',
-        priv3: 'Cloud auto-backup is disabled (allowBackup=false); your browsing stays strictly on your phone.'
+        privTitle: 'Transparent Privacy & 0 Byte Telemetry Architecture',
+        priv1: '0 Byte developer telemetry: no accounts, zero analytics SDKs, zero ad SDKs, zero developer servers.',
+        priv2: 'Saved credentials are encrypted locally via hardware Android Keystore (AES-256-GCM).',
+        priv3: 'Cloud auto-backup is disabled (allowBackup=false); your browsing stays strictly on your phone.',
+        priv4: 'Optional user-triggered features (In-Page / Selected Translation, DoH, Update Check) connect directly to their respective service over HTTPS without cookies or user IDs.',
+        deskKicker: 'DESKTOP BROWSER EXTENSION • MV3',
+        deskTitle: 'The Same Visual Protection Now on Your Desktop',
+        deskSub: 'Keep your favorite desktop browser and add t=0ms Strict Visual Blur, Alt+Hover peek, YouTube Focus Shield, and 401 offline protection rules in one click.',
+        deskStoreBadge: 'Live on Microsoft Edge Add-ons Store',
+        deskCardTitle: 'RAQİB — Halal Visual Shield (Edge • Brave • Firefox)',
+        deskCardLead: 'Ultra-light Manifest V3 add-on featuring 152 Halal Shield & SafeSearch rules, 249 Ad & Tracker rules, YouTube Shorts/recommendation blocker, and 5 built-in languages.',
+        deskPt1: 'Official 1-click install & automatic updates from Microsoft Edge Add-ons Store.',
+        deskPt2: 'Instant Peek-to-Unblur with Alt+Hover or press & hold, plus Alt+B quick toggle.',
+        deskPt3: '0 Byte telemetry, zero remote code, 100% local declarativeNetRequest rules.',
+        dlExtHeader: 'Desktop Browser Extensions (MV3 • 5 Languages • 0 Byte Telemetry)',
+        chgKicker: 'RELEASE HISTORY',
+        chgTitle: 'Transparent Changelog',
+        chgSub: 'Every release is verified on real Android 16 devices and signed with the exact same permanent RSA-4096 key.',
+        changelog: [
+          {
+            ver: 'v1.1.0 (Android • versionCode 27)',
+            date: 'Nov 26, 2026 • Latest',
+            latest: true,
+            items: [
+              'In-Page Selected Text Translation: instant floating sheet without leaving the page (5 languages, Copy, Listen TTS, Quote Card).',
+              'Readability-Grade Reader Mode + Automatic Arabic RTL alignment for full &lt;div&gt;/&lt;br&gt; scholarly & news pages.',
+              'Unlimited Sentence-Chunked TTS: Full Page / Summary / Selected Text reading with Pause/Resume.',
+              'Password Vault V3 + Manual Add/Edit: captures Google Sign-Up radios, X.com SPA flows, and OAuth popups.',
+              'Non-Destructive Downloads List + full-tab promotion for X.com/archive.org/PDF links + t=0ms Strict Blur inside OAuth popups.',
+              'Pro Internal PDF Viewer: Straight-Strip Highlighter (4 colors, persistent highlights, Highlighted PDF export), last-page memory, and Jump-to-Page.'
+            ]
+          },
+          {
+            ver: 'v1.0.0 (Android + Edge / Brave / Firefox)',
+            date: 'Nov 25, 2026 • Initial Stable',
+            latest: false,
+            items: [
+              'First permanent RSA-4096 (v2+v3) signed public Android release (4.56 MB Single-DEX R8).',
+              'Crackle-free background audio engine, zero-paint screen-off mode, and YouTube position recovery.',
+              'Manifest V3 Desktop Extension published live on Microsoft Edge Add-ons Store.'
+            ]
+          }
+        ],
+        faqKicker: 'FREQUENTLY ASKED QUESTIONS',
+        faqTitle: 'Trust, Verification & Daily Use',
+        faqSub: 'Clear answers on privacy boundaries, cryptographic verification, Strict Blur, and desktop setup.',
+        faqs: [
+          ['What does "0 Byte Developer Telemetry" mean? How does translation work?', 'RAQİB sends zero browsing history, device IDs, or analytics to any developer server. Only when you explicitly tap Translate does it send visible/selected text over HTTPS to the translation endpoint without cookies or accounts.'],
+          ['How do I view a harmless image if Strict Blur hides it?', 'Press and hold any blurred image to peek cleanly (Peek-to-Unblur); release and it re-blurs instantly. You can also whitelist trusted sites in one tap from the Blur panel.'],
+          ['Will updating from v1.0.0 to v1.1.0 erase my bookmarks or passwords?', 'No. All official releases share our permanent 4096-bit RSA signing certificate (SHA-256: F7:0D:88...), so you can install right on top without uninstalling or losing data.'],
+          ['Why is the APK only 4.60 MB, and how can I verify its integrity?', 'RAQİB leverages Android\'s native Chromium WebView and R8 Single-DEX optimization with zero ad or analytics SDK bloat. You can verify both the APK SHA-256 and signing certificate above.'],
+          ['How do I install the desktop extension on Edge, Brave, or Firefox?', 'On Microsoft Edge, simply click "Add to Microsoft Edge" above for 1-click official store installation. Signed/unpacked ZIP packages for Brave and Firefox are also available on GitHub Releases.'],
+          ['Does removing an entry from RAQİB\'s Downloads list delete the file from my phone?', 'Never. Starting in v1.1.0, removing a completed download clears only the in-app history entry while keeping your downloaded file safely in phone storage.']
+        ]
       },
 
       ar: {
         dir: 'rtl',
         docTitle: 'رقيب (RAQİB) — متصفح أندرويد حلال بتمويه بصري فوري (v1.1.0)',
-        navGallery: 'الواجهة', navFeatures: 'المميزات', navPrivacy: 'الخصوصية', navDownload: 'التحميل',
-        heroBadge: 'v1.1.0 • حجم 4.60 MB موقّع • أندرويد 8.0–16 • صفر جمع بيانات',
+        navGallery: 'الواجهة', navFeatures: 'المميزات', navDesktop: 'سطح المكتب', navPrivacy: 'الخصوصية', navFaq: 'الأسئلة', navDownload: 'التحميل',
+        heroBadge: 'v1.1.0 • حجم 4.60 MB موقّع • أندرويد 8.0–16 • 0 بايت تتبع',
         heroTitle: 'تصفّح بوعي. احفظ بصرك.',
-        heroSub: 'رقيب (RAQİB) متصفح أندرويد فائق الخفة والسرعة صُمّم للتصفح الآمن والهادف دون تشتيت. يجمع بين التمويه البصري الصارم في اللحظة الصفرية، ودرع الحلال الإلزامي، ومانع الإعلانات، والترجمة الفورية داخل الصفحة في ملف 4.60 MB فقط.',
+        heroSub: 'رقيب (RAQİB) متصفح أندرويد فائق الخفة (4.60 MB) وإضافة سطح مكتب مصمّمان لحفظ البصر والخصوصية وتقليل المشتتات مع تمويه بصري صارم t=0ms ودرع حلال ومانع إعلانات.',
         ctaDownload: 'تحميل APK الموقّع (v1.1.0)',
+        ctaEdgeStore: 'أضف إلى Microsoft Edge (مباشر)',
+        ctaEdgeStoreShort: 'متجر Microsoft Edge (مباشر)',
         ctaReleases: 'إصدارات GitHub و SHA-256',
         ctaPrivacy: 'سياسة الخصوصية',
-        heroMeta: 'موقّع بمفتاح RSA دائم 4096-bit • بدون حساب • بدون إعلانات أو تحليلات • 5 لغات مدمجة',
-        m1: 'تمويه بصري صارم بلا وميض', m2: 'حزمة APK فائقة الخفة R8', m3: 'بيانات تُرسل لأي خادم', m4: 'العربية (RTL) • TR • EN • KU • DE',
+        heroMeta: 'موقّع بمفتاح RSA دائم 4096-bit • بدون حساب • 0 بايت تتبع للمطور • 5 لغات مدمجة',
+        m1: 'تمويه بصري صارم بلا وميض', m2: 'حزمة APK فائقة الخفة R8', m3: 'بيانات تتبع للمطور', m4: 'العربية (RTL) • TR • EN • KU • DE',
         galKicker: 'واجهة أندرويد 16 الحقيقية',
         galTitle: 'تصميم زجاجي هادئ وسريع في كل تفصيل',
         galSub: 'انقر على أي شاشة لتكبير لقطات حقيقية عالية الدقة مأخوذة مباشرة من إصدار رقيب v1.1.0 على أندرويد 16.',
@@ -1117,24 +1428,76 @@
         obtS1: 'افتح تطبيق <strong>Obtainium</strong> مفتوح المصدر على أندرويد ← <strong>Add App</strong>.',
         obtS2: 'أدخل رابط المستودع: <code>https://github.com/TalibTRB/raqib-browser</code>',
         obtS3: 'يتحقق Obtainium تلقائياً من الإصدارات الجديدة ومن تطابق توقيع RSA الدائم.',
-        privTitle: 'تعهد صفر جمع بيانات',
-        priv1: 'بدون حسابات، بدون حزم تحليلات أو إعلانات، وبدون أي خوادم تتبع للمطور.',
-        priv2: 'تُشفّر كلمات المرور المحفوظة محلياً عبر Android Keystore (AES-GCM).',
-        priv3: 'النسخ الاحتياطي السحابي معطّل (allowBackup=false)؛ جميع بياناتك تبقى في هاتفك فقط.'
+        privTitle: 'شفافية الخصوصية ومعمارية 0 بايت تتبع',
+        priv1: '0 بايت تتبع للمطور: بدون حسابات، بدون حزم تحليلات أو إعلانات، وبدون أي خوادم تتبع للمطور.',
+        priv2: 'تُشفّر كلمات المرور المحفوظة محلياً عبر Android Keystore (AES-256-GCM).',
+        priv3: 'النسخ الاحتياطي السحابي معطّل (allowBackup=false)؛ جميع بياناتك تبقى في هاتفك فقط.',
+        priv4: 'الميزات الاختيارية التي يبدأها المستخدم (الترجمة الفورية، DoH، فحص التحديثات) تتصل بالخدمة المعنية عبر HTTPS دون كوكيز أو معرّف مستخدم.',
+        deskKicker: 'إضافة متصفح سطح المكتب • MV3',
+        deskTitle: 'نفس الحماية البصرية الآن على حاسوبك',
+        deskSub: 'احتفظ بمتصفحك المفضل وأضف التمويه البصري الصارم t=0ms والتوضيح بـ Alt+Hover ودرع تركيز يوتيوب و 401 قاعدة محلية بنقرة واحدة.',
+        deskStoreBadge: 'متوفرة رسمياً على متجر Microsoft Edge Add-ons',
+        deskCardTitle: 'RAQİB — Halal Visual Shield (Edge • Brave • Firefox)',
+        deskCardLead: 'إضافة Manifest V3 فائقة الخفة: 152 قاعدة درع حلال والبحث الآمن، 249 قاعدة لمنع الإعلانات والمتتبعات، إخفاء يوتيوب Shorts، و 5 لغات مدمجة.',
+        deskPt1: 'تثبيت رسمي بنقرة واحدة وتحديث تلقائي من متجر Microsoft Edge Add-ons.',
+        deskPt2: 'توضيح لحظي عبر Alt+Hover أو الضغط المطوّل مع اختصار Alt+B السريع.',
+        deskPt3: '0 بايت تتبع، صفر أكواد خارجية، وقواعد DNR محلية 100%.',
+        dlExtHeader: 'إضافات متصفحات سطح المكتب (MV3 • 5 لغات • 0 بايت تتبع)',
+        chgKicker: 'سجل الإصدارات',
+        chgTitle: 'سجل التغييرات الشفاف',
+        chgSub: 'يُختبر كل إصدار على أجهزة أندرويد 16 حقيقية ويُوقّع بنفس مفتاح RSA-4096 الدائم.',
+        changelog: [
+          {
+            ver: 'v1.1.0 (أندرويد • versionCode 27)',
+            date: '26 نوفمبر 2026 • الأحدث',
+            latest: true,
+            items: [
+              'الترجمة الفورية للنص المحدد داخل الصفحة دون مغادرة الموقع (5 لغات، نسخ، استماع صوتي، بطاقة اقتباس).',
+              'وضع قارئ متطور + محاذاة تلقائية للغة العربية (RTL) يستخرج صفحات الفتاوى والمقالات بالكامل.',
+              'قارئ صوتي غير محدود: قراءة الصفحة كاملة أو الملخص أو النص المحدد مع إيقاف مؤقت واستئناف.',
+              'خزنة كلمات المرور V3 + إضافة وتعديل يدوي مع دعم تسجيل Google و X.com والنوافذ المنبثقة.',
+              'إزالة التنزيلات من القائمة دون حذف الملف من الهاتف + فتح روابط archive.org و PDF في تبويب كامل + تمويه t=0ms في نوافذ OAuth.',
+              'عارض PDF احترافي: تظليل شريطي مستقيم (4 ألوان وتصدير PDF مظلّل) + تذكر آخر صفحة + الانتقال السريع لصفحة.'
+            ]
+          },
+          {
+            ver: 'v1.0.0 (أندرويد + Edge / Brave / Firefox)',
+            date: '25 نوفمبر 2026 • الإصدار المستقر الأول',
+            latest: false,
+            items: [
+              'أول إصدار رسمي موقّع بمفتاح RSA-4096 دائم بحجم 4.56 MB.',
+              'محرك صوت خلفي نقي بلا تقطيع مع وضع إطفاء الشاشة واستعادة موضع يوتيوب.',
+              'نشر إضافة سطح المكتب الرسمية MV3 على متجر Microsoft Edge Add-ons.'
+            ]
+          }
+        ],
+        faqKicker: 'الأسئلة الشائعة',
+        faqTitle: 'الخصوصية، التحقق والاستخدام اليومي',
+        faqSub: 'إجابات واضحة حول الخصوصية وتوقيع التطبيق والتمويه البصري وإضافة سطح المكتب.',
+        faqs: [
+          ['ماذا يعني «0 بايت تتبع للمطور»؟ وكيف تعمل الترجمة؟', 'لا يرسل رقيب سجل تصفحك أو هويتك لأي خادم خاص بالمطور. وعندما تضغط أنت على زر الترجمة فقط، تُرسل الفقرة المحددة عبر HTTPS دون كوكيز أو حسابات.'],
+          ['كيف أرى صورة مباحة إذا تم تمويهها؟', 'اضغط مطولاً على أي صورة لتوضيحها لحظياً (Peek-to-Unblur)، وتعود للتمويه فور رفع إصبعك. كما يمكنك استثناء المواقع الموثوقة بنقرة واحدة من لوحة التمويه.'],
+          ['هل تُحذف بياناتي عند التحديث من v1.0.0 إلى v1.1.0؟', 'لا أبداً. جميع الإصدارات الرسمية موقّعة بنفس شهادة RSA-4096 الدائمة (F7:0D:88...)، لذا يمكنك التثبيت فوق النسخة السابقة مباشرة مع بقاء جميع بياناتك.'],
+          ['لماذا حجم ملف APK هو 4.60 MB فقط؟', 'لأن رقيب يعتمد على محرك Chromium WebView الأصلي في أندرويد مع تحسين R8 دون أي حزم إعلانات أو تتبع ثقيلة، ويمكنك التحقق من بصمة SHA-256 أعلاه.'],
+          ['كيف أثبّت إضافة سطح المكتب على Edge أو Brave أو Firefox؟', 'لمتصفح Microsoft Edge اضغط زر «أضف إلى Microsoft Edge» أعلاه للتثبيت الرسمي بنقرة واحدة. وتتوفر حزم ZIP لـ Brave و Firefox عبر GitHub Releases.'],
+          ['إذا حذفت ملفاً من قائمة التنزيلات، هل يُحذف من هاتفي؟', 'لا. ابتداءً من v1.1.0 يؤدي حذف التنزيلات المكتملة إلى إزالتها من القائمة فقط مع بقاء الملف محفوظاً بالكامل في ذاكرة الهاتف.']
+        ]
       },
 
       ku: {
         dir: 'ltr',
         docTitle: 'RAQÎB — Geroka Helal û Dîtbarî ji bo Android (v1.1.0)',
-        navGallery: 'Rûkar', navFeatures: 'Taybetmendî', navPrivacy: 'Nepenî', navDownload: 'Daxistin',
-        heroBadge: 'v1.1.0 • 4.60 MB APK ya Îmzekirî • Android 8.0–16 • Sifir Dane',
+        navGallery: 'Rûkar', navFeatures: 'Taybetmendî', navDesktop: 'Sermase', navPrivacy: 'Nepenî', navFaq: 'Pirs', navDownload: 'Daxistin',
+        heroBadge: 'v1.1.0 • 4.60 MB APK ya Îmzekirî • Android 8.0–16 • 0 Byte Telemetrî',
         heroTitle: 'Bi hişmendî bigere. Çavê xwe biparêze.',
-        heroSub: 'RAQÎB (الرقيب) gerokeke Androidê ya pir sivik û bilez e ji bo gera paqij û bê belavbûna hiş. Şêlûkirina Hişk di t=0ms de, Mertalê Helal ê mecbûrî, astengkerê reklaman û wergera nav-rûpel di 4.60 MB de.',
+        heroSub: 'RAQÎB (الرقيب) gerokeke Androidê ya pir sivik (4.60 MB) û pêveka sermaseyê ye ji bo gera paqij, parastina çav bi Şêlûkirina Hişk t=0ms û Mertalê Helal.',
         ctaDownload: 'APK ya Îmzekirî Daxe (v1.1.0)',
+        ctaEdgeStore: 'Li Microsoft Edge Zêde Bike (Zindî)',
+        ctaEdgeStoreShort: 'Microsoft Edge Store (Zindî)',
         ctaReleases: 'GitHub Releases & SHA-256',
         ctaPrivacy: 'Siyaseta Nepeniyê',
-        heroMeta: 'Bi mifteya RSA 4096-bit îmzekirî • Hesab ne hewce ye • Bê reklam û şopîner • 5 Ziman',
-        m1: 'Şêlûkirina Hişk a Yekser', m2: 'APK ya Sivik a R8', m3: 'Daneyên şandî serveran', m4: 'TR • EN • AR (RTL) • KU • DE',
+        heroMeta: 'Bi mifteya RSA 4096-bit îmzekirî • Hesab ne hewce ye • 0 Byte telemetriya pêşdebiran • 5 Ziman',
+        m1: 'Şêlûkirina Hişk a Yekser', m2: 'APK ya Sivik a R8', m3: 'Telemetriya Pêşdebiran', m4: 'TR • EN • AR (RTL) • KU • DE',
         galKicker: 'RÛKARA RASTÎN A ANDROID 16',
         galTitle: 'Sade, bilez û bi bedewiya şûşeyê',
         galSub: 'Ji bo dîtina dîmenên rastîn ên RAQÎB v1.1.0 li ser Android 16 li ser her ekranê bitikîne.',
@@ -1196,24 +1559,75 @@
         obtS1: 'Sepana <strong>Obtainium</strong> veke → <strong>Add App</strong>.',
         obtS2: 'Navnîşanê binivîse: <code>https://github.com/TalibTRB/raqib-browser</code>',
         obtS3: 'Obtainium guhertoyên nû xweber dibîne û îmzeya RSA kontrol dike.',
-        privTitle: 'Soza Sifir Berhevkirina Daneyan',
-        priv1: 'Bê hesab, bê SDK ya analîtîk an reklamê, bê servera şopandinê.',
-        priv2: 'Şîfreyên tomarkirî bi Android Keystore (AES-GCM) tên şîfrekirin.',
-        priv3: 'Yedekkirina ewrê girtî ye (allowBackup=false); hemû dane tenê li ser telefona te ne.'
+        privTitle: 'Nepeniya Zelal & Mîmariya 0 Byte Telemetrî',
+        priv1: '0 Byte telemetriya pêşdebiran: bê hesab, bê SDK ya analîtîk an reklamê, bê servera şopandinê.',
+        priv2: 'Şîfreyên tomarkirî bi Android Keystore (AES-256-GCM) tên şîfrekirin.',
+        priv3: 'Yedekkirina ewrê girtî ye (allowBackup=false); hemû dane tenê li ser telefona te ne.',
+        priv4: 'Taybetmendiyên vebijarkî (Werger, DoH, Kontrola Nûkirinê) tenê dema tu bixwe bidî destpêkirin bê çerez û bê hesab girêdanê çêdikin.',
+        deskKicker: 'PÊVEKA GEROKA SERMASEYÊ • MV3',
+        deskTitle: 'Heman Parastina Dîtbarî Niha li ser Kompîtera Te',
+        deskSub: 'Bêyî devjêberdana geroka xwe ya sermaseyê Şêlûkirina Hişk t=0ms, Alt+Hover zelalkirin, YouTube Focus Shield û 401 rêzikên herêmî saz bike.',
+        deskStoreBadge: 'Li Microsoft Edge Add-ons Store Zindî ye',
+        deskCardTitle: 'RAQİB — Halal Visual Shield (Edge • Brave • Firefox)',
+        deskCardLead: 'Pêveka sivik a Manifest V3: 152 rêzikên Mertalê Helal & SafeSearch, 249 rêzikên reklam/şopîneran, veşartina YouTube Shorts û 5 ziman.',
+        deskPt1: 'Sazkirina fermî bi yek tikandinê ji Microsoft Edge Add-ons Store.',
+        deskPt2: 'Zelalkirina demkî bi Alt+Hover an pêlkirina dirêj û kurteriya Alt+B.',
+        deskPt3: '0 Byte telemetrî, bê koda dûr, %100 rêzikên herêmî yên DNR.',
+        dlExtHeader: 'Pêvekên Geroka Sermaseyê (MV3 • 5 Ziman • 0 Byte Telemetrî)',
+        chgKicker: 'DÎROKA GUHERTOYAN',
+        chgTitle: 'Tomara Guhertinan a Zelal',
+        chgSub: 'Her guhertoya nû li ser Android 16 tê testkirin û bi heman mifteya RSA-4096 tê îmzekirin.',
+        changelog: [
+          {
+            ver: 'v1.1.0 (Android • versionCode 27)',
+            date: '26 Mijdar 2026 • Herî Nû',
+            latest: true,
+            items: [
+              'Wergera Yekser a Nivîsa Hilbijartî di Rûpelê de (5 ziman, Kopî, Guhdarî, Karta Jêgirtinê).',
+              'Moda Xwendinê ya Pîşeyî + RTL ya Xweber ji bo Erebî (hemû rûpelên &lt;div&gt;/&lt;br&gt; bê kêmasî dikişîne).',
+              'Xwendevanê Dengî yê Bêsînor: Hemû Rûpel / Kurte / Nivîsa Hilbijartî + Rawestandin/Berdewam.',
+              'Xezîneya Şîfreyan V3 + Zêdekirina Destî: tomarkirina qeyda Google, X.com SPA û pencereyên OAuth.',
+              'Rakirina ji lîsteya dakêşanan bêyî jêbirina pelê ji cîhazê + vekirina archive.org/PDF di taba tevahî de + Blur t=0ms di OAuth de.',
+              'Xwendevanê PDF yê Pîşeyî: Nîşankirina Şerîta Rast (4 reng & derxistina PDF), bîranîna rûpelê û Biçe Rûpelê.'
+            ]
+          },
+          {
+            ver: 'v1.0.0 (Android + Edge / Brave / Firefox)',
+            date: '25 Mijdar 2026 • Guhertoya Yekem',
+            latest: false,
+            items: [
+              'Guhertoya yekem a fermî bi îmzeya daîmî RSA-4096 (4.56 MB Single-DEX R8).',
+              'Motora dengê paşxaneyê ya paqij û pêveka fermî ya MV3 li ser Microsoft Edge Store.'
+            ]
+          }
+        ],
+        faqKicker: 'PIRSÊN PIR TÊN PIRSÎN',
+        faqTitle: 'Ewlehî, Kontrol & Bikaranîn',
+        faqSub: 'Bersivên zelal li ser nepenî, kontrola îmzeyê, Şêlûkirina Hişk û sazkirina sermaseyê.',
+        faqs: [
+          ['"0 Byte Telemetrî" tê çi wateyê? Werger çawa dixebite?', 'RAQÎB tu dîrok an daneya bikarhêner naşîne servera pêşdebiran. Tenê dema tu bixwe li bişkoka Wergerê bitikînî, nivîsa hilbijartî bê çerez û bê hesab bi HTTPS tê wergerandin.'],
+          ['Heke Şêlûkirina Hişk wêneyekî bêzerar şêlû bike ez çawa bibînim?', 'Tiliya xwe li ser wêneyê bigire da yekser zelal bibe (Peek-to-Unblur); dema tiliya xwe rakî dîsa şêlû dibe. Malperên bawerpêkirî dikarî bi yek tikandinê bixî lîsteya spî.'],
+          ['Dema ez ji v1.0.0 nû bikim v1.1.0 daneyên min jê diçin?', 'Na. Hemû guhertoyên fermî bi heman sertîfîkaya RSA-4096 (F7:0D:88...) hatine îmzekirin; bêyî jêbirinê rasterast li ser saz bike.'],
+          ['Çima mezinahiya APK tenê 4.60 MB e?', 'RAQÎB motora Chromium WebView a Androidê û optîmîzasyona R8 bi kar tîne bêyî SDK-yên reklam an şopandinê.'],
+          ['Ez çawa li ser kompîterê (Edge / Brave / Firefox) saz bikim?', 'Ji bo Microsoft Edge li bişkoka "Li Microsoft Edge Zêde Bike" bitikîne û ji dikana fermî saz bike. Ji bo Brave û Firefox pakêtên ZIP li GitHub Releases amade ne.'],
+          ['Heke ez pelekê ji lîsteya dakêşanan jê bibim ji telefonê jî jê diçe?', 'Na. Ji v1.1.0 pê ve tenê rêza lîsteyê tê rakirin; pelê te li ser bîra telefonê parastî dimîne.']
+        ]
       },
 
       de: {
         dir: 'ltr',
         docTitle: 'RAQİB — Halal-Visuell-Browser für Android (v1.1.0)',
-        navGallery: 'Oberfläche', navFeatures: 'Funktionen', navPrivacy: 'Datenschutz', navDownload: 'Download',
-        heroBadge: 'v1.1.0 • 4,60 MB Signierte APK • Android 8.0–16 • Null Datensammlung',
+        navGallery: 'Oberfläche', navFeatures: 'Funktionen', navDesktop: 'Desktop', navPrivacy: 'Datenschutz', navFaq: 'FAQ', navDownload: 'Download',
+        heroBadge: 'v1.1.0 • 4,60 MB Signierte APK • Android 8.0–16 • 0 Byte Telemetrie',
         heroTitle: 'Bewusst surfen. Deinen Blick schützen.',
-        heroSub: 'RAQİB (الرقيب) ist ein extrem leichter, datenschutzorientierter Android-Browser für ruhiges, schnelles und ablenkungsfreies Surfen. Sofortiger t=0ms Strenger Bild-Blur, obligatorischer Halal-Schild, Aho-Corasick-Werbeblocker und native In-Page-Übersetzung in nur 4,60 MB.',
+        heroSub: 'RAQİB (الرقيب) ist ein ultraleichter (4,60 MB), datenschutzorientierter Android-Browser und Desktop-Add-on-Ökosystem mit sofortigem t=0ms Strengem Bild-Blur, Halal-Schild und Werbeblocker.',
         ctaDownload: 'Signierte APK laden (v1.1.0)',
+        ctaEdgeStore: 'Zu Microsoft Edge hinzufügen (Live)',
+        ctaEdgeStoreShort: 'Microsoft Edge Store (Live)',
         ctaReleases: 'GitHub Releases & SHA-256',
         ctaPrivacy: 'Datenschutzerklärung',
-        heroMeta: 'Dauerhaft 4096-Bit-RSA signiert • Kein Konto nötig • Keine Tracking-SDKs • 5 Sprachen',
-        m1: 'Zero-Flash Strenger Bild-Blur', m2: 'Single-DEX R8-optimierte APK', m3: 'Daten an Server gesendet', m4: 'TR • EN • AR (RTL) • KU • DE',
+        heroMeta: 'Dauerhaft 4096-Bit-RSA signiert • Kein Konto nötig • 0 Byte Entwickler-Telemetrie • 5 Sprachen',
+        m1: 'Zero-Flash Strenger Bild-Blur', m2: 'Single-DEX R8-optimierte APK', m3: 'Entwickler-Telemetrie', m4: 'TR • EN • AR (RTL) • KU • DE',
         galKicker: 'ECHTE ANDROID-16-OBERFLÄCHE',
         galTitle: 'Klar, blitzschnell und in moderner Glas-Ästhetik',
         galSub: 'Tippen Sie auf ein Gerät, um echte, hochauflösende Android-16-Screenshots von RAQİB v1.1.0 im Detail zu betrachten.',
@@ -1275,10 +1689,59 @@
         obtS1: 'Öffnen Sie die Open-Source-App <strong>Obtainium</strong> auf Android → <strong>Add App</strong>.',
         obtS2: 'Repository-URL eingeben: <code>https://github.com/TalibTRB/raqib-browser</code>',
         obtS3: 'Obtainium erkennt neue signierte Releases automatisch und prüft die RSA-Signatur.',
-        privTitle: 'Null-Datensammlungs-Versprechen',
-        priv1: 'Keine Konten, keine Analyse-SDKs, keine Werbe-SDKs, keine Entwicklerserver.',
-        priv2: 'Gespeicherte Zugangsdaten werden lokal per Android Keystore (AES-GCM) verschlüsselt.',
-        priv3: 'Cloud-Backup ist deaktiviert (allowBackup=false); Ihre Daten verlassen niemals Ihr Gerät.'
+        privTitle: 'Transparenter Datenschutz & 0-Byte-Telemetrie',
+        priv1: '0 Byte Entwickler-Telemetrie: keine Konten, keine Analyse-SDKs, keine Werbe-SDKs, keine Entwicklerserver.',
+        priv2: 'Gespeicherte Zugangsdaten werden lokal per Android Keystore (AES-256-GCM) verschlüsselt.',
+        priv3: 'Cloud-Backup ist deaktiviert (allowBackup=false); Ihre Daten bleiben ausschließlich lokal auf dem Gerät.',
+        priv4: 'Optionale Funktionen auf Nutzerwunsch (In-Page-/Auswahl-Übersetzung, DoH, Update-Prüfung) senden Anfragen direkt per HTTPS ohne Cookies oder Nutzerkonten.',
+        deskKicker: 'DESKTOP-BROWSER-ERWEITERUNG • MV3',
+        deskTitle: 'Derselbe visuelle Schutz jetzt auch auf Ihrem PC',
+        deskSub: 'Behalten Sie Ihren Desktop-Browser und fügen Sie t=0ms Strengen Bild-Blur, Alt+Hover-Vorschau, YouTube Focus Shield und 401 lokale Schutzregeln mit einem Klick hinzu.',
+        deskStoreBadge: 'Live im Microsoft Edge Add-ons Store',
+        deskCardTitle: 'RAQİB — Halal Visual Shield (Edge • Brave • Firefox)',
+        deskCardLead: 'Ultraleichte Manifest-V3-Erweiterung mit 152 Halal-Schild- & SafeSearch-Regeln, 249 Werbe-/Tracker-Regeln, YouTube-Shorts-Blocker und 5 Sprachen.',
+        deskPt1: 'Offizielle 1-Klick-Installation & automatische Updates über Microsoft Edge Add-ons.',
+        deskPt2: 'Sofortiges Peek-to-Unblur per Alt+Hover oder Gedrückthalten sowie Alt+B Kurzbefehl.',
+        deskPt3: '0 Byte Telemetrie, kein Remote-Code, 100 % lokale DNR-Regeln.',
+        dlExtHeader: 'Desktop-Browser-Erweiterungen (MV3 • 5 Sprachen • 0 Byte Telemetrie)',
+        chgKicker: 'VERSIONSVERLAUF',
+        chgTitle: 'Transparentes Änderungsprotokoll',
+        chgSub: 'Jedes Release wird auf Android 16 geprüft und mit demselben dauerhaften RSA-4096-Schlüssel signiert.',
+        changelog: [
+          {
+            ver: 'v1.1.0 (Android • versionCode 27)',
+            date: '26. Nov. 2026 • Aktuell',
+            latest: true,
+            items: [
+              'Sofortige Auswahl-Übersetzung direkt auf der Seite ohne Seitenwechsel (5 Sprachen, Kopieren, Vorlesen, Zitatkarte).',
+              'Readability-Lesemodus + automatisches Arabisch-RTL für vollständige &lt;div&gt;/&lt;br&gt;-Artikel.',
+              'Unbegrenztes Satz-TTS: Ganze Seite / Zusammenfassung / Markierter Text mit Pause/Fortsetzen.',
+              'Passwort-Tresor V3 + manuelles Hinzufügen/Bearbeiten inkl. Google-Registrierung, X.com SPA & OAuth-Popups.',
+              'Sichere Download-Liste (löscht niemals Dateien vom Gerät) + Voll-Tab-Öffnung für archive.org/PDF/X-Links + t=0ms Blur in OAuth-Popups.',
+              'Profi-PDF-Viewer: Gerader Textmarker (4 Farben, PDF-Export), automatisches Merken der letzten Seite & Seitensprung.'
+            ]
+          },
+          {
+            ver: 'v1.0.0 (Android + Edge / Brave / Firefox)',
+            date: '25. Nov. 2026 • Erstes Release',
+            latest: false,
+            items: [
+              'Erstes dauerhaft RSA-4096 (v2+v3) signiertes Android-Release (4,56 MB Single-DEX R8).',
+              'Knisterfreie Hintergrund-Audiowiedergabe und Veröffentlichung der MV3-Desktop-Erweiterung im Edge Store.'
+            ]
+          }
+        ],
+        faqKicker: 'HÄUFIGE FRAGEN (FAQ)',
+        faqTitle: 'Vertrauen, Prüfung & Alltag',
+        faqSub: 'Klare Antworten zu Datenschutz, Signaturprüfung, Bild-Blur und Desktop-Installation.',
+        faqs: [
+          ['Was bedeutet „0 Byte Entwickler-Telemetrie“? Wie funktioniert die Übersetzung?', 'RAQİB übermittelt weder Verlauf noch Geräte-IDs oder Analysedaten an Entwicklerserver. Nur wenn Sie aktiv auf „Übersetzen“ tippen, wird der gewählte Text ohne Cookies oder Konto per HTTPS übersetzt.'],
+          ['Wie sehe ich ein harmloses Bild trotz Strengem Blur?', 'Halten Sie den Finger kurz auf das Bild (Peek-to-Unblur) – beim Loslassen wird es sofort wieder unscharf. Vertrauenswürdige Seiten können mit einem Tipp auf die Whitelist gesetzt werden.'],
+          ['Gehen meine Daten beim Update von v1.0.0 auf v1.1.0 verloren?', 'Nein. Alle offiziellen Releases nutzen dasselbe dauerhafte RSA-4096-Zertifikat (F7:0D:88...) und lassen sich direkt über die vorhandene Installation aktualisieren.'],
+          ['Warum ist die APK nur 4,60 MB groß und wie prüfe ich sie?', 'RAQİB nutzt Androids natives Chromium-WebView plus R8-Optimierung ohne Tracking-SDK-Ballast. SHA-256-Prüfsumme und Signaturzertifikat lassen sich oben jederzeit überprüfen.'],
+          ['Wie installiere ich die Desktop-Erweiterung für Edge, Brave oder Firefox?', 'Für Microsoft Edge einfach oben auf „Zu Microsoft Edge hinzufügen“ klicken. ZIP-Pakete für Brave und Firefox stehen zusätzlich auf GitHub Releases bereit.'],
+          ['Löscht das Entfernen aus der Download-Liste die Datei auf meinem Handy?', 'Niemals. Ab v1.1.0 entfernt das Löschen abgeschlossener Einträge ausschließlich den Verlaufseintrag – die Datei bleibt sicher auf Ihrem Gerät.']
+        ]
       }
     };
 
@@ -1314,6 +1777,31 @@
           `).join('')}
         </div>
       `).join('');
+
+      const cg = document.getElementById('changelogGrid');
+      if (cg && Array.isArray(t.changelog)) {
+        cg.innerHTML = t.changelog.map(rel => `
+          <article class="changelog-card${rel.latest ? ' latest' : ''}">
+            <div class="changelog-head">
+              <span class="changelog-ver">${rel.ver}</span>
+              <span class="changelog-date">${rel.date}</span>
+            </div>
+            <ul class="changelog-list">
+              ${rel.items.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </article>
+        `).join('');
+      }
+
+      const fg = document.getElementById('faqGrid');
+      if (fg && Array.isArray(t.faqs)) {
+        fg.innerHTML = t.faqs.map((pair, idx) => `
+          <details class="faq-item"${idx === 0 ? ' open' : ''}>
+            <summary>${pair[0]}</summary>
+            <p>${pair[1]}</p>
+          </details>
+        `).join('');
+      }
     }
 
     function setLang(code) {
