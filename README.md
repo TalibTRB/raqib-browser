@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.1.3-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.1.4-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.66%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.3 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.1.4 Android Interface Showcase" width="820" />
 </p>
 
 **RAQİB (الرقيب)** is an ultra-lightweight (`4.66 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.1.3` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.1.4` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.1.3-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.1.4-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,11 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.1.4` (`versionCode 31` — 2026-11-26)
+* **Honest Translation Accuracy Disclaimer & Refined Copy (All 5 Languages — TR / EN / AR / KU / DE):**
+  * Added a clear, professional notice in both *Settings → Language & Translation* and the *Selected Text Translation* sheet reminding users that no translation engine or AI can guarantee 100% accuracy and recommending verification by a proficient speaker for religious, scholarly, legal, or sensitive texts.
+  * Toned down over-promising "precision" copy across all 5 locales to calm, realistic wording (*Translation Engine*, *Scholarly Text Adaptation*, *Enhanced AI / Pro*).
 
 ### `v1.1.3` (`versionCode 30` — 2026-11-26)
 * **Precision Translation Suite (Katman 1 + Katman 2 — Zero Blur Impact, Zero Telemetry):**
