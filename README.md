@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.4.1-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.4.2-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
   <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.76%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.4.1 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.4.2 Android Interface Showcase" width="820" />
 </p>
 
 **RAQİB (الرقيب)** is an ultra-lightweight (`4.76 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.4.1` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.4.2` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.4.1-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.4.2-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,11 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.4.2` (2026-11-27)
+* Switched YouTube Dark Mode to its fast native dark path with zero dark-overlay flash, faster video startup, and instant single-tap manual Next (`>|`) transitions while keeping ad blocking, post-end autoplay lock, and visual blur 100% active.
+* Added a 1-tap icon-only Dark / Light Mode toggle directly at the top of the Browser Menu that smoothly synchronizes browser chrome, system bars, all tabs, Split View, Link Preview, and websites.
+* Eliminated Omnibox suggestion list flicker while typing so Google search suggestions update smoothly in place letter-by-letter.
 
 ### `v1.4.1` (2026-11-27)
 * Upgraded universal Dark & Light website rendering with full contrast protection across buttons, tabs, pills, gradients, and dynamic SPA sites (`prefers-color-scheme` sync included).

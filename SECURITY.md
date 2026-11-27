@@ -4,11 +4,11 @@
 
 | Version | Supported |
 | :--- | :--- |
-| `1.4.x` | Yes (Active Release — `v1.4.1`, `versionCode 37`) |
-| `1.3.x` | Security maintenance — please upgrade to `v1.4.1` |
-| `1.2.x` | Security maintenance — please upgrade to `v1.4.1` |
-| `1.1.x` | Security maintenance — please upgrade to `v1.4.1` |
-| `1.0.x` | Security maintenance — please upgrade to `v1.4.1` |
+| `1.4.x` | Yes (Active Release — `v1.4.2`, `versionCode 38`) |
+| `1.3.x` | Security maintenance — please upgrade to `v1.4.2` |
+| `1.2.x` | Security maintenance — please upgrade to `v1.4.2` |
+| `1.1.x` | Security maintenance — please upgrade to `v1.4.2` |
+| `1.0.x` | Security maintenance — please upgrade to `v1.4.2` |
 | `< 1.0.0` | Pre-launch development builds (unsupported) |
 
 ## Official Release Signing Verification
