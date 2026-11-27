@@ -6,19 +6,19 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.3.0-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.4.0-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
-  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.72%20MB-059669?style=for-the-badge" />
+  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.76%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
   <img alt="Privacy" src="https://img.shields.io/badge/Developer%20Telemetry-0%20Bytes-0F172A?style=for-the-badge" />
   <img alt="Languages" src="https://img.shields.io/badge/Languages-TR%20%7C%20EN%20%7C%20AR%20%7C%20KU%20%7C%20DE-334155?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.3.0 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.4.0 Android Interface Showcase" width="820" />
 </p>
 
-**RAQİB (الرقيب)** is an ultra-lightweight (`4.72 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
+**RAQİB (الرقيب)** is an ultra-lightweight (`4.76 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
 
 > **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (Vercel & GitHub Pages), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
 
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.3.0` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.4.0` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.3.0-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.4.0-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,11 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.4.0` (2026-11-27)
+* Deep Wave 2 platform hardening across App Lock, Password Vault, QR preview verification, Clean Guest Session isolation, and full-surface privacy shields.
+* Major UI fluidity & performance upgrades: faster Compose rendering, indexed Room v3 storage, lighter tab/article memory footprint, and stronger YouTube & ad/tracker protection.
+* Refined 5-language first-launch greeting and *er-Rakîb* (*الرَّقِيب*) presentation, plus expanded Site Permissions, localized Hijri tools, and safety confirmations.
 
 ### `v1.3.0` (2026-11-26)
 * Comprehensive security hardening across URL validation, bridge isolation, PIN protection, and release checksum verification.
