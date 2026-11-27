@@ -6,19 +6,19 @@
 </p>
 
 <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.4.2-10B981?style=for-the-badge" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.5.0-10B981?style=for-the-badge" />
   <img alt="Android" src="https://img.shields.io/badge/Android-8.0%20--%2016%20(API%2026--36)-1F242B?style=for-the-badge" />
-  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.76%20MB-059669?style=for-the-badge" />
+  <img alt="APK Size" src="https://img.shields.io/badge/Signed%20APK-4.82%20MB-059669?style=for-the-badge" />
   <img alt="Edge Store" src="https://img.shields.io/badge/Microsoft%20Edge-Live%20in%20Store-0078D4?style=for-the-badge" />
   <img alt="Privacy" src="https://img.shields.io/badge/Developer%20Telemetry-0%20Bytes-0F172A?style=for-the-badge" />
   <img alt="Languages" src="https://img.shields.io/badge/Languages-TR%20%7C%20EN%20%7C%20AR%20%7C%20KU%20%7C%20DE-334155?style=for-the-badge" />
 </p>
 
 <p align="center">
-  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.4.2 Android Interface Showcase" width="820" />
+  <img src="docs/assets/hero-showcase.png" alt="RAQİB v1.5.0 Android Interface Showcase" width="820" />
 </p>
 
-**RAQİB (الرقيب)** is an ultra-lightweight (`4.76 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
+**RAQİB (الرقيب)** is an ultra-lightweight (`4.82 MB`), privacy-first visual protection browser for Android — plus official **Manifest V3 Browser Extensions for Microsoft Edge (Live on Microsoft Edge Add-ons Store!), Brave, and Firefox** — engineered for calm, distraction-free, and fast browsing.
 
 > **Official Distribution & Documentation Repository:** This public repository hosts the 5-language interactive showcase site (Vercel & GitHub Pages), official signed release APKs, desktop browser extensions, SHA-256 checksums, 5-language Privacy Policy, and cryptographic verification details. Source code is proprietary (`All Rights Reserved`).
 
@@ -28,7 +28,7 @@
 
 * **5-Language Showcase Website (Vercel):** https://raqib-browser.vercel.app/
 * **Microsoft Edge Add-ons Store (Live 1-Click Install):** https://microsoftedge.microsoft.com/addons/detail/raqi%CC%87b-%E2%80%94-halal-visual-shie/gkebimegcelcjcanaogpkabbpgdakbce
-* **Download Latest Release (`v1.4.2` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
+* **Download Latest Release (`v1.5.0` — Signed Android APK + Extensions):** https://github.com/TalibTRB/raqib-browser/releases/latest
 * **5-Language Privacy Policy (HTTPS):** https://raqib-browser.vercel.app/privacy
 * **Security, Privacy & Network Transparency Policy:** [SECURITY.md](SECURITY.md)
 
@@ -72,7 +72,7 @@ Every official APK published on GitHub Releases is signed with our permanent 409
 Verify locally:
 ```bash
 sha256sum -c SHA256SUMS.txt
-apksigner verify --verbose --print-certs RAQIB-v1.4.2-signed-release.apk
+apksigner verify --verbose --print-certs RAQIB-v1.5.0-signed-release.apk
 ```
 
 ---
@@ -88,6 +88,11 @@ Both Manifest V3 packages include `t = 0 ms` Strict Visual Blur, Peek-to-Unblur 
 ---
 
 ## Changelog
+
+### `v1.5.0` (2026-11-27)
+* **Light-Speed Core Architecture:** Activated AGP Startup & Baseline Profiles (`startup-prof.txt`), Binary Trie v6 O(1) ad/tracker indexing, single-pass Halal Shield matching, WeakMap CSSOM + 2-phase FastDOM Visual Blur & Universal Dark Mode engines, zero-flash MRU tab switching, and GPU-accelerated UI gestures.
+* **Touch-Scroll & Keyboard Reliability Fixes:** Resolved nested carousel `pan-x`/`pan-y` scroll deadlocks over product images (such as Hepsiburada product strips) and fixed WebView touch-mode IME focus loss so the soft keyboard opens reliably on Hepsiburada, Trendyol, and Google search fields even after clearing queries or switching tabs.
+* **Open in Background Tab:** Added **"Open in background tab"** (*Arka planda yeni sekmede aç*) plus quick Copy/Share link actions to the link long-press menu across all 5 languages (`TR / EN / AR / KU / DE`).
 
 ### `v1.4.2` (2026-11-27)
 * Switched YouTube Dark Mode to its fast native dark path with zero dark-overlay flash, faster video startup, and instant single-tap manual Next (`>|`) transitions while keeping ad blocking, post-end autoplay lock, and visual blur 100% active.
